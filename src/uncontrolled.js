@@ -8,6 +8,13 @@ export default ({
   resetHandlerName
 }) => (Target) => {
   class Uncontrolled extends PureComponent {
+    constructor () {
+      super()
+
+      this.handleHandler = this.handleHandler.bind(this)
+      this.handleReset = this.handleReset.bind(this)
+    }
+
     componentDidMount () {
       this.setState({
         [prop]: this.props[prop] != null

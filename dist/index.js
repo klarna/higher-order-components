@@ -300,7 +300,11 @@ module.exports =
 	      function Uncontrolled() {
 	        _classCallCheck(this, Uncontrolled);
 	
-	        return _possibleConstructorReturn(this, _PureComponent.apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, _PureComponent.call(this));
+	
+	        _this.handleHandler = _this.handleHandler.bind(_this);
+	        _this.handleReset = _this.handleReset.bind(_this);
+	        return _this;
 	      }
 	
 	      Uncontrolled.prototype.componentDidMount = function componentDidMount() {
