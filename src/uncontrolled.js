@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {PureComponent} from 'react'
 
 export default ({
   defaultProp,
@@ -6,54 +6,60 @@ export default ({
   handlerSelector,
   prop,
   resetHandlerName
-}) => (Component) => React.createClass({
-  displayName: Component.displayName || Component.name,
-
-  componentDidMount () {
-    this.setState({
-      [prop]: this.props[prop] != null
-        ? this.props[prop]
-        : this.props[defaultProp]
-    })
-  },
-
-  handleHandler (e) {
-    if (this.props[prop] == null) {
+}) => (Target) => {
+  class Uncontrolled extends PureComponent {
+    componentDidMount () {
       this.setState({
-        [prop]: handlerSelector
-          ? handlerSelector(e)
-          : e
+        [prop]: this.props[prop] != null
+          ? this.props[prop]
+          : this.props[defaultProp]
       })
     }
 
-    this.props[handlerName] && this.props[handlerName](e)
-  },
+    handleHandler (e) {
+      if (this.props[prop] == null) {
+        this.setState({
+          [prop]: handlerSelector
+            ? handlerSelector(e)
+            : e
+        })
+      }
 
-  handleReset (e) {
-    if (this.props[prop] == null) {
-      this.setState({
-        [prop]: undefined
-      })
+      this.props[handlerName] && this.props[handlerName](e)
     }
 
-    this.props[resetHandlerName] && this.props[resetHandlerName](e)
-  },
+    handleReset (e) {
+      if (this.props[prop] == null) {
+        this.setState({
+          [prop]: undefined
+        })
+      }
 
-  render () {
-    const props = {
-      ...Object.keys(this.props)
-        .filter((key) => key !== defaultProp)
-        .reduce((copiedProps, propName) => {
-          copiedProps[propName] = this.props[propName]
-          return copiedProps
-        }, {}),
-      [handlerName]: this.handleHandler,
-      ...(resetHandlerName ? { [resetHandlerName]: this.handleReset } : {})
+      this.props[resetHandlerName] && this.props[resetHandlerName](e)
     }
 
-    return <Component
-      {...this.state}
-      {...props}
-    />
+    render () {
+      const props = {
+        ...Object.keys(this.props)
+          .filter((key) => key !== defaultProp)
+          .reduce((copiedProps, propName) => {
+            copiedProps[propName] = this.props[propName]
+            return copiedProps
+          }, {}),
+        [handlerName]: this.handleHandler,
+        ...(resetHandlerName ? { [resetHandlerName]: this.handleReset } : {})
+      }
+
+      return (
+        <Target
+          {...this.state}
+          {...props}
+        />
+      )
+    }
   }
-})
+
+  Uncontrolled.displayName = Target.displayName || Target.name
+
+  return Uncontrolled
+}

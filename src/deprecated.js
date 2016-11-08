@@ -1,17 +1,25 @@
 import React from 'react'
 
-const deprecate = ({name, replacement, reference}) => console && console.error && console.error(
-  `Warning: '${name}' is deprecated and will be removed in the next major version.` +
-  (replacement ? `\nUse '${replacement}' instead.` : '') +
-  (reference ? `\nRead more on ${reference}` : '')
-)
+const deprecate = ({name, useInstead, readMore}) =>
+  console && console.error &&
+  console.error(
+    `Warning: '${name}' is deprecated and will be removed in the next major version.` +
+    (useInstead ? `\nUse '${useInstead}' instead.` : '') +
+    (readMore ? `\nRead more on ${readMore}` : '')
+  )
 
-export default (Component, componentName, replacement, reference) => (props) => {
-  deprecate({
-    name: componentName || Component.displayName || Component.name,
-    replacement,
-    reference
-  })
+export default ({name, useInstead, readMore}) => (Target) => {
+  function Deprecated (props) {
+    deprecate({
+      name: name || Target.displayName || Target.name,
+      useInstead,
+      readMore
+    })
 
-  return <Component {...props} />
+    return <Target {...props} />
+  }
+
+  Deprecated.displayName = Target.displayName || Target.name
+
+  return Deprecated
 }
