@@ -1,8 +1,8 @@
 {
   "name": "higher-order-components",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "A collection of useful React higher-order components",
+  "main": "dist/index.js",
   "scripts": {
     "test": "npm run test:lint && npm run test:typecheck && npm run test:unit",
     "build": "sagui build",

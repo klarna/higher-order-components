@@ -3,6 +3,5 @@
  * see: http://sagui.js.org/
  */
 module.exports = {
-  pages: ['index'],
-  libraries: ['deprecated', 'overridable', 'themeable', 'uncontrolled']
+  libraries: ['index', 'deprecated', 'overridable', 'themeable', 'uncontrolled']
 }
