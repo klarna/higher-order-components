@@ -19,9 +19,8 @@
     "type": "git",
     "url": "git+https://github.com/klarna/higher-order-components.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["higher-order-component", "react"],
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/klarna/higher-order-components/issues"
   },

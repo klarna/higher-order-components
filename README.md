@@ -2,7 +2,7 @@
 
 This library is a collection of useful React higher-order Components.
 
-## overridable
+## Overridable
 
 **Overridable** provides a way of replacing the styles or the full implementation of a component.
 
@@ -40,7 +40,7 @@ type Overridable = (
 ) => (target: ReactComponent) => Component
 ```
 
-## themeable
+## Themeable
 
 **Themeable** allows you to configure your components so that they can take information from the React.context to customize some props, whenever in the tree they might be. This higher-order component is useful for theming your components without having to use React.context explicitly in your component implementation.
 
@@ -167,7 +167,7 @@ render(
 - why the props are necessary in the predicate function (again, an example)
 - how this could be used to make arbitrary components themeable, including third party ones
 
-## uncontrolled
+## Uncontrolled decorator
 
 **Uncontrolled** is a generic method of making a controlled property of a Component behave as an uncontrolled prop when not set. This is the default behavior that React exposes for form components such as `<input>`:
 
@@ -180,7 +180,7 @@ render(
 
 ```
 
-## deprecated
+## Deprecated decorator
 
 **TODO** what does it do?
 
@@ -212,3 +212,9 @@ deprecated({
   name: 'OldUnderlined'
 })
 ```
+
+## License
+
+See [LICENSE](LICENSE)
+
+MIT License
