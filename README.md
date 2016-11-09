@@ -2,6 +2,8 @@
 
 This library is a collection of useful React higher-order Components.
 
+**Note**: Documentation is a work in progress. It will probably be expanded with examples later on.
+
 ## Overridable
 
 **Overridable** provides a way of replacing the styles or the full implementation of a component.
