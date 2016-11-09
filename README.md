@@ -1,5 +1,7 @@
 # @klarna/higher-order-components
 
+[![Build Status](https://travis-ci.org/klarna/higher-order-components.svg)](https://travis-ci.org/klarna/higher-order-components)
+
 This library is a collection of useful React higher-order Components.
 
 **Note**: Documentation is a work in progress. It will probably be expanded with examples later on.
