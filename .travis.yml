@@ -3,6 +3,8 @@ node_js:
 - '6'
 before_script:
 - npm install
+script:
+- npm test
 deploy:
   provider: npm
   email: ui-admin.e@klarna.com
