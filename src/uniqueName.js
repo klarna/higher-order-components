@@ -26,4 +26,6 @@ export default (Target) => {
       return <Target name={this.uniqueName} {...this.props} />
     }
   }
+
+  UniqueName.displayName = Target.displayName || Target.name
 }
