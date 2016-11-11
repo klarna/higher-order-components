@@ -15,14 +15,32 @@ describe('uniqueName', () => {
       const UniquelyNamedInput = uniqueName(Input)
 
       render(
-        <UniquelyNamedInput />,
+        <div>
+          <UniquelyNamedInput />
+          <UniquelyNamedInput />
+          <UniquelyNamedInput />
+        </div>,
         root
       )
 
+      const inputList = root.children[0].children
+
       ok(
-        root.children[0]
+        inputList[0]
           .getAttribute('name')
           .match(/^Input-[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/)
+      )
+
+      ok(
+        inputList[0].getAttribute('name') !== inputList[1].getAttribute('name')
+      )
+
+      ok(
+        inputList[1].getAttribute('name') !== inputList[2].getAttribute('name')
+      )
+
+      ok(
+        inputList[0].getAttribute('name') !== inputList[2].getAttribute('name')
       )
     })
   })
