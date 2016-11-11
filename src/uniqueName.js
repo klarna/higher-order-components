@@ -15,7 +15,7 @@ const uuid = (seed) => {
 
 let counter = 0
 export default (Target) => {
-  return class UniqueName extends PureComponent {
+  class UniqueName extends PureComponent {
     constructor () {
       super()
 
@@ -28,4 +28,6 @@ export default (Target) => {
   }
 
   UniqueName.displayName = Target.displayName || Target.name
+
+  return UniqueName
 }
