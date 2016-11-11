@@ -15,13 +15,11 @@ const uuid = (seed) => {
 
 let counter = 0
 export default (Target) => {
-  class UniqueName extends PureComponent {
+  return class UniqueName extends PureComponent {
     constructor () {
       super()
 
-      this.uniqueName = uniqueName(
-        `${Target.displayName || Target.name}-${uuid(counter++)}`
-      )
+      this.uniqueName = `${Target.displayName || Target.name}-${uuid(counter++)}`
     }
 
     render () {
