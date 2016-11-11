@@ -6,6 +6,75 @@ This library is a collection of useful React higher-order Components.
 
 **Note**: Documentation is a work in progress. It will probably be expanded with examples later on.
 
+## UniqueName
+
+**UniqueName** is a helper for components that need a `name` prop, so that it defaults to a namespaced UUID if not specified. This is useful for components that wrap `checkbox` or `radio` input types, which will not behave properly without a unique name. When using those Component types as fully controlled, name are unimportant, so it’s easy to forget to add them. This is a common source of mistakes for this family of components:
+
+Say that you have the component:
+
+```javascript
+// Radio.jsx
+import React from 'react'
+
+function Radio ({name, value, onChange}) {
+  return <div>
+    <p>
+      <input
+        type='radio'
+        name={name}
+        id={`${name}-acceptable`}
+        value='acceptable'
+      />
+      <label
+        htmlFor={`${name}-acceptable`}>
+        Acceptable
+      </label>
+    </p>
+
+    <p>
+      <input
+        type='radio'
+        name={name}
+        id={`${name}-adequate`}
+        value='adequate'
+      />
+      <label
+        htmlFor={`${name}-adequate`}>
+        Adequate
+      </label>
+    </p>
+
+    <p>
+      <input
+        type='radio'
+        name={name}
+        id={`${name}-close-enough`}
+        value='close-enough'
+      />
+      <label
+        htmlFor={`${name}-close-enough`}>
+        Close enough
+      </label>
+    </p>
+  </div>
+}
+
+export default Radio
+```
+
+…you can add the `uniqueName` higher-order component around it:
+
+```diff
++import {uniqueName} from '@klarna/higher-order-components'
+
+-export default Radio
++export default uniqueName(Radio)
+```
+
+…and it no longer matters if you forget to set a `name` when using it, unless you actually care about that name of course.
+
+The UUID for this would look something like: `Radio-c821f424-053a-4175-8112-1e0a6370b4cc`
+
 ## Overridable
 
 **Overridable** provides a way of replacing the styles or the full implementation of a component.
