@@ -287,6 +287,27 @@ deprecated({
 })
 ```
 
+## Namespaced DisplayName
+
+**NamespacedDisplayName** let's you easily set the `displayName` of components grouped under a single namespace.
+
+`icons/withDisplayName.js`:
+```javascript
+import {namespacedDisplayName} from '@klarna/higher-order-components'
+export default namespacedDisplayName('Icon')
+```
+
+`icons/Close.jsx`:
+```javascript
+import withDisplayName from './withDisplayName'
+
+const Component = () => (
+  <span class="icon--close">Close</span>
+)
+
+export default withDisplayName(Component)
+```
+
 ## License
 
 See [LICENSE](LICENSE)
