@@ -305,7 +305,7 @@ const Component = () => (
   <span class="icon--close">Close</span>
 )
 
-export default withDisplayName(Component)
+export default withDisplayName('Close')(Component)
 ```
 
 ## License
