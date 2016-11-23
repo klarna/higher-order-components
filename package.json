@@ -4,17 +4,14 @@
   "description": "A collection of useful React higher-order components",
   "main": "dist/index.js",
   "scripts": {
-    "test": "npm run test:lint && npm run test:typecheck && npm run test:unit",
     "build": "sagui build",
-    "develop": "sagui develop --port 3000",
-    "dist": "NODE_ENV=production sagui build --optimize",
-    "start": "npm run develop",
-    "test:coverage": "npm run test:unit -- --coverage",
-    "test:lint": "sagui lint",
-    "test:typecheck": "sagui typecheck",
-    "test:unit": "NODE_ENV=test sagui test",
-    "test:unit:watch": "npm run test:unit -- --watch",
-    "prepublish": "npm run dist"
+    "dist": "sagui build --optimize",
+    "start": "sagui develop --port 3000",
+    "test": "npm run test:lint && npm run test:typecheck && npm run test:unit",
+    "test:lint": "sagui test:lint",
+    "test:typecheck": "sagui test:typecheck",
+    "test:unit": "sagui test:unit --coverage",
+    "test:unit:watch": "sagui test:unit --watch"
   },
   "repository": {
     "type": "git",
@@ -33,7 +30,7 @@
     "react": "^15.3.2",
     "react-context-props": "^0.1.4",
     "react-dom": "^15.3.2",
-    "sagui": "^7.1.1"
+    "sagui": "8.0.0-rc.0"
   },
   "peerDependencies": {
     "react": "^15.3.2",
