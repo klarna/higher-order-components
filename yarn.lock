@@ -1257,6 +1257,10 @@ code-point-at@^1.0.0:
   dependencies:
     number-is-nan "^1.0.0"
 
+collect-fps@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/collect-fps/-/collect-fps-1.1.0.tgz#e071299861bd5ee1b8e36ff4bfba2407236e05bd"
+
 color-convert@^1.3.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.6.0.tgz#7592755faf53938a05b1ea8e5374cab77d6dd190"
