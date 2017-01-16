@@ -5,9 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "sagui build",
-    "dist": "sagui build --optimize",
+    "dist": "sagui dist",
     "start": "sagui develop --port 3000",
-    "test": "npm run test:lint && npm run test:typecheck && npm run test:unit",
+    "test": "sagui test",
     "test:lint": "sagui test:lint",
     "test:typecheck": "sagui test:typecheck",
     "test:unit": "sagui test:unit --coverage",
@@ -30,7 +30,7 @@
     "react": "^15.3.2",
     "react-context-props": "^0.1.4",
     "react-dom": "^15.3.2",
-    "sagui": "8.0.0-rc.0"
+    "sagui": "8.0.1"
   },
   "peerDependencies": {
     "react": "^15.3.2",
