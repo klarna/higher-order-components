@@ -11,28 +11,37 @@ This library is a collection of useful React higher-order Components.
 
 **monitorAnimationSpeed** allows you to track the frames per second that the browser window is achieving when your component is rendered. This is particularly useful for components that are animated.
 
-In order to do this, **monitorAnimationSpeed** uses the `collect-fps` library to collect the rate in which `requestAnimationFrame` is being called. If the frames per second drop below a threshold (30 FPS by default) then a property is set in the decorated component to notify that the animation speed is slow (the property is `lowFPS` by default) and the `onLowFPS` is invoked so that the outer components can react to the FPS information.
+In order to do this, **monitorAnimationSpeed** uses the `collect-fps` library to collect the rate in which `requestAnimationFrame` is being called. If the frames per second drop below a threshold (30 FPS by default) then a property is set in the decorated component to notify that the animation speed is slow (the property is `lowFPS` by default).
 
-**monitorAnimationSpeed** also supports a list of `propsToWatch` so that whenever of those props is updated, the collection of frames is restarted. This allows you to track animation speed when props that will trigger animations inside your component.
+**monitorAnimationSpeed** passes two props down to the inner component:
+
+- `onStartFPSCollection`: to be called when the inner component starts a heavy animation of some sort
+- `onEndFPSCollection`: to be called when the animation is complete
+
+**monitorAnimationSpeed** updates the value of the `lowFPS` prop when the collection is completed.
 
 ```javascript
-function AnimatedComponent ({lowFPS}) {
-  return <div className={lowFPS ? 'no-animation' : 'expensive-animation'} />
+class AnimatedComponent extends Component {
+  componentDidMount () {
+    // Say that the animation starts when the component is mounted and that
+    // it takes a fixed time to complete
+    this.props.onStartFPSCollection()
+
+    setTimeout(() => {
+      this.props.onEndFPSCollection()
+    }, 300)
+  }
+
+  render () {
+    return <div
+      className={this.props.lowFPS ? 'no-animation' : 'expensive-animation'}
+    />
+  }
 }
 
 const MonitoredAnimatedComponent = monitorAnimationSpeed({
-  sampleSize: 20, // default amount of frames collected
-  lowFPSPropName: 'lowFPS', // default name of the prop to be set if FPS drop below the threshold
   threshold: 30, // default threshold of frames per second. Below this number it will be considered to be low frame rate
-  propsToWatch: [], // by default animation speed is tracked only when the component is mounted. If you specify a prop such as `value` in this list, the animation tracking will retrigger when a the `value` prop is changed
 })(AnimatedComponent)
-
-render(
-  <MonitoredAnimatedComponent
-    onLowFPS={() => console.log('Animation speed is too low.')}
-  />,
-  document.getElementById('root')
-)
 ```
 
 ## UniqueName
