@@ -9,7 +9,11 @@ export default ({
   fpsCollector = collectFps
 }) => (Target) => {
   const collectFpsForComponent = (component) =>
-    fpsCollector(sampleSize, (err, fps) => component.setState({fps}))
+    fpsCollector(sampleSize, (err, fps) =>
+      component.setState({
+        fps: err ? 0 : fps
+      })
+    )
 
   class MonitorAnimationSpeed extends Component {
     constructor () {
