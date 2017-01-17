@@ -41,7 +41,7 @@ describe('monitorAnimationSpeed', () => {
     })
   })
 
-  describe('if the speed is above the specified threshold', () => {
+  describe('if the speed is above or equals to the specified threshold', () => {
     it('sets the lowFPS prop to false', done => {
       const root = document.createElement('div')
       class Target extends Component {
