@@ -19,7 +19,7 @@ export default ({
     constructor () {
       super()
 
-      this.state = {fps: 60}
+      this.state = {fps: threshold}
     }
 
     render () {
