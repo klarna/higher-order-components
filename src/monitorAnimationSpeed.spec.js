@@ -112,7 +112,7 @@ describe('monitorAnimationSpeed', () => {
 
         let called = false
 
-        render(<MonitoredTarget onLowFPS={() => called = true} />, root)
+        render(<MonitoredTarget onLowFPS={() => { called = true }} />, root)
 
         setTimeout(() => {
           expect(called).toBe(false)
@@ -154,7 +154,34 @@ describe('monitorAnimationSpeed', () => {
         render(<MonitoredTarget />, root)
       })
 
-      it('calls the onLowFPS callback', (done) => {})
+      it('calls the onLowFPS callback', (done) => {
+        const root = document.createElement('div')
+        class Target extends Component {
+          render () {
+            return <div />
+          }
+        }
+        const framesInspector = (sampleSize) => equal(sampleSize, 20)
+        const fpsCollector = getFPSCollector([undefined, 20], framesInspector)
+        const MonitoredTarget = monitorAnimationSpeed({
+          sampleSize: 20,
+          lowFPSPropName: 'disableAnimation',
+          threshold: 30,
+          propsToWatch: ['value'],
+          fpsCollector
+        })(Target)
+
+        let callCounter = 0
+        const callback = () => {
+          callCounter = callCounter + 1
+          if (callCounter === 2) {
+            done()
+          }
+        }
+
+        render(<MonitoredTarget onLowFPS={callback} value='value' />, root)
+        render(<MonitoredTarget onLowFPS={callback} />, root)
+      })
     })
 
     describe('if the speed is above the specified threshold', () => {
@@ -188,7 +215,42 @@ describe('monitorAnimationSpeed', () => {
         render(<MonitoredTarget />, root)
       })
 
-      it('doesn’t call the onLowFPS callback', (done) => {})
+      it('doesn’t call the onLowFPS callback', (done) => {
+        const root = document.createElement('div')
+        let callCounter = 0
+        class Target extends Component {
+          componentDidUpdate () {
+            callCounter = callCounter + 1
+            if (callCounter === 3 && this.props.disableAnimation === false) {
+              done()
+            }
+          }
+
+          render () {
+            return <div />
+          }
+        }
+
+        const framesInspector = (sampleSize) => equal(sampleSize, 20)
+        const fpsCollector = getFPSCollector([undefined, 60], framesInspector)
+        const MonitoredTarget = monitorAnimationSpeed({
+          sampleSize: 20,
+          lowFPSPropName: 'disableAnimation',
+          threshold: 30,
+          propsToWatch: ['value'],
+          fpsCollector
+        })(Target)
+
+        let called = false
+
+        render(<MonitoredTarget onLowFPS={() => { called = true }} value='value' />, root)
+        render(<MonitoredTarget onLowFPS={() => { called = true }} />, root)
+
+        setTimeout(() => {
+          expect(called).toBe(false)
+          done()
+        })
+      })
     })
   })
 
