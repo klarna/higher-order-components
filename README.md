@@ -26,6 +26,13 @@ const MonitoredAnimatedComponent = monitorAnimationSpeed({
   threshold: 30, // default threshold of frames per second. Below this number it will be considered to be low frame rate
   propsToWatch: [], // by default animation speed is tracked only when the component is mounted. If you specify a prop such as `value` in this list, the animation tracking will retrigger when a the `value` prop is changed
 })(AnimatedComponent)
+
+render(
+  <MonitoredAnimatedComponent
+    onLowFPS={() => console.log('Animation speed is too low.')}
+  />,
+  document.getElementById('root')
+)
 ```
 
 ## UniqueName
