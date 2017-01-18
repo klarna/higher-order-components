@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
 import {equal} from 'assert'
-import monitorAnimationSpeed from './monitorAnimationSpeed'
+import notifyOnLowFPS from './notifyOnLowFPS'
 
 const getFPSCollector = (result) => () => () => result
 
-describe('monitorAnimationSpeed', () => {
+describe('notifyOnLowFPS', () => {
   describe('if the speed is below the specified threshold', () => {
     it('sets the lowFPS prop to true', done => {
       const root = document.createElement('div')
@@ -32,12 +32,12 @@ describe('monitorAnimationSpeed', () => {
         }
       }
       const fpsCollector = getFPSCollector(20)
-      const MonitoredTarget = monitorAnimationSpeed({
+      const DecoratedTarget = notifyOnLowFPS({
         threshold: 30,
         fpsCollector
       })(Target)
 
-      render(<MonitoredTarget />, root)
+      render(<DecoratedTarget />, root)
     })
   })
 
@@ -67,12 +67,12 @@ describe('monitorAnimationSpeed', () => {
         }
       }
       const fpsCollector = getFPSCollector(40)
-      const MonitoredTarget = monitorAnimationSpeed({
+      const DecoratedTarget = notifyOnLowFPS({
         threshold: 30,
         fpsCollector
       })(Target)
 
-      render(<MonitoredTarget />, root)
+      render(<DecoratedTarget />, root)
     })
   })
 })
