@@ -1,5 +1,6 @@
 export deprecated from './deprecated'
 export overridable from './overridable'
+export notifyOnLowFPS from './notifyOnLowFPS'
 export themeable from './themeable'
 export uncontrolled from './uncontrolled'
 export uniqueName from './uniqueName'

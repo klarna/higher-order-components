@@ -37,6 +37,7 @@
     "react-context-props": "^0.1.4"
   },
   "dependencies": {
+    "collect-fps": "2.0.0",
     "seed-random": "^2.2.0"
   }
 }

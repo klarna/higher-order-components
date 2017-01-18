@@ -7,6 +7,43 @@ This library is a collection of useful React higher-order Components.
 
 **Note**: Documentation is a work in progress. It will probably be expanded with examples later on.
 
+## NofifyOnLowFPS
+
+**notifyOnLowFPS** allows you to track the frames per second that the browser window is achieving when your component is rendered. This is particularly useful for components that are animated.
+
+In order to do this, **notifyOnLowFPS** uses the `collect-fps` library to collect the rate in which `requestAnimationFrame` is being called. If the frames per second drop below a threshold (30 FPS by default) then a property is set in the decorated component to notify that the animation speed is slow (the property is `lowFPS` by default).
+
+**notifyOnLowFPS** passes two props down to the inner component:
+
+- `onStartFPSCollection`: to be called when the inner component starts a heavy animation of some sort
+- `onEndFPSCollection`: to be called when the animation is complete
+
+**notifyOnLowFPS** updates the value of the `lowFPS` prop when the collection is completed.
+
+```javascript
+class AnimatedComponent extends Component {
+  componentDidMount () {
+    // Say that the animation starts when the component is mounted and that
+    // it takes a fixed time to complete
+    this.props.onStartFPSCollection()
+
+    setTimeout(() => {
+      this.props.onEndFPSCollection()
+    }, 300)
+  }
+
+  render () {
+    return <div
+      className={this.props.lowFPS ? 'no-animation' : 'expensive-animation'}
+    />
+  }
+}
+
+const DecoratedAnimatedComponent = notifyOnLowFPS({
+  threshold: 30, // default threshold of frames per second. Below this number it will be considered to be low frame rate
+})(AnimatedComponent)
+```
+
 ## UniqueName
 
 **UniqueName** is a helper for components that need a `name` prop, so that it defaults to a namespaced UUID if not specified. This is useful for components that wrap `checkbox` or `radio` input types, which will not behave properly without a unique name. When using those Component types as fully controlled, name are unimportant, so it’s easy to forget to add them. This is a common source of mistakes for this family of components:
