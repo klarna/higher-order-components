@@ -7,18 +7,18 @@ This library is a collection of useful React higher-order Components.
 
 **Note**: Documentation is a work in progress. It will probably be expanded with examples later on.
 
-## MonitorAnimationSpeed
+## NofifyOnLowFPS
 
-**monitorAnimationSpeed** allows you to track the frames per second that the browser window is achieving when your component is rendered. This is particularly useful for components that are animated.
+**notifyOnLowFPS** allows you to track the frames per second that the browser window is achieving when your component is rendered. This is particularly useful for components that are animated.
 
-In order to do this, **monitorAnimationSpeed** uses the `collect-fps` library to collect the rate in which `requestAnimationFrame` is being called. If the frames per second drop below a threshold (30 FPS by default) then a property is set in the decorated component to notify that the animation speed is slow (the property is `lowFPS` by default).
+In order to do this, **notifyOnLowFPS** uses the `collect-fps` library to collect the rate in which `requestAnimationFrame` is being called. If the frames per second drop below a threshold (30 FPS by default) then a property is set in the decorated component to notify that the animation speed is slow (the property is `lowFPS` by default).
 
-**monitorAnimationSpeed** passes two props down to the inner component:
+**notifyOnLowFPS** passes two props down to the inner component:
 
 - `onStartFPSCollection`: to be called when the inner component starts a heavy animation of some sort
 - `onEndFPSCollection`: to be called when the animation is complete
 
-**monitorAnimationSpeed** updates the value of the `lowFPS` prop when the collection is completed.
+**notifyOnLowFPS** updates the value of the `lowFPS` prop when the collection is completed.
 
 ```javascript
 class AnimatedComponent extends Component {
@@ -39,7 +39,7 @@ class AnimatedComponent extends Component {
   }
 }
 
-const MonitoredAnimatedComponent = monitorAnimationSpeed({
+const DecoratedAnimatedComponent = notifyOnLowFPS({
   threshold: 30, // default threshold of frames per second. Below this number it will be considered to be low frame rate
 })(AnimatedComponent)
 ```

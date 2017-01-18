@@ -15,7 +15,7 @@ export default ({
     endFPSCollection = fpsCollector()
   }
 
-  class MonitorAnimationSpeed extends Component {
+  class NotifyOnLowFPS extends Component {
     constructor () {
       super()
 
@@ -37,7 +37,7 @@ export default ({
     }
   }
 
-  MonitorAnimationSpeed.displayName = Target.displayName || Target.name
+  NotifyOnLowFPS.displayName = Target.displayName || Target.name
 
-  return MonitorAnimationSpeed
+  return NotifyOnLowFPS
 }
