@@ -9,10 +9,11 @@ export default ({
 }) => (Target) => {
   let endFPSCollection = noop
 
-  const handleStartFPSCollection = (component) => {
+  const handleStartFPSCollection = onStartFPSCollection => () => {
     if (endFPSCollection !== noop) { endFPSCollection() }
 
     endFPSCollection = fpsCollector()
+    onStartFPSCollection && onStartFPSCollection()
   }
 
   class NotifyOnLowFPS extends Component {
@@ -23,14 +24,24 @@ export default ({
     }
 
     render () {
+      const {
+        onStartFPSCollection,
+        onEndFPSCollection,
+        onFPSCollected,
+        ...props
+      } = this.props
+
       return <Target
-        {...this.props}
-        onStartFPSCollection={handleStartFPSCollection}
+        {...props}
+        onStartFPSCollection={handleStartFPSCollection(onStartFPSCollection)}
         onEndFPSCollection={() => {
           if (endFPSCollection !== noop) {
-            this.setState({fps: endFPSCollection()})
+            const fps = endFPSCollection()
+            this.setState({fps})
             endFPSCollection = noop
+            onFPSCollected && onFPSCollected(fps)
           }
+          onEndFPSCollection && onEndFPSCollection()
         }}
         lowFPS={this.state.fps < threshold}
       />

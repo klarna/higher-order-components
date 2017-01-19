@@ -39,6 +39,102 @@ describe('notifyOnLowFPS', () => {
 
       render(<DecoratedTarget />, root)
     })
+
+    it('calls its own onStartFPSCollection', done => {
+      const root = document.createElement('div')
+      class Target extends Component {
+        componentDidMount () {
+          this.collectionComplete = false
+          this.props.onStartFPSCollection()
+
+          setTimeout(() => {
+            this.collectionComplete = true
+            this.props.onEndFPSCollection()
+          })
+        }
+
+        render () {
+          return <div />
+        }
+      }
+      const fpsCollector = getFPSCollector(20)
+      const DecoratedTarget = notifyOnLowFPS({
+        threshold: 30,
+        fpsCollector
+      })(Target)
+
+      render(
+        <DecoratedTarget
+          onStartFPSCollection={done}
+        />,
+        root
+      )
+    })
+
+    it('calls its own onEndFPSCollection', done => {
+      const root = document.createElement('div')
+      class Target extends Component {
+        componentDidMount () {
+          this.collectionComplete = false
+          this.props.onStartFPSCollection()
+
+          setTimeout(() => {
+            this.collectionComplete = true
+            this.props.onEndFPSCollection()
+          })
+        }
+
+        render () {
+          return <div />
+        }
+      }
+      const fpsCollector = getFPSCollector(20)
+      const DecoratedTarget = notifyOnLowFPS({
+        threshold: 30,
+        fpsCollector
+      })(Target)
+
+      render(
+        <DecoratedTarget
+          onEndFPSCollection={done}
+        />,
+        root
+      )
+    })
+
+    it('calls its own onFPSCollected with the fps', done => {
+      const root = document.createElement('div')
+      class Target extends Component {
+        componentDidMount () {
+          this.collectionComplete = false
+          this.props.onStartFPSCollection()
+
+          setTimeout(() => {
+            this.collectionComplete = true
+            this.props.onEndFPSCollection()
+          })
+        }
+
+        render () {
+          return <div />
+        }
+      }
+      const fpsCollector = getFPSCollector(20)
+      const DecoratedTarget = notifyOnLowFPS({
+        threshold: 30,
+        fpsCollector
+      })(Target)
+
+      render(
+        <DecoratedTarget
+          onFPSCollected={fps => {
+            equal(20, fps)
+            done()
+          }}
+        />,
+        root
+      )
+    })
   })
 
   describe('if the speed is above or equals to the specified threshold', () => {
