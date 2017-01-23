@@ -44,6 +44,21 @@ const DecoratedAnimatedComponent = notifyOnLowFPS({
 })(AnimatedComponent)
 ```
 
+The decorated component exposes the `onStartFPSCollection` and `onEndFPSCollection` handlers plus a `onFPSCollected` handler that passes the FPS as a value to the callback:
+
+```javascript
+import {render} from 'react-dom'
+
+render(
+  <DecoratedAnimatedComponent
+    onStartFPSCollection={() => console.log('collection started')}
+    onEndFPSCollection={() => console.log('collection ended')}
+    onFPSCollected={fps => console.log('fps count', fps)}
+  />,
+  domElement
+)
+```
+
 ## UniqueName
 
 **UniqueName** is a helper for components that need a `name` prop, so that it defaults to a namespaced UUID if not specified. This is useful for components that wrap `checkbox` or `radio` input types, which will not behave properly without a unique name. When using those Component types as fully controlled, name are unimportant, so it’s easy to forget to add them. This is a common source of mistakes for this family of components:
