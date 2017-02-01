@@ -4,11 +4,12 @@ import {getContextualizer} from 'react-context-props'
 import {equal} from 'assert'
 import themeable from './themeable'
 
-const root = document.createElement('div')
-document.body.appendChild(root)
-
 describe('themeable', () => {
   it('gets the prop from context', () => {
+    const root = document.createElement('div')
+    document.body.innerHTML = ''
+    document.body.appendChild(root)
+
     const Theme = getContextualizer({
       customizations: PropTypes.shape({
         informal: PropTypes.bool

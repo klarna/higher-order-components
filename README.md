@@ -288,7 +288,17 @@ render(
 **Uncontrolled** is a generic interface however, and allows you to modify all kind of properties to behave in this way (**TODO**: which)
 
 ```javascript
+import {uncontrolled} from '@klarna/higher-order-components'
 
+uncontrolled({
+  prop: 'value',
+  defaultProp: 'defaultValue',
+  handlers: {
+    onChange: ({value: currentValue}) => (e) => e.target.value,
+    onClear: () => () => '',
+    onDoubleClick: ({value: currentValue}) => () => `${currentValue}${currentValue}`
+  }
+})(Input)
 ```
 
 ## Deprecated decorator
