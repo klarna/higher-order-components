@@ -9,8 +9,10 @@ export default ({
 }) => (Target) => {
   let endFPSCollection = noop
 
-  const handleStartFPSCollection = (component) => {
-    if (endFPSCollection !== noop) { endFPSCollection() }
+  const handleStartFPSCollection = (component) => () => {
+    if (endFPSCollection !== noop || component.state.fps < threshold) {
+      return
+    }
 
     endFPSCollection = fpsCollector()
   }
@@ -25,7 +27,7 @@ export default ({
     render () {
       return <Target
         {...this.props}
-        onStartFPSCollection={handleStartFPSCollection}
+        onStartFPSCollection={handleStartFPSCollection(this)}
         onEndFPSCollection={() => {
           if (endFPSCollection !== noop) {
             this.setState({fps: endFPSCollection()})
