@@ -14,7 +14,11 @@ export default ({
       return
     }
 
-    endFPSCollection = fpsCollector()
+    try {
+      endFPSCollection = fpsCollector()
+    } catch (e) {
+      endFPSCollection = () => 0
+    }
   }
 
   class NotifyOnLowFPS extends Component {

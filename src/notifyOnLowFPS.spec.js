@@ -169,4 +169,41 @@ describe('notifyOnLowFPS', () => {
       })
     })
   })
+
+  describe('when collect FPS throws an error', () => {
+    it('sets the lowFPS prop to true', done => {
+      const root = document.createElement('div')
+      class Target extends Component {
+        componentDidMount () {
+          this.collectionComplete = false
+          this.props.onStartFPSCollection()
+
+          setTimeout(() => {
+            this.collectionComplete = true
+            this.props.onEndFPSCollection()
+          })
+        }
+
+        componentDidUpdate () {
+          if (this.collectionComplete) {
+            expect(this.props.lowFPS).toBe(true)
+            done()
+          }
+        }
+
+        render () {
+          return <div />
+        }
+      }
+      const fpsCollector = () => {
+        throw new Error('something')
+      }
+      const DecoratedTarget = notifyOnLowFPS({
+        threshold: 30,
+        fpsCollector
+      })(Target)
+
+      render(<DecoratedTarget />, root)
+    })
+  })
 })
