@@ -12,7 +12,7 @@
     "test:typecheck": "sagui test:typecheck",
     "test:unit": "sagui test:unit --coverage",
     "test:unit:watch": "sagui test:unit --watch",
-    "prepublish": "sagui dist"
+    "prepublish": "sagui build"
   },
   "repository": {
     "type": "git",
