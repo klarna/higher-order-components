@@ -3,5 +3,13 @@
  * see: http://sagui.js.org/
  */
 module.exports = {
-  libraries: ['index', 'deprecated', 'namespacedDisplayName', 'overridable', 'themeable', 'uncontrolled']
+  libraries: [
+    'index',
+    'deprecated',
+    'namespacedDisplayName',
+    'notifyOnLowFPS',
+    'overridable',
+    'themeable',
+    'uncontrolled'
+  ]
 }
