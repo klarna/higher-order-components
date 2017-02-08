@@ -44,7 +44,7 @@ const DecoratedAnimatedComponent = notifyOnLowFPS({
 })(AnimatedComponent)
 ```
 
-The decorated component exposes the `onStartFPSCollection` and `onEndFPSCollection` handlers plus a `onFPSCollected` handler that passes the FPS as a value to the callback:
+The decorated component exposes the `onLowFPS` handler. This handler will be called if the FPS counts ever drops below the threshold.
 
 ```javascript
 import {render} from 'react-dom'
