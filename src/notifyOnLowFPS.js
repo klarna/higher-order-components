@@ -34,8 +34,12 @@ export default ({
         onStartFPSCollection={handleStartFPSCollection(this)}
         onEndFPSCollection={() => {
           if (endFPSCollection !== noop) {
-            this.setState({fps: endFPSCollection()})
+            const fps = endFPSCollection()
+            this.setState({fps})
             endFPSCollection = noop
+            if (fps < threshold) {
+              this.props.onLowFPS && this.props.onLowFPS()
+            }
           }
         }}
         lowFPS={this.state.fps < threshold}

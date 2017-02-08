@@ -7,7 +7,7 @@ This library is a collection of useful React higher-order Components.
 
 **Note**: Documentation is a work in progress. It will probably be expanded with examples later on.
 
-## NofifyOnLowFPS
+## NotifyOnLowFPS
 
 **notifyOnLowFPS** allows you to track the frames per second that the browser window is achieving when your component is rendered. This is particularly useful for components that are animated.
 
@@ -42,6 +42,19 @@ class AnimatedComponent extends Component {
 const DecoratedAnimatedComponent = notifyOnLowFPS({
   threshold: 30, // default threshold of frames per second. Below this number it will be considered to be low frame rate
 })(AnimatedComponent)
+```
+
+The decorated component exposes the `onLowFPS` handler. This handler will be called if the FPS counts ever drops below the threshold.
+
+```javascript
+import {render} from 'react-dom'
+
+render(
+  <DecoratedAnimatedComponent
+    onLowFPS={() => console.log('fps count dropped below threshold')}
+  />,
+  domElement
+)
 ```
 
 ## UniqueName

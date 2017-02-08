@@ -40,6 +40,35 @@ describe('notifyOnLowFPS', () => {
       render(<DecoratedTarget />, root)
     })
 
+    it('calls the onLowFPS handler', done => {
+      const root = document.createElement('div')
+      let called = false
+      class Target extends Component {
+        componentDidMount () {
+          this.props.onStartFPSCollection()
+
+          setTimeout(() => {
+            this.props.onEndFPSCollection()
+            expect(called).toBe(true)
+            done()
+          })
+        }
+
+        render () {
+          return <div />
+        }
+      }
+      const fpsCollector = getFPSCollector(20)
+      const DecoratedTarget = notifyOnLowFPS({
+        threshold: 30,
+        fpsCollector
+      })(Target)
+
+      render(<DecoratedTarget
+        onLowFPS={() => { called = true }}
+      />, root)
+    })
+
     it('doesn’t collect again', done => {
       const root = document.createElement('div')
       let callCount = 0
@@ -104,6 +133,35 @@ describe('notifyOnLowFPS', () => {
       })(Target)
 
       render(<DecoratedTarget />, root)
+    })
+
+    it('does not calls the onLowFPS handler', done => {
+      const root = document.createElement('div')
+      let called = false
+      class Target extends Component {
+        componentDidMount () {
+          this.props.onStartFPSCollection()
+
+          setTimeout(() => {
+            this.props.onEndFPSCollection()
+            expect(called).toBe(false)
+            done()
+          })
+        }
+
+        render () {
+          return <div />
+        }
+      }
+      const fpsCollector = getFPSCollector(40)
+      const DecoratedTarget = notifyOnLowFPS({
+        threshold: 30,
+        fpsCollector
+      })(Target)
+
+      render(<DecoratedTarget
+        onLowFPS={() => { called = true }}
+      />, root)
     })
 
     it('collects again', done => {
