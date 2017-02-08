@@ -6,6 +6,10 @@ describe('namespacedDisplayName', () => {
     const Component = function () {}
     const namespace = 'foo'
     const name = 'bar'
-    equal(namespacedDisplayName(namespace)(name)(Component).displayName, `${namespace}.${name}`)
+
+    equal(
+      namespacedDisplayName(namespace)(name)(Component).displayName,
+      `${namespace}.${name}`
+    )
   })
 })

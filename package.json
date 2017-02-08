@@ -1,6 +1,6 @@
 {
   "name": "@klarna/higher-order-components",
-  "version": "0.4.0",
+  "version": "0.5.5",
   "description": "A collection of useful React higher-order components",
   "main": "dist/index.js",
   "scripts": {
@@ -11,7 +11,8 @@
     "test:lint": "sagui test:lint",
     "test:typecheck": "sagui test:typecheck",
     "test:unit": "sagui test:unit --coverage",
-    "test:unit:watch": "sagui test:unit --watch"
+    "test:unit:watch": "sagui test:unit --watch",
+    "prepublish": "sagui build"
   },
   "repository": {
     "type": "git",
