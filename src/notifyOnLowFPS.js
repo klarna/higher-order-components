@@ -29,13 +29,6 @@ export default ({
     }
 
     render () {
-      const {
-        onStartFPSCollection,
-        onEndFPSCollection,
-        onFPSCollected,
-        ...props
-      } = this.props
-
       return <Target
         {...this.props}
         onStartFPSCollection={handleStartFPSCollection(this)}
@@ -44,9 +37,10 @@ export default ({
             const fps = endFPSCollection()
             this.setState({fps})
             endFPSCollection = noop
-            onFPSCollected && onFPSCollected(fps)
+            if (fps < threshold) {
+              this.props.onLowFPS && this.props.onLowFPS()
+            }
           }
-          onEndFPSCollection && onEndFPSCollection()
         }}
         lowFPS={this.state.fps < threshold}
       />
