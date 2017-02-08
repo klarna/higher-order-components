@@ -51,9 +51,7 @@ import {render} from 'react-dom'
 
 render(
   <DecoratedAnimatedComponent
-    onStartFPSCollection={() => console.log('collection started')}
-    onEndFPSCollection={() => console.log('collection ended')}
-    onFPSCollected={fps => console.log('fps count', fps)}
+    onLowFPS={() => console.log('fps count dropped below threshold')}
   />,
   domElement
 )
