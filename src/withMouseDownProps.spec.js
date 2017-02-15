@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
-import withTouchProps from './withTouchProps'
+import withMouseDownProps from './withMouseDownProps'
 
-describe('withTouchProps', () => {
-  it('has the touch down prop when touchStart gets triggered', done => {
+describe('withMouseDownProps', () => {
+  it('has the touch down prop when mouseDown gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {
       constructor () {
@@ -15,14 +15,14 @@ describe('withTouchProps', () => {
       componentDidMount () {
         setTimeout(() => {
           this.updated = true
-          this.props.onTouchStart()
+          this.props.onMouseDown()
         })
       }
 
       componentDidUpdate () {
         if (this.updated) {
           setTimeout(() => {
-            expect(root.querySelector('span').textContent).toBe('Touched!')
+            expect(root.querySelector('span').textContent).toBe('Mouse down!')
             done()
           })
         }
@@ -37,14 +37,14 @@ describe('withTouchProps', () => {
       }
     }
     Target.defaultProps = { label: '' }
-    const DecoratedTarget = withTouchProps({
-      label: 'Touched!'
+    const DecoratedTarget = withMouseDownProps({
+      label: 'Mouse down!'
     })(Target)
 
     render(<DecoratedTarget />, root)
   })
 
-  it('loses the touch down prop when touchEnd gets triggered', done => {
+  it('loses the touch down prop when mouseUp gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {
       constructor () {
@@ -54,12 +54,12 @@ describe('withTouchProps', () => {
       }
 
       componentDidMount () {
-        this.props.onTouchStart()
+        this.props.onMouseDown()
       }
 
       componentDidUpdate () {
         setTimeout(() => {
-          this.props.onTouchEnd()
+          this.props.onMouseUp()
           this.updated = true
         })
 
@@ -76,8 +76,8 @@ describe('withTouchProps', () => {
     }
 
     Target.defaultProps = { label: '' }
-    const DecoratedTarget = withTouchProps({
-      label: 'Touched!'
+    const DecoratedTarget = withMouseDownProps({
+      label: 'Mouse down!'
     })(Target)
 
     render(<DecoratedTarget />, root)
