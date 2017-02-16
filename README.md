@@ -7,6 +7,83 @@ This library is a collection of useful React higher-order Components.
 
 **Note**: Documentation is a work in progress. It will probably be expanded with examples later on.
 
+## withFocusProps (props) (Component)
+
+Adds the props to the component if the element is focused.
+
+```javascript
+// InputBlock.js
+import {withFocusProps} from '@klarna/higher-order-components'
+
+function InputBlock ({focused, onFocus, onBlur}) {
+  return <div>
+    <input onFocus={onFocus} onBlur={onBlur} />
+    {focused ? 'It’s focused!' : 'It’s not focused'}
+  </div>
+}
+
+export withFocusProps({
+  focused: true
+})(InputBlock)
+```
+
+## withHoverProps (props) (Component)
+
+Adds the props to the component if the element is hovered.
+
+```javascript
+// Hovereable.js
+import {withHoverProps} from '@klarna/higher-order-components'
+
+function Hovereable ({hovered, onMouseEnter, onMouseLeave}) {
+  return <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    {hovered ? 'I’m hovered!' : 'I’m not hovered'}
+  </div>
+}
+
+export withHoverProps({
+  hovered: true
+})(Hovereable)
+```
+
+## withMouseDownProps (props) (Component)
+
+Adds the props to the component if the element is being pressed with the mouse.
+
+```javascript
+// Pressable.js
+import {withMouseDownProps} from '@klarna/higher-order-components'
+
+function Pressable ({pressed, onMouseDown, onMouseUp}) {
+  return <div onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
+    {pressed ? 'I’m pressed!' : 'I’m not pressed'}
+  </div>
+}
+
+export withMouseDownProps({
+  pressed: true
+})(Pressable)
+```
+
+## withTouchProps (props) (Component)
+
+Adds the props to the component if the element is being touched.
+
+```javascript
+// Pressable.js
+import {withTouchProps} from '@klarna/higher-order-components'
+
+function Touchable ({touched, onTouchStart, onTouchEnd}) {
+  return <div onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+    {touched ? 'I’m touched!' : 'I’m not touched'}
+  </div>
+}
+
+export withTouchProps({
+  touched: true
+})(Touchable)
+```
+
 ## NotifyOnLowFPS
 
 **notifyOnLowFPS** allows you to track the frames per second that the browser window is achieving when your component is rendered. This is particularly useful for components that are animated.
