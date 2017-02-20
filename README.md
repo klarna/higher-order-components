@@ -7,6 +7,39 @@ This library is a collection of useful React higher-order Components.
 
 **Note**: Documentation is a work in progress. It will probably be expanded with examples later on.
 
+
+## withDisplayName (string) ... (Component)
+
+**withDisplayName** let's you easily set the `displayName` of components.
+
+For example:
+
+```javascript
+import {withDisplayName} from '@klarna/higher-order-components'
+
+function UnnamedComponent () {
+  return <hr />
+}
+
+const Hr = withDisplayName('Hr')(UnnamedComponent)
+
+Hr.displayName // 'Hr'
+```
+
+This function though takes an arbitrary number of parameters. You can use this to generate functions to set namespaced `displayName`s:
+
+```javascript
+import {withDisplayName} from '@klarna/higher-order-components'
+
+function UnnamedComponent () {
+  return <hr />
+}
+
+const Hr = withDisplayName('Basic')('HTML')('Hr')(UnnamedComponent)
+
+Hr.displayName // 'Basic.HTML.Hr'
+```
+
 ## withFocusProps (props) (Component)
 
 Adds the props to the component if the element is focused.
@@ -422,27 +455,6 @@ deprecated({
   …,
   name: 'OldUnderlined'
 })
-```
-
-## Namespaced DisplayName
-
-**NamespacedDisplayName** let's you easily set the `displayName` of components grouped under a single namespace.
-
-`icons/withDisplayName.js`:
-```javascript
-import {namespacedDisplayName} from '@klarna/higher-order-components'
-export default namespacedDisplayName('Icon')
-```
-
-`icons/Close.jsx`:
-```javascript
-import withDisplayName from './withDisplayName'
-
-const Component = () => (
-  <span class="icon--close">Close</span>
-)
-
-export default withDisplayName('Close')(Component)
 ```
 
 ## License
