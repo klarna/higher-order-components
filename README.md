@@ -7,6 +7,40 @@ This library is a collection of useful React higher-order Components.
 
 **Note**: Documentation is a work in progress. It will probably be expanded with examples later on.
 
+## withLayoutProps (propsForLayouts) (Component)
+
+This decorator allows you to pick up a `layout` context prop and, depending on its string value, spread some prop values on the decorated component. Combined with some Component that listens on window resize events and sets the `layout` prop in the React.context, this helper allows to essentially have something like media queries for React.
+
+In this example we will use [`getContextualizer`]() from the [`react-context-props`]() to easily set up the `layout` prop in the React context
+
+```javascript
+import React, {PropTypes} from 'react'
+import {getContextualizer} from 'react-context-props'
+import {withLayoutProps} from '@klarna/higher-order-components'
+
+const LayoutSetter = getContextualizer({layout: PropTypes.string})
+
+function DifferentLabelAccordingToLayout ({label}) {
+  return <span>{label}</span>
+}
+
+const Decorated = withLayoutProps({
+  mobile: {
+    label: 'mobile'
+  },
+  desktop: {
+    label: 'desktop'
+  }
+})(DifferentLabelAccordingToLayout)
+
+function App () {
+  // will render `<span>desktop</span>`
+
+  return <LayoutSetter layout='desktop'>
+    <Decorated />
+  </LayoutSetter>
+}
+```
 
 ## withDisplayName (string) ... (Component)
 
