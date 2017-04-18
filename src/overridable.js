@@ -11,12 +11,22 @@ export default (styles = {}, designName) => (Target) => {
     }
 
     componentWillMount () {
-      this.styles = {...styles, ...this.props.styles}
+      this.mergeStylesProp(this.props.styles)
       this.getAndSetOverride()
+    }
+
+    componentWillReceiveProps ({ styles }) {
+      if (styles && Object.keys(styles).length > 0) {
+        this.mergeStylesProp(styles)
+      }
     }
 
     componentWillUpdate () {
       this.getAndSetOverride()
+    }
+
+    mergeStylesProp (stylesProp) {
+      this.styles = {...styles, ...stylesProp}
     }
 
     getAndSetOverride () {
