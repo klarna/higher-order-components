@@ -10,39 +10,20 @@ export default (styles = {}, designName) => (Target) => {
       this.Component = Target
     }
 
-    componentWillMount () {
-      this.mergeStylesProp(this.props.styles)
-      this.getAndSetOverride()
-    }
-
-    componentWillReceiveProps ({ styles }) {
-      if (styles && Object.keys(styles).length > 0) {
-        this.mergeStylesProp(styles)
-      }
-    }
-
-    componentWillUpdate () {
-      this.getAndSetOverride()
-    }
-
-    mergeStylesProp (stylesProp) {
-      this.styles = {...styles, ...stylesProp}
-    }
-
-    getAndSetOverride () {
+    getOverride () {
       if (!this.props.design.getOverrideFor) {
-        return
+        return {...styles, ...this.props.styles}
       }
       const override = this.props.design.getOverrideFor(
         Object.assign(Target, { designName: this.designName })
       )
       this.Component = override.Component
-      this.styles = {...this.styles, ...override.css}
+      return {...styles, ...this.props.styles, ...override.css}
     }
 
     render () {
       const {design, ...otherProps} = this.props // eslint-disable-line
-      const props = {...otherProps, styles: this.styles}
+      const props = {...otherProps, styles: this.getOverride()}
       return <this.Component {...props} />
     }
   }
