@@ -4814,9 +4814,9 @@ rx-lite@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
 
-sagui@8.0.1:
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/sagui/-/sagui-8.0.1.tgz#3bbcbc6fcf47c42381792dfac32bdc297a9f8098"
+sagui@8.0.7:
+  version "8.0.7"
+  resolved "https://registry.yarnpkg.com/sagui/-/sagui-8.0.7.tgz#fc4082f67245c2fd7b9a59bd0cf8ebe7a3fb5a18"
   dependencies:
     autoprefixer "^6.3.6"
     babel-core "^6.10.4"
