@@ -8,8 +8,8 @@ const deprecate = ({name, useInstead, readMore}) =>
     (readMore ? `\nRead more on ${readMore}` : '')
   )
 
-export default ({name, useInstead, readMore}) => (Target) => {
-  function Deprecated (props) {
+export default ({name, useInstead, readMore}) => Target => {
+  function WithDeprecationWarning (props) {
     deprecate({
       name: name || Target.displayName || Target.name,
       useInstead,
@@ -19,7 +19,7 @@ export default ({name, useInstead, readMore}) => (Target) => {
     return <Target {...props} />
   }
 
-  Deprecated.displayName = Target.displayName || Target.name
+  WithDeprecationWarning.displayName = Target.displayName || Target.name
 
-  return Deprecated
+  return WithDeprecationWarning
 }

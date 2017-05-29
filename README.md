@@ -116,7 +116,7 @@ export withTouchProps({
 })(Touchable)
 ```
 
-## withFPSGauge
+## withFPSGauge ({threshold: number}) (Component)
 
 **withFPSGauge** allows you to track the frames per second that the browser window is achieving when your component is rendered. This is particularly useful for components that are animated.
 
@@ -164,6 +164,33 @@ render(
   />,
   domElement
 )
+```
+
+## withDeprecationWarning (config) (Component)
+
+A component wrapped with `withDeprecationWarning` will print an error to the console when used so that consumers know they need to update their codebase to the latest component. It can be configured with the name of a component to use instead, and a URL where to read more.
+
+```javascript
+import React from 'react'
+import {withDeprecationWarning} from '@klarna/higher-order-components'
+
+function ObsoleteUnderlinedComponent ({ children }) {
+  return <u>{children}</u>
+}
+
+export default withDeprecationWarning({
+  readMore: 'http://example.com/why-old-component-is-deprecated',
+  useInstead: 'Underlined'
+})(ObsoleteUnderlinedComponent)
+```
+
+If the component doesn’t have a defined `name` or `displayName`, you can specify its name:
+
+```javascript
+withDeprecationWarning({
+  …,
+  name: 'ObsoleteUnderlinedComponent'
+})
 ```
 
 ## UniqueName
@@ -422,39 +449,6 @@ uncontrolled({
     onDoubleClick: ({value: currentValue}) => () => `${currentValue}${currentValue}`
   }
 })(Input)
-```
-
-## Deprecated decorator
-
-**TODO** what does it do?
-
-```javascript
-type Url = string
-
-type Deprecated = (options: { readMore: ?Url, useInstead: ?string, name: ?string }) => (component: ReactComponent) => ReactComponent
-```
-
-```javascript
-import React from 'react'
-import {deprecated} from '@klarna/higher-order-components'
-
-function OldUnderlined ({ … }) {
-  …
-}
-
-export default deprecated({
-  readMore: 'http://example.com/why-old-component-is-deprecated',
-  useInstead: 'Underlined'
-})(OldUnderlined)
-```
-
-If the component doesn’t have a defined `name` or `displayName`, you can specify its name like:
-
-```javascript
-deprecated({
-  …,
-  name: 'OldUnderlined'
-})
 ```
 
 ## License

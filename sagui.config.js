@@ -5,10 +5,10 @@
 module.exports = {
   libraries: [
     'index',
-    'deprecated',
     'overridable',
     'themeable',
     'uncontrolled',
+    'withDeprecationWarning',
     'withDisplayName',
     'withFocusProps',
     'withFPSGauge',
