@@ -15,7 +15,7 @@ describe('withHoverProps', () => {
       componentDidMount () {
         setTimeout(() => {
           this.updated = true
-          this.props.onMouseEnter()
+          this.props.onMouseOver()
         })
       }
 
@@ -54,7 +54,7 @@ describe('withHoverProps', () => {
       }
 
       componentDidMount () {
-        this.props.onMouseEnter()
+        this.props.onMouseOver()
       }
 
       componentDidUpdate () {

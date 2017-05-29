@@ -102,8 +102,8 @@ Adds the props to the component if the element is hovered.
 // Hovereable.js
 import {withHoverProps} from '@klarna/higher-order-components'
 
-function Hovereable ({hovered, onMouseEnter, onMouseLeave}) {
-  return <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+function Hovereable ({hovered, onMouseOver, onMouseOut}) {
+  return <div onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
     {hovered ? 'I’m hovered!' : 'I’m not hovered'}
   </div>
 }
