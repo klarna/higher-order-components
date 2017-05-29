@@ -32,7 +32,7 @@
     "react": "^15.5.0",
     "react-context-props": "^2.0.0",
     "react-dom": "^15.5.0",
-    "sagui": "8.0.7"
+    "sagui": "9.0.0-rc.17"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",

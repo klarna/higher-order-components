@@ -19,11 +19,11 @@ export default Target => {
     constructor () {
       super()
 
-      this.uniqueName = `${Target.displayName || Target.name}-${uuid(counter++)}`
+      this.uniqueFormIdentifier = `${Target.displayName || Target.name}-${uuid(counter++)}`
     }
 
     render () {
-      return <Target name={this.uniqueName} {...this.props} />
+      return <Target name={this.uniqueFormIdentifier} {...this.props} />
     }
   }
 
