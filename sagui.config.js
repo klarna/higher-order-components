@@ -6,12 +6,12 @@ module.exports = {
   libraries: [
     'index',
     'deprecated',
-    'notifyOnLowFPS',
     'overridable',
     'themeable',
     'uncontrolled',
     'withDisplayName',
     'withFocusProps',
+    'withFPSGauge',
     'withHoverProps',
     'withMouseDownProps',
     'withTouchProps'
