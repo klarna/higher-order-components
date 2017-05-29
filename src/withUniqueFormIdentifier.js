@@ -14,8 +14,8 @@ const uuid = (seed) => {
 }
 
 let counter = 0
-export default (Target) => {
-  class UniqueName extends PureComponent {
+export default Target => {
+  class WithUniqueFormIdentifier extends PureComponent {
     constructor () {
       super()
 
@@ -27,7 +27,7 @@ export default (Target) => {
     }
   }
 
-  UniqueName.displayName = Target.displayName || Target.name
+  WithUniqueFormIdentifier.displayName = Target.displayName || Target.name
 
-  return UniqueName
+  return WithUniqueFormIdentifier
 }

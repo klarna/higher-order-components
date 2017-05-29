@@ -193,9 +193,9 @@ withDeprecationWarning({
 })
 ```
 
-## UniqueName
+## withUniqueFormIdentifier
 
-**UniqueName** is a helper for components that need a `name` prop, so that it defaults to a namespaced UUID if not specified. This is useful for components that wrap `checkbox` or `radio` input types, which will not behave properly without a unique name. When using those Component types as fully controlled, name are unimportant, so it’s easy to forget to add them. This is a common source of mistakes for this family of components:
+**withUniqueFormIdentifier** is a helper for components that need a `name` prop, so that it defaults to a namespaced UUID if not specified. This is useful for components that wrap `checkbox` or `radio` input types, which will not behave properly without an unique name. When using those Component types as fully controlled, names are unimportant, so it’s easy to forget to add them. This is a common source of problem for this family of components, which **withUniqueFormIdentifier** helps you to avoid.
 
 Say that you have the component:
 
@@ -249,13 +249,13 @@ function Radio ({name, value, onChange}) {
 export default Radio
 ```
 
-…you can add the `uniqueName` higher-order component around it:
+…you can add the `withUniqueFormIdentifier` higher-order component around it:
 
 ```diff
-+import {uniqueName} from '@klarna/higher-order-components'
++import {withUniqueFormIdentifier} from '@klarna/higher-order-components'
 
 -export default Radio
-+export default uniqueName(Radio)
++export default withUniqueFormIdentifier(Radio)
 ```
 
 …and it no longer matters if you forget to set a `name` when using it, unless you actually care about that name of course.

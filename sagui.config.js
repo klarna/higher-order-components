@@ -6,7 +6,6 @@ module.exports = {
   libraries: [
     'index',
     'overridable',
-    'withTheme',
     'uncontrolled',
     'withDeprecationWarning',
     'withDisplayName',
@@ -14,6 +13,8 @@ module.exports = {
     'withFPSGauge',
     'withHoverProps',
     'withMouseDownProps',
-    'withTouchProps'
+    'withTheme',
+    'withTouchProps',
+    'withUniqueFormIdentifier'
   ]
 }

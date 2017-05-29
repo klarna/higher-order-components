@@ -1,9 +1,9 @@
 import React from 'react'
 import {render} from 'react-dom'
 import {equal, ok} from 'assert'
-import uniqueName from './uniqueName'
+import withUniqueFormIdentifier from './withUniqueFormIdentifier'
 
-describe('uniqueName', () => {
+describe('withUniqueFormIdentifier', () => {
   describe('no name specified', () => {
     it('has unique id', () => {
       const root = document.createElement('div')
@@ -12,7 +12,7 @@ describe('uniqueName', () => {
         return <input name={name} />
       }
 
-      const UniquelyNamedInput = uniqueName(Input)
+      const UniquelyNamedInput = withUniqueFormIdentifier(Input)
 
       render(
         <div>
@@ -53,7 +53,7 @@ describe('uniqueName', () => {
         return <input name={name} />
       }
 
-      const UniquelyNamedInput = uniqueName(Input)
+      const UniquelyNamedInput = withUniqueFormIdentifier(Input)
 
       render(
         <UniquelyNamedInput name='actualName' />,
