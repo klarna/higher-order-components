@@ -300,9 +300,9 @@ type Overridable = (
 ) => (target: ReactComponent) => Component
 ```
 
-## Themeable
+## withTheme (themeToProps) (Component)
 
-**Themeable** allows you to configure your components so that they can take information from the React.context to customize some props, whenever in the tree they might be. This higher-order component is useful for theming your components without having to use React.context explicitly in your component implementation.
+**withTheme** allows you to configure your components so that they can take information from the `React.context` to customize some props, whenever in the tree they might be. This higher-order component is useful for theming your components without having to use `React.context` explicitly in your component implementation.
 
 Say you have a set of textual components that support a small version of themselves via the `small: boolean` prop.
 
@@ -348,37 +348,37 @@ render(
 )
 ```
 
-You could of course pass a `small` prop to the MoreComplexView and have that one send the value down to each Title and Paragraph, but it can easily get cumbersome. If you happen, for example, to use a component inside MoreComplexView that in turn uses Title or Paragraph inside, you would have to pass `small` to that new component as well, and so on and so forth. What you really want to do is to set a global option for whether the text is regular or small, which is what React.context is for. Adding support for contextProps in your Title and Paragraph components makes their implementation complex though: there is a more elegant way to do it, with the **themeable** higher-order component:
+You could of course pass a `small` prop to the MoreComplexView and have that one send the value down to each Title and Paragraph, but it can easily get cumbersome. If you happen, for example, to use a component inside MoreComplexView that in turn uses Title or Paragraph inside, you would have to pass `small` to that new component as well, and so on and so forth. What you really want to do is to set a global option for whether the text is regular or small, which is what React.context is for. Adding support for contextProps in your Title and Paragraph components makes their implementation complex though: there is a more elegant way to do it, with the **withTheme** higher-order component:
 
 ```diff
 // Title.jsx
-+import {themeable} from '@klarna/higher-order-components'
++import {withTheme} from '@klarna/higher-order-components'
 
 function Title ({children, small}) {
   return <h2 style={{ fontSize: small ? '12px' : '18px' }}>{children}</h2>
 }
 
 -export default Title
-+export default themeable((customizations, props) => ({
++export default withTheme((customizations, props) => ({
 +  small: customizations.textSize === 'small'
 +}))(Title)
 ```
 
 ```diff
 // Paragraph.jsx
-+import {themeable} from '@klarna/higher-order-components'
++import {withTheme} from '@klarna/higher-order-components'
 
 function Paragraph ({children, small}) {
   return <p style={{ fontSize: small ? '12px' : '18px' }}>{children}</p>
 }
 
 -export default Paragraph
-+export default themeable((customizations, props) => ({
++export default withTheme((customizations, props) => ({
 +  small: customizations.textSize === 'small'
 +}))(Paragraph)
 ```
 
-The predicate function that you pass to `themeable` will only be called if there is a `customizations` from in the context, which means that wrapping your components with `themeable` is safe since nothing will change unless that prop is set.
+The predicate function that you pass to `withTheme` will only be called if there is a `customizations` from in the context, which means that wrapping your components with `withTheme` is safe since nothing will change unless that prop is set.
 
 Now you only need to set the prop in the React.context. You can easily do that with a little help from [`react-context-props`](https://github.com/xaviervia/react-context-props):
 

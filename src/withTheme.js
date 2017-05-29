@@ -1,8 +1,8 @@
 import React from 'react'
 import {withPropsFromContext} from 'react-context-props'
 
-const themeable = (adapter) => (Target) => {
-  const Themeable = withPropsFromContext(
+const withTheme = adapter => Target => {
+  const WithTheme = withPropsFromContext(
     ['customizations']
   )(
     ({ customizations, ...props }) => (
@@ -15,9 +15,9 @@ const themeable = (adapter) => (Target) => {
     )
   )
 
-  Themeable.displayName = Target.displayName || Target.name
+  WithTheme.displayName = Target.displayName || Target.name
 
-  return Themeable
+  return WithTheme
 }
 
-export default themeable
+export default withTheme

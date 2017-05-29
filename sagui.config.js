@@ -6,7 +6,7 @@ module.exports = {
   libraries: [
     'index',
     'overridable',
-    'themeable',
+    'withTheme',
     'uncontrolled',
     'withDeprecationWarning',
     'withDisplayName',

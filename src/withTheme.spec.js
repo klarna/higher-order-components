@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import {render} from 'react-dom'
 import {getContextualizer} from 'react-context-props'
 import {equal} from 'assert'
-import themeable from './themeable'
+import withTheme from './withTheme'
 
-describe('themeable', () => {
+describe('withTheme', () => {
   it('gets the prop from context', () => {
     const root = document.createElement('div')
     document.body.innerHTML = ''
@@ -23,7 +23,7 @@ describe('themeable', () => {
       </div>
     }
 
-    const ThemeableSalutation = themeable((customizations, props) => ({
+    const ThemeableSalutation = withTheme((customizations, props) => ({
       formality: customizations.informal ? 'informal' : 'formal'
     }))(Salutation)
 
