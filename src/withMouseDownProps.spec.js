@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
 import withMouseDownProps from './withMouseDownProps'
+import {equal} from 'assert'
 
 describe('withMouseDownProps', () => {
   it('has the touch down prop when mouseDown gets triggered', done => {
@@ -47,12 +48,6 @@ describe('withMouseDownProps', () => {
   it('loses the touch down prop when mouseUp gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {
-      constructor () {
-        super()
-
-        this.updated = false
-      }
-
       componentDidMount () {
         this.props.onMouseDown()
       }
@@ -60,13 +55,11 @@ describe('withMouseDownProps', () => {
       componentDidUpdate () {
         setTimeout(() => {
           this.props.onMouseUp()
-          this.updated = true
+          setTimeout(() => {
+            equal(root.querySelector('span').textContent, '')
+            done()
+          })
         })
-
-        if (this.updated) {
-          expect(root.querySelector('span').textContent).toBe('')
-          done()
-        }
       }
 
       render () {
