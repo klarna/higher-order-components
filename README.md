@@ -14,7 +14,8 @@ This decorator allows you to pick up a `layout` context prop and, depending on i
 In this example we will use [`getContextualizer`]() from the [`react-context-props`]() to easily set up the `layout` prop in the React context
 
 ```javascript
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import {getContextualizer} from 'react-context-props'
 import {withLayoutProps} from '@klarna/higher-order-components'
 
@@ -392,7 +393,8 @@ Now you only need to set the prop in the React.context. You can easily do that w
 
 ```javascript
 // Theme.jsx
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import {getContextualizer} from 'react-context-props'
 
 const Theme = getContextualizer({

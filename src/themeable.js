@@ -3,6 +3,8 @@ import {withPropsFromContext} from 'react-context-props'
 
 const themeable = (adapter) => (Target) => {
   const Themeable = withPropsFromContext(
+    ['customizations']
+  )(
     ({ customizations, ...props }) => (
       <Target
         {...{
@@ -10,8 +12,7 @@ const themeable = (adapter) => (Target) => {
           ...customizations ? adapter(customizations, props) : {}
         }}
       />
-    ),
-    ['customizations']
+    )
   )
 
   Themeable.displayName = Target.displayName || Target.name
