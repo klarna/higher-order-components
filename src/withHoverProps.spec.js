@@ -59,7 +59,7 @@ describe('withHoverProps', () => {
 
       componentDidUpdate () {
         setTimeout(() => {
-          this.props.onMouseLeave()
+          this.props.onMouseOut()
           this.updated = true
         })
 
