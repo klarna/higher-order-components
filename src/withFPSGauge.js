@@ -21,7 +21,7 @@ export default ({
     }
   }
 
-  class NotifyOnLowFPS extends Component {
+  class WithFPSGauge extends Component {
     constructor () {
       super()
 
@@ -47,7 +47,7 @@ export default ({
     }
   }
 
-  NotifyOnLowFPS.displayName = Target.displayName || Target.name
+  WithFPSGauge.displayName = Target.displayName || Target.name
 
-  return NotifyOnLowFPS
+  return WithFPSGauge
 }
