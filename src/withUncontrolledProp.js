@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 
-const makeUncontrolledHandler = ({
+const makeWithUncontrolledPropHandler = ({
   component,
   prop: propName,
   props,
@@ -22,7 +22,7 @@ const makeUncontrolledHandler = ({
 }
 
 export default ({ defaultProp, handlers, prop, resetHandlerName }) => Target => {
-  class Uncontrolled extends PureComponent {
+  class WithUncontrolledProp extends PureComponent {
     componentDidMount() {
       this.setState({
         [prop]: this.props[prop] != null ? this.props[prop] : this.props[defaultProp],
@@ -41,7 +41,7 @@ export default ({ defaultProp, handlers, prop, resetHandlerName }) => Target => 
         ...Object.keys(handlers)
           .map(handlerName => [
             handlerName,
-            makeUncontrolledHandler({
+            makeWithUncontrolledPropHandler({
               props: this.props,
               prop,
               component: this,
@@ -59,7 +59,7 @@ export default ({ defaultProp, handlers, prop, resetHandlerName }) => Target => 
     }
   }
 
-  Uncontrolled.displayName = Target.displayName || Target.name
+  WithUncontrolledProp.displayName = Target.displayName || Target.name
 
-  return Uncontrolled
+  return WithUncontrolledProp
 }

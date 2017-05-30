@@ -1,9 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { equal } from 'assert'
-import uncontrolled from './uncontrolled'
+import withUncontrolledProp from './withUncontrolledProp'
 
-describe('uncontrolled', () => {
+describe('withUncontrolledProp', () => {
   it('makes the prop uncontrolled when undefined', done => {
     const root = document.createElement('div')
     document.body.innerHTML = ''
@@ -18,7 +18,7 @@ describe('uncontrolled', () => {
       )
     }
 
-    const UncontrolledButtonSwitch = uncontrolled({
+    const UncontrolledButtonSwitch = withUncontrolledProp({
       prop: 'pressed',
       defaultProp: 'autoPressed',
       handlers: {
@@ -50,7 +50,7 @@ describe('uncontrolled', () => {
       )
     }
 
-    const UncontrolledButtonSwitch = uncontrolled({
+    const UncontrolledButtonSwitch = withUncontrolledProp({
       prop: 'pressed',
       defaultProp: 'autoPressed',
       handlers: {
@@ -79,7 +79,7 @@ describe('uncontrolled', () => {
       )
     }
 
-    const UncontrolledButtonSwitch = uncontrolled({
+    const UncontrolledButtonSwitch = withUncontrolledProp({
       prop: 'pressed',
       defaultProp: 'autoPressed',
       handlers: {
@@ -108,7 +108,7 @@ describe('uncontrolled', () => {
       )
     }
 
-    const UncontrolledButtonSwitch = uncontrolled({
+    const UncontrolledButtonSwitch = withUncontrolledProp({
       prop: 'pressed',
       defaultProp: 'autoPressed',
       handlers: {
@@ -136,7 +136,7 @@ describe('uncontrolled', () => {
         )
       }
 
-      const UncontrolledButtonSwitch = uncontrolled({
+      const UncontrolledButtonSwitch = withUncontrolledProp({
         prop: 'pressed',
         defaultProp: 'autoPressed',
         handlers: {
@@ -172,7 +172,7 @@ describe('uncontrolled', () => {
         )
       }
 
-      const UncontrolledButtonSwitch = uncontrolled({
+      const UncontrolledButtonSwitch = withUncontrolledProp({
         prop: 'pressed',
         defaultProp: 'autoPressed',
         handlers: {

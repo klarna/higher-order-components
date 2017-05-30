@@ -6,7 +6,6 @@ module.exports = {
   libraries: [
     'index',
     'overridable',
-    'uncontrolled',
     'withDeprecationWarning',
     'withDisplayName',
     'withFocusProps',
@@ -15,6 +14,7 @@ module.exports = {
     'withMouseDownProps',
     'withTheme',
     'withTouchProps',
+    'withUncontrolledProp',
     'withUniqueFormIdentifier'
   ]
 }

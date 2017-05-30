@@ -428,28 +428,37 @@ render(
 - why the props are necessary in the predicate function (again, an example)
 - how this could be used to make arbitrary components themeable, including third party ones
 
-## Uncontrolled decorator
+## withUncontrolledProp (config) (Component)
 
-**Uncontrolled** is a generic method of making a controlled property of a Component behave as an uncontrolled prop when not set. This is the default behavior that React exposes for form components such as `<input>`:
+**withUncontrolledProp** is a generic method of making a controlled property of a Component behave as an uncontrolled prop when not set. This is the default behavior that React exposes for form components such as `<input>`:
 
 - `<input value='Controlled' />` and `<input value='' />` will have a controlled value
 - `<input />` and `<input defaultValue='Initial value, before user interaction' />` will have an uncontrolled value
 
-**Uncontrolled** is a generic interface however, and allows you to modify all kind of properties to behave in this way (**TODO**: which)
+By using the **withUncontrolledProp**, the prop `prop` will be treated as uncontrolled if not defined by the user and the functions specified on `handlers` will be called with the current props and the arguments that the original handlers got called with, and the return value will be used as the new value for the prop. `defaultProp` allows you to configure a new prop that, when used, will set an initial value to the prop but make it stay uncontrolled.
 
 ```javascript
-import {uncontrolled} from '@klarna/higher-order-components'
+import {withUncontrolledProp} from '@klarna/higher-order-components'
 
-uncontrolled({
+function Counter ({value, onClick}) {
+  return <div>
+    <button onClick={onClick}>
+      Add one
+    </button>
+    {value}
+  </div>
+}
+
+export default withUncontrolledProp({
   prop: 'value',
   defaultProp: 'defaultValue',
   handlers: {
-    onChange: ({value: currentValue}) => (e) => e.target.value,
-    onClear: () => () => '',
-    onDoubleClick: ({value: currentValue}) => () => `${currentValue}${currentValue}`
+    onClick: props => e => props.value + 1
   }
-})(Input)
+})(Counter)
 ```
+
+> The behavior of this higher-order component is very close to combining `withState` and `withHandlers` from [`recompose`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withstate). The reason why it was created anyway is that it also provides the `defaultProp`.
 
 ## License
 
