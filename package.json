@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "collect-fps": "2.0.0",
+    "recompose": "^0.23.4",
     "seed-random": "^2.2.0"
   }
 }
