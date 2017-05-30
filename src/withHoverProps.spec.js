@@ -4,6 +4,16 @@ import withHoverProps from './withHoverProps'
 import { equal } from 'assert'
 
 describe('withHoverProps', () => {
+  it('wraps the name of the original component', () => {
+    function Input(props) {
+      return <input {...props} />
+    }
+
+    const EnhancedInput = withHoverProps({ hover: true })(Input)
+
+    equal(EnhancedInput.displayName, 'withHoverProps(Input)')
+  })
+
   it('has the hovered prop when mouseEnter gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {

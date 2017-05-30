@@ -1,4 +1,5 @@
 import React from 'react'
+import wrapDisplayName from 'recompose/wrapDisplayName'
 import { withPropsFromContext } from 'react-context-props'
 
 const withTheme = adapter => Target => {
@@ -11,7 +12,7 @@ const withTheme = adapter => Target => {
     />
   ))
 
-  WithTheme.displayName = Target.displayName || Target.name
+  WithTheme.displayName = wrapDisplayName(Target, 'withTheme')
 
   return WithTheme
 }

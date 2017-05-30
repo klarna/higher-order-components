@@ -4,6 +4,16 @@ import { equal, ok } from 'assert'
 import withUniqueFormIdentifier from './withUniqueFormIdentifier'
 
 describe('withUniqueFormIdentifier', () => {
+  it('wraps the name of the original component', () => {
+    function Input(props) {
+      return <input {...props} />
+    }
+
+    const EnhancedInput = withUniqueFormIdentifier(Input)
+
+    equal(EnhancedInput.displayName, 'withUniqueFormIdentifier(Input)')
+  })
+
   describe('no name specified', () => {
     it('has unique id', () => {
       const root = document.createElement('div')

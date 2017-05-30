@@ -4,6 +4,16 @@ import withMouseDownProps from './withMouseDownProps'
 import { equal } from 'assert'
 
 describe('withMouseDownProps', () => {
+  it('wraps the name of the original component', () => {
+    function Input(props) {
+      return <input {...props} />
+    }
+
+    const EnhancedInput = withMouseDownProps({ hover: true })(Input)
+
+    equal(EnhancedInput.displayName, 'withMouseDownProps(Input)')
+  })
+
   it('has the touch down prop when mouseDown gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {

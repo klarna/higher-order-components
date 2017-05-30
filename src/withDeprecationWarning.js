@@ -1,4 +1,5 @@
 import React from 'react'
+import wrapDisplayName from 'recompose/wrapDisplayName'
 
 const deprecate = ({ name, useInstead, readMore }) =>
   console &&
@@ -20,7 +21,7 @@ export default ({ name, useInstead, readMore }) => Target => {
     return <Target {...props} />
   }
 
-  WithDeprecationWarning.displayName = Target.displayName || Target.name
+  WithDeprecationWarning.displayName = wrapDisplayName(Target, 'withDeprecationWarning')
 
   return WithDeprecationWarning
 }

@@ -4,6 +4,16 @@ import withFocusProps from './withFocusProps'
 import { equal } from 'assert'
 
 describe('withFocusProps', () => {
+  it('wraps the name of the original component', () => {
+    function Input(props) {
+      return <input {...props} />
+    }
+
+    const EnhancedInput = withFocusProps({ focus: true })(Input)
+
+    equal(EnhancedInput.displayName, 'withFocusProps(Input)')
+  })
+
   it('has the touch down prop when focus gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {

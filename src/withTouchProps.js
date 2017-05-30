@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import wrapDisplayName from 'recompose/wrapDisplayName'
 
-export default touchProps => Target =>
+export default touchProps => Target => {
   class WithTouchProps extends Component {
     constructor() {
       super()
@@ -30,3 +31,8 @@ export default touchProps => Target =>
       )
     }
   }
+
+  WithTouchProps.displayName = wrapDisplayName(Target, 'withTouchProps')
+
+  return WithTouchProps
+}

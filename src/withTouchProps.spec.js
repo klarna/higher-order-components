@@ -4,6 +4,16 @@ import withTouchProps from './withTouchProps'
 import { equal } from 'assert'
 
 describe('withTouchProps', () => {
+  it('wraps the name of the original component', () => {
+    function Input(props) {
+      return <input {...props} />
+    }
+
+    const EnhancedInput = withTouchProps({ touch: true })(Input)
+
+    equal(EnhancedInput.displayName, 'withTouchProps(Input)')
+  })
+
   it('has the touch down prop when touchStart gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {

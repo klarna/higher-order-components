@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import wrapDisplayName from 'recompose/wrapDisplayName'
 
-export default hoverProps => Target =>
+export default hoverProps => Target => {
   class WithHoverProps extends Component {
     constructor() {
       super()
@@ -30,3 +31,8 @@ export default hoverProps => Target =>
       )
     }
   }
+
+  WithHoverProps.displayName = wrapDisplayName(Target, 'withHoverProps')
+
+  return WithHoverProps
+}

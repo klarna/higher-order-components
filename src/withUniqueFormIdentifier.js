@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import wrapDisplayName from 'recompose/wrapDisplayName'
 import seededRandom from 'seed-random'
 
 const TOKENS = /[xy]/g
@@ -27,7 +28,7 @@ export default Target => {
     }
   }
 
-  WithUniqueFormIdentifier.displayName = Target.displayName || Target.name
+  WithUniqueFormIdentifier.displayName = wrapDisplayName(Target, 'withUniqueFormIdentifier')
 
   return WithUniqueFormIdentifier
 }

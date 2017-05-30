@@ -6,6 +6,16 @@ import { equal } from 'assert'
 import withTheme from './withTheme'
 
 describe('withTheme', () => {
+  it('wraps the name of the original component', () => {
+    function Input(props) {
+      return <input {...props} />
+    }
+
+    const EnhancedInput = withTheme(() => ({}))(Input)
+
+    equal(EnhancedInput.displayName, 'withTheme(Input)')
+  })
+
   it('gets the prop from context', () => {
     const root = document.createElement('div')
     document.body.innerHTML = ''

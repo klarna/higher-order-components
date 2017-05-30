@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import wrapDisplayName from 'recompose/wrapDisplayName'
 
-export default mouseDownProps => Target =>
+export default mouseDownProps => Target => {
   class WithMouseDownProps extends Component {
     constructor() {
       super()
@@ -30,3 +31,8 @@ export default mouseDownProps => Target =>
       )
     }
   }
+
+  WithMouseDownProps.displayName = wrapDisplayName(Target, 'withMouseDownProps')
+
+  return WithMouseDownProps
+}

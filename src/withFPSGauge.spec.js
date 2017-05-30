@@ -6,6 +6,16 @@ import withFPSGauge from './withFPSGauge'
 const getFPSCollector = result => () => () => result
 
 describe('withFPSGauge', () => {
+  it('wraps the name of the original component', () => {
+    function Input(props) {
+      return <input {...props} />
+    }
+
+    const EnhancedInput = withFPSGauge({ threshold: 50 })(Input)
+
+    equal(EnhancedInput.displayName, 'withFPSGauge(Input)')
+  })
+
   describe('if the speed is below the specified threshold', () => {
     it('sets the lowFPS prop to true', done => {
       const root = document.createElement('div')

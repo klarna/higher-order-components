@@ -4,6 +4,22 @@ import { equal } from 'assert'
 import withUncontrolledProp from './withUncontrolledProp'
 
 describe('withUncontrolledProp', () => {
+  it('wraps the name of the original component', () => {
+    function Input(props) {
+      return <input {...props} />
+    }
+
+    const EnhancedInput = withUncontrolledProp({
+      prop: 'value',
+      defaultProp: 'defaultValue',
+      handlers: {
+        onChange: () => () => '',
+      },
+    })(Input)
+
+    equal(EnhancedInput.displayName, 'withUncontrolledProp(Input)')
+  })
+
   it('makes the prop uncontrolled when undefined', done => {
     const root = document.createElement('div')
     document.body.innerHTML = ''

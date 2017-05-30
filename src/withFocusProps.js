@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import wrapDisplayName from 'recompose/wrapDisplayName'
 
-export default focusProps => Target =>
+export default focusProps => Target => {
   class WithFocusProps extends Component {
     constructor() {
       super()
@@ -30,3 +31,8 @@ export default focusProps => Target =>
       )
     }
   }
+
+  WithFocusProps.displayName = wrapDisplayName(Target, 'withFocusProps')
+
+  return WithFocusProps
+}

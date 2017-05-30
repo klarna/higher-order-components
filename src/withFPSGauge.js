@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import collectFps from 'collect-fps'
+import wrapDisplayName from 'recompose/wrapDisplayName'
 
 const noop = () => {}
 
@@ -46,7 +47,7 @@ export default ({ threshold = 30, fpsCollector = collectFps }) => Target => {
     }
   }
 
-  WithFPSGauge.displayName = Target.displayName || Target.name
+  WithFPSGauge.displayName = wrapDisplayName(Target, 'withFPSGauge')
 
   return WithFPSGauge
 }
