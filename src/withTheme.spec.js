@@ -21,11 +21,12 @@ describe('withTheme', () => {
     document.body.innerHTML = ''
     document.body.appendChild(root)
 
-    const Theme = getContextualizer({
-      customizations: PropTypes.shape({
+    const Theme = getContextualizer(
+      {
         informal: PropTypes.bool,
-      }),
-    })
+      },
+      'theme'
+    )
 
     function Salutation({ formality }) {
       return (
@@ -35,12 +36,12 @@ describe('withTheme', () => {
       )
     }
 
-    const ThemeableSalutation = withTheme((customizations, props) => ({
-      formality: customizations.informal ? 'informal' : 'formal',
+    const ThemeableSalutation = withTheme((theme, props) => ({
+      formality: theme.informal ? 'informal' : 'formal',
     }))(Salutation)
 
     render(
-      <Theme customizations={{ informal: true }}>
+      <Theme informal>
         <div>
           <ThemeableSalutation />
         </div>

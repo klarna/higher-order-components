@@ -3,11 +3,11 @@ import wrapDisplayName from 'recompose/wrapDisplayName'
 import { withPropsFromContext } from 'react-context-props'
 
 const withTheme = adapter => Target => {
-  const WithTheme = withPropsFromContext(['customizations'])(({ customizations, ...props }) => (
+  const WithTheme = withPropsFromContext(['theme'])(({ theme, ...props }) => (
     <Target
       {...{
         ...props,
-        ...(customizations ? adapter(customizations, props) : {}),
+        ...(theme ? adapter(theme, props) : {}),
       }}
     />
   ))
