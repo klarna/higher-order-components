@@ -1,16 +1,16 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
-import {equal} from 'assert'
+import React, { Component } from 'react'
+import { render } from 'react-dom'
+import { equal } from 'assert'
 import withFPSGauge from './withFPSGauge'
 
-const getFPSCollector = (result) => () => () => result
+const getFPSCollector = result => () => () => result
 
 describe('withFPSGauge', () => {
   describe('if the speed is below the specified threshold', () => {
     it('sets the lowFPS prop to true', done => {
       const root = document.createElement('div')
       class Target extends Component {
-        componentDidMount () {
+        componentDidMount() {
           this.collectionComplete = false
           this.props.onStartFPSCollection()
 
@@ -20,21 +20,21 @@ describe('withFPSGauge', () => {
           })
         }
 
-        componentDidUpdate () {
+        componentDidUpdate() {
           if (this.collectionComplete) {
             equal(this.props.lowFPS, true)
             done()
           }
         }
 
-        render () {
+        render() {
           return <div />
         }
       }
       const fpsCollector = getFPSCollector(20)
       const DecoratedTarget = withFPSGauge({
         threshold: 30,
-        fpsCollector
+        fpsCollector,
       })(Target)
 
       render(<DecoratedTarget />, root)
@@ -44,7 +44,7 @@ describe('withFPSGauge', () => {
       const root = document.createElement('div')
       let called = false
       class Target extends Component {
-        componentDidMount () {
+        componentDidMount() {
           this.props.onStartFPSCollection()
 
           setTimeout(() => {
@@ -54,19 +54,24 @@ describe('withFPSGauge', () => {
           })
         }
 
-        render () {
+        render() {
           return <div />
         }
       }
       const fpsCollector = getFPSCollector(20)
       const DecoratedTarget = withFPSGauge({
         threshold: 30,
-        fpsCollector
+        fpsCollector,
       })(Target)
 
-      render(<DecoratedTarget
-        onLowFPS={() => { called = true }}
-      />, root)
+      render(
+        <DecoratedTarget
+          onLowFPS={() => {
+            called = true
+          }}
+        />,
+        root
+      )
     })
 
     it('doesn’t collect again', done => {
@@ -77,7 +82,7 @@ describe('withFPSGauge', () => {
         return getFPSCollector(20)()
       }
       class Target extends Component {
-        componentDidMount () {
+        componentDidMount() {
           this.props.onStartFPSCollection()
 
           setTimeout(() => {
@@ -88,13 +93,13 @@ describe('withFPSGauge', () => {
           })
         }
 
-        render () {
+        render() {
           return <div />
         }
       }
       const DecoratedTarget = withFPSGauge({
         threshold: 30,
-        fpsCollector
+        fpsCollector,
       })(Target)
 
       render(<DecoratedTarget />, root)
@@ -105,7 +110,7 @@ describe('withFPSGauge', () => {
     it('sets the lowFPS prop to false', done => {
       const root = document.createElement('div')
       class Target extends Component {
-        componentDidMount () {
+        componentDidMount() {
           this.collectionComplete = false
           this.props.onStartFPSCollection()
 
@@ -115,21 +120,21 @@ describe('withFPSGauge', () => {
           })
         }
 
-        componentDidUpdate () {
+        componentDidUpdate() {
           if (this.collectionComplete) {
             equal(this.props.lowFPS, false)
             done()
           }
         }
 
-        render () {
+        render() {
           return <div />
         }
       }
       const fpsCollector = getFPSCollector(40)
       const DecoratedTarget = withFPSGauge({
         threshold: 30,
-        fpsCollector
+        fpsCollector,
       })(Target)
 
       render(<DecoratedTarget />, root)
@@ -139,7 +144,7 @@ describe('withFPSGauge', () => {
       const root = document.createElement('div')
       let called = false
       class Target extends Component {
-        componentDidMount () {
+        componentDidMount() {
           this.props.onStartFPSCollection()
 
           setTimeout(() => {
@@ -149,19 +154,24 @@ describe('withFPSGauge', () => {
           })
         }
 
-        render () {
+        render() {
           return <div />
         }
       }
       const fpsCollector = getFPSCollector(40)
       const DecoratedTarget = withFPSGauge({
         threshold: 30,
-        fpsCollector
+        fpsCollector,
       })(Target)
 
-      render(<DecoratedTarget
-        onLowFPS={() => { called = true }}
-      />, root)
+      render(
+        <DecoratedTarget
+          onLowFPS={() => {
+            called = true
+          }}
+        />,
+        root
+      )
     })
 
     it('collects again', done => {
@@ -172,7 +182,7 @@ describe('withFPSGauge', () => {
         return getFPSCollector(50)()
       }
       class Target extends Component {
-        componentDidMount () {
+        componentDidMount() {
           this.props.onStartFPSCollection()
 
           setTimeout(() => {
@@ -183,13 +193,13 @@ describe('withFPSGauge', () => {
           })
         }
 
-        render () {
+        render() {
           return <div />
         }
       }
       const DecoratedTarget = withFPSGauge({
         threshold: 30,
-        fpsCollector
+        fpsCollector,
       })(Target)
 
       render(<DecoratedTarget />, root)
@@ -206,19 +216,19 @@ describe('withFPSGauge', () => {
       }
 
       class Target extends Component {
-        componentDidMount () {
+        componentDidMount() {
           this.props.onStartFPSCollection()
           this.props.onStartFPSCollection()
         }
 
-        render () {
+        render() {
           return <div />
         }
       }
 
       const DecoratedTarget = withFPSGauge({
         threshold: 30,
-        fpsCollector
+        fpsCollector,
       })(Target)
 
       render(<DecoratedTarget />, root, () => {
@@ -232,7 +242,7 @@ describe('withFPSGauge', () => {
     it('sets the lowFPS prop to true', done => {
       const root = document.createElement('div')
       class Target extends Component {
-        componentDidMount () {
+        componentDidMount() {
           this.collectionComplete = false
           this.props.onStartFPSCollection()
 
@@ -242,14 +252,14 @@ describe('withFPSGauge', () => {
           })
         }
 
-        componentDidUpdate () {
+        componentDidUpdate() {
           if (this.collectionComplete) {
             expect(this.props.lowFPS).toBe(true)
             done()
           }
         }
 
-        render () {
+        render() {
           return <div />
         }
       }
@@ -258,7 +268,7 @@ describe('withFPSGauge', () => {
       }
       const DecoratedTarget = withFPSGauge({
         threshold: 30,
-        fpsCollector
+        fpsCollector,
       })(Target)
 
       render(<DecoratedTarget />, root)

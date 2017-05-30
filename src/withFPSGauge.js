@@ -1,15 +1,12 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import collectFps from 'collect-fps'
 
 const noop = () => {}
 
-export default ({
-  threshold = 30,
-  fpsCollector = collectFps
-}) => (Target) => {
+export default ({ threshold = 30, fpsCollector = collectFps }) => Target => {
   let endFPSCollection = noop
 
-  const handleStartFPSCollection = (component) => () => {
+  const handleStartFPSCollection = component => () => {
     if (endFPSCollection !== noop || component.state.fps < threshold) {
       return
     }
@@ -22,28 +19,30 @@ export default ({
   }
 
   class WithFPSGauge extends Component {
-    constructor () {
+    constructor() {
       super()
 
-      this.state = {fps: threshold}
+      this.state = { fps: threshold }
     }
 
-    render () {
-      return <Target
-        {...this.props}
-        onStartFPSCollection={handleStartFPSCollection(this)}
-        onEndFPSCollection={() => {
-          if (endFPSCollection !== noop) {
-            const fps = endFPSCollection()
-            this.setState({fps})
-            endFPSCollection = noop
-            if (fps < threshold) {
-              this.props.onLowFPS && this.props.onLowFPS()
+    render() {
+      return (
+        <Target
+          {...this.props}
+          onStartFPSCollection={handleStartFPSCollection(this)}
+          onEndFPSCollection={() => {
+            if (endFPSCollection !== noop) {
+              const fps = endFPSCollection()
+              this.setState({ fps })
+              endFPSCollection = noop
+              if (fps < threshold) {
+                this.props.onLowFPS && this.props.onLowFPS()
+              }
             }
-          }
-        }}
-        lowFPS={this.state.fps < threshold}
-      />
+          }}
+          lowFPS={this.state.fps < threshold}
+        />
+      )
     }
   }
 

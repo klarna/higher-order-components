@@ -5,7 +5,7 @@ const takeAName = name => {
     if (typeof TargetOrName === 'string') {
       return takeAName(`${name}.${TargetOrName}`)
     } else {
-      const WithDisplayName = (props) => <TargetOrName {...props} />
+      const WithDisplayName = props => <TargetOrName {...props} />
 
       WithDisplayName.displayName = name
 

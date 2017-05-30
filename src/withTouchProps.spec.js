@@ -1,26 +1,26 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
+import React, { Component } from 'react'
+import { render } from 'react-dom'
 import withTouchProps from './withTouchProps'
-import {equal} from 'assert'
+import { equal } from 'assert'
 
 describe('withTouchProps', () => {
   it('has the touch down prop when touchStart gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {
-      constructor () {
+      constructor() {
         super()
 
         this.updated = false
       }
 
-      componentDidMount () {
+      componentDidMount() {
         setTimeout(() => {
           this.updated = true
           this.props.onTouchStart()
         })
       }
 
-      componentDidUpdate () {
+      componentDidUpdate() {
         if (this.updated) {
           setTimeout(() => {
             expect(root.querySelector('span').textContent).toBe('Touched!')
@@ -29,17 +29,19 @@ describe('withTouchProps', () => {
         }
       }
 
-      render () {
-        const {label} = this.props
+      render() {
+        const { label } = this.props
 
-        return <div style={{backgroundColor: 'red', width: 40, height: 20}}>
-          <span>{label}</span>
-        </div>
+        return (
+          <div style={{ backgroundColor: 'red', width: 40, height: 20 }}>
+            <span>{label}</span>
+          </div>
+        )
       }
     }
     Target.defaultProps = { label: '' }
     const DecoratedTarget = withTouchProps({
-      label: 'Touched!'
+      label: 'Touched!',
     })(Target)
 
     render(<DecoratedTarget />, root)
@@ -48,11 +50,11 @@ describe('withTouchProps', () => {
   it('loses the touch down prop when touchEnd gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {
-      componentDidMount () {
+      componentDidMount() {
         this.props.onTouchStart()
       }
 
-      componentDidUpdate () {
+      componentDidUpdate() {
         setTimeout(() => {
           this.props.onTouchEnd()
           setTimeout(() => {
@@ -62,15 +64,15 @@ describe('withTouchProps', () => {
         })
       }
 
-      render () {
-        const {label} = this.props
+      render() {
+        const { label } = this.props
         return <span>{label}</span>
       }
     }
 
     Target.defaultProps = { label: '' }
     const DecoratedTarget = withTouchProps({
-      label: 'Touched!'
+      label: 'Touched!',
     })(Target)
 
     render(<DecoratedTarget />, root)

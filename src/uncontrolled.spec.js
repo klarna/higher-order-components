@@ -1,6 +1,6 @@
 import React from 'react'
-import {render} from 'react-dom'
-import {equal} from 'assert'
+import { render } from 'react-dom'
+import { equal } from 'assert'
 import uncontrolled from './uncontrolled'
 
 describe('uncontrolled', () => {
@@ -9,25 +9,24 @@ describe('uncontrolled', () => {
     document.body.innerHTML = ''
     document.body.appendChild(root)
 
-    function ButtonSwitch1 ({ pressed, onClick }) {
-      return <div>
-        <button onClick={onClick}>press</button>
-        <span>{pressed ? 'pressed' : 'not pressed'}</span>
-      </div>
+    function ButtonSwitch1({ pressed, onClick }) {
+      return (
+        <div>
+          <button onClick={onClick}>press</button>
+          <span>{pressed ? 'pressed' : 'not pressed'}</span>
+        </div>
+      )
     }
 
     const UncontrolledButtonSwitch = uncontrolled({
       prop: 'pressed',
       defaultProp: 'autoPressed',
       handlers: {
-        onClick: () => () => true
-      }
+        onClick: () => () => true,
+      },
     })(ButtonSwitch1)
 
-    render(
-      <UncontrolledButtonSwitch />,
-      root
-    )
+    render(<UncontrolledButtonSwitch />, root)
 
     root.querySelector('button').click()
 
@@ -42,25 +41,24 @@ describe('uncontrolled', () => {
     document.body.innerHTML = ''
     document.body.appendChild(root)
 
-    function ButtonSwitch ({ pressed, onClick }) {
-      return <div>
-        <button onClick={onClick}>press</button>
-        <span>{pressed ? 'pressed' : 'not pressed'}</span>
-      </div>
+    function ButtonSwitch({ pressed, onClick }) {
+      return (
+        <div>
+          <button onClick={onClick}>press</button>
+          <span>{pressed ? 'pressed' : 'not pressed'}</span>
+        </div>
+      )
     }
 
     const UncontrolledButtonSwitch = uncontrolled({
       prop: 'pressed',
       defaultProp: 'autoPressed',
       handlers: {
-        onClick: () => () => true
-      }
+        onClick: () => () => true,
+      },
     })(ButtonSwitch)
 
-    render(
-      <UncontrolledButtonSwitch pressed={false} />,
-      root
-    )
+    render(<UncontrolledButtonSwitch pressed={false} />, root)
 
     root.querySelector('button').click()
 
@@ -72,25 +70,24 @@ describe('uncontrolled', () => {
     document.body.innerHTML = ''
     document.body.appendChild(root)
 
-    function ButtonSwitch ({ pressed, onClick }) {
-      return <div>
-        <button onClick={onClick}>press</button>
-        <span>{pressed ? 'pressed' : 'not pressed'}</span>
-      </div>
+    function ButtonSwitch({ pressed, onClick }) {
+      return (
+        <div>
+          <button onClick={onClick}>press</button>
+          <span>{pressed ? 'pressed' : 'not pressed'}</span>
+        </div>
+      )
     }
 
     const UncontrolledButtonSwitch = uncontrolled({
       prop: 'pressed',
       defaultProp: 'autoPressed',
       handlers: {
-        onClick: () => () => true
-      }
+        onClick: () => () => true,
+      },
     })(ButtonSwitch)
 
-    render(
-      <UncontrolledButtonSwitch autoPressed={false} />,
-      root
-    )
+    render(<UncontrolledButtonSwitch autoPressed={false} />, root)
 
     root.querySelector('button').click()
 
@@ -102,25 +99,24 @@ describe('uncontrolled', () => {
     document.body.innerHTML = ''
     document.body.appendChild(root)
 
-    function ButtonSwitch ({ pressed, onClick }) {
-      return <div>
-        <button onClick={onClick}>press</button>
-        <span>{pressed ? 'pressed' : 'not pressed'}</span>
-      </div>
+    function ButtonSwitch({ pressed, onClick }) {
+      return (
+        <div>
+          <button onClick={onClick}>press</button>
+          <span>{pressed ? 'pressed' : 'not pressed'}</span>
+        </div>
+      )
     }
 
     const UncontrolledButtonSwitch = uncontrolled({
       prop: 'pressed',
       defaultProp: 'autoPressed',
       handlers: {
-        onClick: () => () => true
-      }
+        onClick: () => () => true,
+      },
     })(ButtonSwitch)
 
-    render(
-      <UncontrolledButtonSwitch autoPressed />,
-      root
-    )
+    render(<UncontrolledButtonSwitch autoPressed />, root)
 
     equal(root.querySelector('span').textContent, 'pressed')
   })
@@ -131,25 +127,24 @@ describe('uncontrolled', () => {
       document.body.innerHTML = ''
       document.body.appendChild(root)
 
-      function ButtonSwitch ({ pressed, onClick }) {
-        return <div>
-          <button onClick={onClick}>toggle</button>
-          <span>{pressed ? 'pressed' : 'not pressed'}</span>
-        </div>
+      function ButtonSwitch({ pressed, onClick }) {
+        return (
+          <div>
+            <button onClick={onClick}>toggle</button>
+            <span>{pressed ? 'pressed' : 'not pressed'}</span>
+          </div>
+        )
       }
 
       const UncontrolledButtonSwitch = uncontrolled({
         prop: 'pressed',
         defaultProp: 'autoPressed',
         handlers: {
-          onClick: ({pressed}) => () => !pressed
-        }
+          onClick: ({ pressed }) => () => !pressed,
+        },
       })(ButtonSwitch)
 
-      render(
-        <UncontrolledButtonSwitch />,
-        root
-      )
+      render(<UncontrolledButtonSwitch />, root)
 
       root.querySelector('button').click()
 
@@ -167,26 +162,25 @@ describe('uncontrolled', () => {
       document.body.innerHTML = ''
       document.body.appendChild(root)
 
-      function ButtonSwitch ({ pressed, onClick }) {
-        return <div>
-          <button id='press' onClick={() => onClick(true)}>press</button>
-          <button id='unpress' onClick={() => onClick(false)}>unpress</button>
-          <span>{pressed ? 'pressed' : 'not pressed'}</span>
-        </div>
+      function ButtonSwitch({ pressed, onClick }) {
+        return (
+          <div>
+            <button id="press" onClick={() => onClick(true)}>press</button>
+            <button id="unpress" onClick={() => onClick(false)}>unpress</button>
+            <span>{pressed ? 'pressed' : 'not pressed'}</span>
+          </div>
+        )
       }
 
       const UncontrolledButtonSwitch = uncontrolled({
         prop: 'pressed',
         defaultProp: 'autoPressed',
         handlers: {
-          onClick: () => (pressed) => pressed
-        }
+          onClick: () => pressed => pressed,
+        },
       })(ButtonSwitch)
 
-      render(
-        <UncontrolledButtonSwitch />,
-        root
-      )
+      render(<UncontrolledButtonSwitch />, root)
 
       root.querySelector('#press').click()
 

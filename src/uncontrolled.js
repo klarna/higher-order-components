@@ -1,18 +1,18 @@
-import React, {PureComponent} from 'react'
+import React, { PureComponent } from 'react'
 
 const makeUncontrolledHandler = ({
   component,
   prop: propName,
   props,
   handlerName,
-  higherOrderComponentHandler
+  higherOrderComponentHandler,
 }) => (...eventArgs) => {
   if (props[propName] == null) {
     component.setState({
       [propName]: higherOrderComponentHandler({
         ...component.state,
-        ...props
-      })(...eventArgs)
+        ...props,
+      })(...eventArgs),
     })
   }
 
@@ -21,48 +21,41 @@ const makeUncontrolledHandler = ({
   }
 }
 
-export default ({
-  defaultProp,
-  handlers,
-  prop,
-  resetHandlerName
-}) => (Target) => {
+export default ({ defaultProp, handlers, prop, resetHandlerName }) => Target => {
   class Uncontrolled extends PureComponent {
-    componentDidMount () {
+    componentDidMount() {
       this.setState({
-        [prop]: this.props[prop] != null
-          ? this.props[prop]
-          : this.props[defaultProp]
+        [prop]: this.props[prop] != null ? this.props[prop] : this.props[defaultProp],
       })
     }
 
-    render () {
+    render() {
       const props = {
         ...Object.keys(this.props)
-          .filter((key) => key !== defaultProp)
+          .filter(key => key !== defaultProp)
           .reduce((copiedProps, propName) => {
             copiedProps[propName] = this.props[propName]
             return copiedProps
           }, {}),
 
         ...Object.keys(handlers)
-          .map(handlerName => [handlerName, makeUncontrolledHandler({
-            props: this.props,
-            prop,
-            component: this,
+          .map(handlerName => [
             handlerName,
-            higherOrderComponentHandler: handlers[handlerName]
-          })])
+            makeUncontrolledHandler({
+              props: this.props,
+              prop,
+              component: this,
+              handlerName,
+              higherOrderComponentHandler: handlers[handlerName],
+            }),
+          ])
           .reduce((handlerProps, [handlerName, handlerFunction]) => {
             handlerProps[handlerName] = handlerFunction
             return handlerProps
-          }, {})
+          }, {}),
       }
 
-      return <Target
-        {...this.state}
-        {...props}
-      />
+      return <Target {...this.state} {...props} />
     }
   }
 

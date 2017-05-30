@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {render} from 'react-dom'
-import {getContextualizer} from 'react-context-props'
-import {equal} from 'assert'
+import { render } from 'react-dom'
+import { getContextualizer } from 'react-context-props'
+import { equal } from 'assert'
 import withTheme from './withTheme'
 
 describe('withTheme', () => {
@@ -13,22 +13,24 @@ describe('withTheme', () => {
 
     const Theme = getContextualizer({
       customizations: PropTypes.shape({
-        informal: PropTypes.bool
-      })
+        informal: PropTypes.bool,
+      }),
     })
 
-    function Salutation ({ formality }) {
-      return <div id='salutation'>
-        {formality === 'formal' ? 'Greetings' : 'Hello'}
-      </div>
+    function Salutation({ formality }) {
+      return (
+        <div id="salutation">
+          {formality === 'formal' ? 'Greetings' : 'Hello'}
+        </div>
+      )
     }
 
     const ThemeableSalutation = withTheme((customizations, props) => ({
-      formality: customizations.informal ? 'informal' : 'formal'
+      formality: customizations.informal ? 'informal' : 'formal',
     }))(Salutation)
 
     render(
-      <Theme customizations={{informal: true}}>
+      <Theme customizations={{ informal: true }}>
         <div>
           <ThemeableSalutation />
         </div>
@@ -36,9 +38,6 @@ describe('withTheme', () => {
       root
     )
 
-    equal(
-      root.querySelector('#salutation').textContent.trim(),
-      'Hello'
-    )
+    equal(root.querySelector('#salutation').textContent.trim(), 'Hello')
   })
 })

@@ -1,26 +1,26 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
+import React, { Component } from 'react'
+import { render } from 'react-dom'
 import withFocusProps from './withFocusProps'
-import {equal} from 'assert'
+import { equal } from 'assert'
 
 describe('withFocusProps', () => {
   it('has the touch down prop when focus gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {
-      constructor () {
+      constructor() {
         super()
 
         this.updated = false
       }
 
-      componentDidMount () {
+      componentDidMount() {
         setTimeout(() => {
           this.updated = true
           this.props.onFocus()
         })
       }
 
-      componentDidUpdate () {
+      componentDidUpdate() {
         if (this.updated) {
           setTimeout(() => {
             expect(root.querySelector('span').textContent).toBe('Focused!')
@@ -29,17 +29,19 @@ describe('withFocusProps', () => {
         }
       }
 
-      render () {
-        const {label} = this.props
+      render() {
+        const { label } = this.props
 
-        return <div style={{backgroundColor: 'red', width: 40, height: 20}}>
-          <span>{label}</span>
-        </div>
+        return (
+          <div style={{ backgroundColor: 'red', width: 40, height: 20 }}>
+            <span>{label}</span>
+          </div>
+        )
       }
     }
     Target.defaultProps = { label: '' }
     const DecoratedTarget = withFocusProps({
-      label: 'Focused!'
+      label: 'Focused!',
     })(Target)
 
     render(<DecoratedTarget />, root)
@@ -48,11 +50,11 @@ describe('withFocusProps', () => {
   it('loses the touch down prop when blur gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {
-      componentDidMount () {
+      componentDidMount() {
         this.props.onFocus()
       }
 
-      componentDidUpdate () {
+      componentDidUpdate() {
         setTimeout(() => {
           this.props.onBlur()
           setTimeout(() => {
@@ -62,15 +64,15 @@ describe('withFocusProps', () => {
         })
       }
 
-      render () {
-        const {label} = this.props
+      render() {
+        const { label } = this.props
         return <span>{label}</span>
       }
     }
 
     Target.defaultProps = { label: '' }
     const DecoratedTarget = withFocusProps({
-      label: 'Focused!'
+      label: 'Focused!',
     })(Target)
 
     render(<DecoratedTarget />, root)

@@ -1,14 +1,14 @@
-import React, {PureComponent} from 'react'
+import React, { PureComponent } from 'react'
 import seededRandom from 'seed-random'
 
 const TOKENS = /[xy]/g
 
-const uuid = (seed) => {
+const uuid = seed => {
   const random = seed === undefined ? Math.random : seededRandom(seed)
 
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(TOKENS, (c) => {
-    const r = random() * 16 | 0
-    const v = c === 'x' ? r : (r & 0x3 | 0x8)
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(TOKENS, c => {
+    const r = (random() * 16) | 0
+    const v = c === 'x' ? r : (r & 0x3) | 0x8
     return v.toString(16)
   })
 }
@@ -16,13 +16,13 @@ const uuid = (seed) => {
 let counter = 0
 export default Target => {
   class WithUniqueFormIdentifier extends PureComponent {
-    constructor () {
+    constructor() {
       super()
 
       this.uniqueFormIdentifier = `${Target.displayName || Target.name}-${uuid(counter++)}`
     }
 
-    render () {
+    render() {
       return <Target name={this.uniqueFormIdentifier} {...this.props} />
     }
   }
