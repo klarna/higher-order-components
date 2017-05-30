@@ -4800,9 +4800,9 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-context-props@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-context-props/-/react-context-props-2.0.0.tgz#a160ad88ed4f9715b973cb5677f52b3e79f42395"
+react-context-props@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-context-props/-/react-context-props-2.1.0.tgz#66eafca274219969cd50898741ebc6b0b782db18"
 
 react-dom@^15.5.0:
   version "15.5.4"

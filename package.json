@@ -31,14 +31,14 @@
   "devDependencies": {
     "prop-types": "^15.5.10",
     "react": "^15.5.0",
-    "react-context-props": "^2.0.0",
+    "react-context-props": "^2.1.0",
     "react-dom": "^15.5.0",
     "sagui": "9.0.0-rc.16"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",
     "react": "^15.5.0",
-    "react-context-props": "^2.0.0"
+    "react-context-props": "^2.1.0"
   },
   "dependencies": {
     "collect-fps": "2.0.0",
