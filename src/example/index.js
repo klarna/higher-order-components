@@ -6,6 +6,8 @@ import WithDeprecationWarningExample from './WithDeprecationWarningExample'
 import WithDisplayNameExample from './WithDisplayNameExample'
 import WithFocusPropsExample from './WithFocusPropsExample'
 import WithHoverPropsExample from './WithHoverPropsExample'
+import WithMouseDownPropsExample from './WithMouseDownPropsExample'
+import WithTouchPropsExample from './WithTouchPropsExample'
 
 const Example = ({ children }) => (
   <div
@@ -55,6 +57,12 @@ const Page = componentQueries(
       </Example>
       <Example>
         <WithHoverPropsExample />
+      </Example>
+      <Example>
+        <WithMouseDownPropsExample />
+      </Example>
+      <Example>
+        <WithTouchPropsExample />
       </Example>
     </section>
   </main>

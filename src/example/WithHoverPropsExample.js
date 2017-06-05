@@ -20,12 +20,12 @@ export default withHoverProps({ hovered: true })(function Focusable({ hovered, .
   return (
     <article {...props}>
       <h1>withHoverProps</h1>
-      {hovered ? 'hovered!' : 'not hovered'}
+      {hovered ? 'hovered!' : 'hover the example to see it change'}
     </article>
   )
 })`}</pre>
       </code>
-      {hovered ? 'hovered!' : 'not hovered'}
+      {hovered ? 'hovered!' : 'hover the example to see it change'}
     </article>
   )
 })
