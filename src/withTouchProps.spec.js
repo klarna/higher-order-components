@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
 import withTouchProps from './withTouchProps'
+import {equal} from 'assert'
 
 describe('withTouchProps', () => {
   it('has the touch down prop when touchStart gets triggered', done => {
@@ -47,12 +48,6 @@ describe('withTouchProps', () => {
   it('loses the touch down prop when touchEnd gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {
-      constructor () {
-        super()
-
-        this.updated = false
-      }
-
       componentDidMount () {
         this.props.onTouchStart()
       }
@@ -60,13 +55,11 @@ describe('withTouchProps', () => {
       componentDidUpdate () {
         setTimeout(() => {
           this.props.onTouchEnd()
-          this.updated = true
+          setTimeout(() => {
+            equal(root.querySelector('span').textContent, '')
+            done()
+          })
         })
-
-        if (this.updated) {
-          expect(root.querySelector('span').textContent).toBe('')
-          done()
-        }
       }
 
       render () {

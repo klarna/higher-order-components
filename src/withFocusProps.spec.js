@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
 import withFocusProps from './withFocusProps'
+import {equal} from 'assert'
 
 describe('withFocusProps', () => {
   it('has the touch down prop when focus gets triggered', done => {
@@ -47,12 +48,6 @@ describe('withFocusProps', () => {
   it('loses the touch down prop when blur gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {
-      constructor () {
-        super()
-
-        this.updated = false
-      }
-
       componentDidMount () {
         this.props.onFocus()
       }
@@ -60,13 +55,11 @@ describe('withFocusProps', () => {
       componentDidUpdate () {
         setTimeout(() => {
           this.props.onBlur()
-          this.updated = true
+          setTimeout(() => {
+            equal(root.querySelector('span').textContent, '')
+            done()
+          })
         })
-
-        if (this.updated) {
-          expect(root.querySelector('span').textContent).toBe('')
-          done()
-        }
       }
 
       render () {

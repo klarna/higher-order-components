@@ -6,13 +6,13 @@
   "scripts": {
     "build": "sagui build",
     "dist": "sagui dist",
+    "prepublish": "sagui build",
     "start": "sagui develop --port 3000",
     "test": "sagui test",
     "test:lint": "sagui test:lint",
     "test:typecheck": "sagui test:typecheck",
     "test:unit": "sagui test:unit --coverage",
-    "test:unit:watch": "sagui test:unit --watch",
-    "prepublish": "sagui build"
+    "test:unit:watch": "sagui test:unit --watch"
   },
   "repository": {
     "type": "git",
@@ -28,14 +28,16 @@
   },
   "homepage": "https://github.com/klarna/higher-order-components#readme",
   "devDependencies": {
-    "react": "^15.3.2",
-    "react-context-props": "^0.1.4",
-    "react-dom": "^15.3.2",
-    "sagui": "8.0.1"
+    "prop-types": "^15.5.10",
+    "react": "^15.5.0",
+    "react-context-props": "^2.0.0",
+    "react-dom": "^15.5.0",
+    "sagui": "8.0.7"
   },
   "peerDependencies": {
-    "react": "^15.3.2",
-    "react-context-props": "^0.1.4"
+    "prop-types": "^15.5.10",
+    "react": "^15.5.0",
+    "react-context-props": "^2.0.0"
   },
   "dependencies": {
     "collect-fps": "2.0.0",
