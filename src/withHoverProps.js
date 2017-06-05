@@ -12,7 +12,7 @@ export default hoverProps => Target => {
     }
 
     render() {
-      const { onMouseEnter, onMouseLeave, ...props } = this.props
+      const { onMouseOver, onMouseOut, ...props } = this.props
       const { hover } = this.state
 
       return (

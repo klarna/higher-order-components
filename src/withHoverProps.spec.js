@@ -26,7 +26,7 @@ describe('withHoverProps', () => {
       componentDidMount() {
         setTimeout(() => {
           this.updated = true
-          this.props.onMouseEnter()
+          this.props.onMouseOver()
         })
       }
 
@@ -61,12 +61,12 @@ describe('withHoverProps', () => {
     const root = document.createElement('div')
     class Target extends Component {
       componentDidMount() {
-        this.props.onMouseEnter()
+        this.props.onMouseOver()
       }
 
       componentDidUpdate() {
         setTimeout(() => {
-          this.props.onMouseLeave()
+          this.props.onMouseOut()
           setTimeout(() => {
             equal(root.querySelector('span').textContent, '')
             done()
