@@ -17,13 +17,13 @@ export default hoverProps => Target => {
 
       return (
         <Target
-          onMouseEnter={(...args) => {
+          onMouseOver={(...args) => {
             this.setState({ hover: true })
-            onMouseEnter && onMouseEnter(...args)
+            onMouseOver && onMouseOver(...args)
           }}
-          onMouseLeave={(...args) => {
+          onMouseOut={(...args) => {
             this.setState({ hover: false })
-            onMouseLeave && onMouseLeave(...args)
+            onMouseOut && onMouseOut(...args)
           }}
           {...props}
           {...(hover ? hoverProps : {})}
