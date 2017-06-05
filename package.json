@@ -31,8 +31,10 @@
   "devDependencies": {
     "prop-types": "^15.5.10",
     "react": "^15.5.0",
+    "react-component-queries": "^2.1.1",
     "react-context-props": "^2.1.0",
     "react-dom": "^15.5.0",
+    "react-sizeme": "^2.3.2",
     "sagui": "9.0.0-rc.16"
   },
   "peerDependencies": {

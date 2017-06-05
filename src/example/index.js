@@ -1,9 +1,11 @@
 import React from 'react'
 import { render } from 'react-dom'
+import componentQueries from 'react-component-queries'
 
 import WithDeprecationWarningExample from './WithDeprecationWarningExample'
 import WithDisplayNameExample from './WithDisplayNameExample'
 import WithFocusPropsExample from './WithFocusPropsExample'
+import WithHoverPropsExample from './WithHoverPropsExample'
 
 const Example = ({ children }) => (
   <div
@@ -18,7 +20,9 @@ const Example = ({ children }) => (
   </div>
 )
 
-render(
+const Page = componentQueries(
+  ({ width }) => (width < 800 ? { mobile: true } : { mobile: false })
+)(({ mobile }) => (
   <main style={{ padding: 20 }}>
     <h1
       style={{
@@ -32,8 +36,12 @@ render(
     <section
       style={{
         display: 'grid',
-        gridTemplateColumns: 'calc(50% - 10px) calc(50% - 10px)',
-        gridGap: '20px',
+        ...(mobile
+          ? { gridTemplateColumns: '100%' }
+          : {
+              gridTemplateColumns: 'calc(50% - 10px) calc(50% - 10px)',
+              gridGap: '20px',
+            }),
       }}
     >
       <Example>
@@ -45,7 +53,11 @@ render(
       <Example>
         <WithFocusPropsExample />
       </Example>
+      <Example>
+        <WithHoverPropsExample />
+      </Example>
     </section>
-  </main>,
-  document.getElementById('root')
-)
+  </main>
+))
+
+render(<Page />, document.getElementById('root'))
