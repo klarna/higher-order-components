@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 
 import WithDeprecationWarningExample from './WithDeprecationWarningExample'
 import WithDisplayNameExample from './WithDisplayNameExample'
+import WithFocusPropsExample from './WithFocusPropsExample'
 
 const Example = ({ children }) => (
   <div
@@ -40,6 +41,9 @@ render(
       </Example>
       <Example>
         <WithDisplayNameExample />
+      </Example>
+      <Example>
+        <WithFocusPropsExample />
       </Example>
     </section>
   </main>,

@@ -1,7 +1,9 @@
 import React from 'react'
 import { withDisplayName } from '../'
 
-export default withDisplayName('Has')('Long')('Namespaced')('Name')(function ComponentToBeWrappedWithADifferentName() {
+export default withDisplayName('Has')('Long')('Namespaced')(
+  'Name'
+)(function ComponentToBeWrappedWithADifferentName() {
   return (
     <article>
       <h1>withDisplayName</h1>
