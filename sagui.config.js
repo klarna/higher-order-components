@@ -16,5 +16,6 @@ module.exports = {
     'withTouchProps',
     'withUncontrolledProp',
     'withUniqueFormIdentifier'
-  ]
+  ],
+  pages: ['example/index']
 }
