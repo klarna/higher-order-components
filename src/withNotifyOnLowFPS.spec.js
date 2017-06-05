@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { equal } from 'assert'
-import withFPSGauge from './withFPSGauge'
+import withNotifyOnLowFPS from './withNotifyOnLowFPS'
 
 const getFPSCollector = result => () => () => result
 
-describe('withFPSGauge', () => {
+describe('withNotifyOnLowFPS', () => {
   it('wraps the name of the original component', () => {
     function Input(props) {
       return <input {...props} />
     }
 
-    const EnhancedInput = withFPSGauge({ threshold: 50 })(Input)
+    const EnhancedInput = withNotifyOnLowFPS({ threshold: 50 })(Input)
 
-    equal(EnhancedInput.displayName, 'withFPSGauge(Input)')
+    equal(EnhancedInput.displayName, 'withNotifyOnLowFPS(Input)')
   })
 
   describe('if the speed is below the specified threshold', () => {
@@ -42,7 +42,7 @@ describe('withFPSGauge', () => {
         }
       }
       const fpsCollector = getFPSCollector(20)
-      const DecoratedTarget = withFPSGauge({
+      const DecoratedTarget = withNotifyOnLowFPS({
         threshold: 30,
         fpsCollector,
       })(Target)
@@ -69,7 +69,7 @@ describe('withFPSGauge', () => {
         }
       }
       const fpsCollector = getFPSCollector(20)
-      const DecoratedTarget = withFPSGauge({
+      const DecoratedTarget = withNotifyOnLowFPS({
         threshold: 30,
         fpsCollector,
       })(Target)
@@ -107,7 +107,7 @@ describe('withFPSGauge', () => {
           return <div />
         }
       }
-      const DecoratedTarget = withFPSGauge({
+      const DecoratedTarget = withNotifyOnLowFPS({
         threshold: 30,
         fpsCollector,
       })(Target)
@@ -142,7 +142,7 @@ describe('withFPSGauge', () => {
         }
       }
       const fpsCollector = getFPSCollector(40)
-      const DecoratedTarget = withFPSGauge({
+      const DecoratedTarget = withNotifyOnLowFPS({
         threshold: 30,
         fpsCollector,
       })(Target)
@@ -169,7 +169,7 @@ describe('withFPSGauge', () => {
         }
       }
       const fpsCollector = getFPSCollector(40)
-      const DecoratedTarget = withFPSGauge({
+      const DecoratedTarget = withNotifyOnLowFPS({
         threshold: 30,
         fpsCollector,
       })(Target)
@@ -207,7 +207,7 @@ describe('withFPSGauge', () => {
           return <div />
         }
       }
-      const DecoratedTarget = withFPSGauge({
+      const DecoratedTarget = withNotifyOnLowFPS({
         threshold: 30,
         fpsCollector,
       })(Target)
@@ -236,7 +236,7 @@ describe('withFPSGauge', () => {
         }
       }
 
-      const DecoratedTarget = withFPSGauge({
+      const DecoratedTarget = withNotifyOnLowFPS({
         threshold: 30,
         fpsCollector,
       })(Target)
@@ -276,7 +276,7 @@ describe('withFPSGauge', () => {
       const fpsCollector = () => {
         throw new Error('something')
       }
-      const DecoratedTarget = withFPSGauge({
+      const DecoratedTarget = withNotifyOnLowFPS({
         threshold: 30,
         fpsCollector,
       })(Target)

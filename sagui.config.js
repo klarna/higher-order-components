@@ -9,7 +9,7 @@ module.exports = {
     'withDeprecationWarning',
     'withDisplayName',
     'withFocusProps',
-    'withFPSGauge',
+    'withNotifyOnLowFPS',
     'withHoverProps',
     'withMouseDownProps',
     'withTheme',

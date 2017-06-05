@@ -116,18 +116,18 @@ export withTouchProps({
 })(Touchable)
 ```
 
-## withFPSGauge ({threshold: number}) (Component)
+## withNotifyOnLowFPS ({threshold: number}) (Component)
 
-**withFPSGauge** allows you to track the frames per second that the browser window is achieving when your component is rendered. This is particularly useful for components that are animated.
+**withNotifyOnLowFPS** allows you to track the frames per second that the browser window is achieving when your component is rendered. This is particularly useful for components that are animated.
 
-In order to do this, **withFPSGauge** uses the `collect-fps` library to collect the rate in which `requestAnimationFrame` is being called. If the frames per second drop below a threshold (30 FPS by default) then a property is set in the decorated component to notify that the animation speed is slow (the property is `lowFPS` by default).
+In order to do this, **withNotifyOnLowFPS** uses the `collect-fps` library to collect the rate in which `requestAnimationFrame` is being called. If the frames per second drop below a threshold (30 FPS by default) then a property is set in the decorated component to notify that the animation speed is slow (the property is `lowFPS` by default).
 
-**withFPSGauge** passes two props down to the inner component:
+**withNotifyOnLowFPS** passes two props down to the inner component:
 
 - `onStartFPSCollection`: to be called when the inner component starts a heavy animation of some sort
 - `onEndFPSCollection`: to be called when the animation is complete
 
-**withFPSGauge** updates the value of the `lowFPS` prop when the collection is completed.
+**withNotifyOnLowFPS** updates the value of the `lowFPS` prop when the collection is completed.
 
 ```javascript
 class AnimatedComponent extends Component {
@@ -148,7 +148,7 @@ class AnimatedComponent extends Component {
   }
 }
 
-const DecoratedAnimatedComponent = withFPSGauge({
+const DecoratedAnimatedComponent = withNotifyOnLowFPS({
   threshold: 30, // default threshold of frames per second. Below this number it will be considered to be low frame rate
 })(AnimatedComponent)
 ```

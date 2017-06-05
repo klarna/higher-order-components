@@ -19,7 +19,7 @@ export default ({ threshold = 30, fpsCollector = collectFps }) => Target => {
     }
   }
 
-  class WithFPSGauge extends Component {
+  class WithNotifyOnLowFPS extends Component {
     constructor() {
       super()
 
@@ -47,7 +47,7 @@ export default ({ threshold = 30, fpsCollector = collectFps }) => Target => {
     }
   }
 
-  WithFPSGauge.displayName = wrapDisplayName(Target, 'withFPSGauge')
+  WithNotifyOnLowFPS.displayName = wrapDisplayName(Target, 'withNotifyOnLowFPS')
 
-  return WithFPSGauge
+  return WithNotifyOnLowFPS
 }
