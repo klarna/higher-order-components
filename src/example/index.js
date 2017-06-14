@@ -9,7 +9,7 @@ import WithHoverPropsExample from './WithHoverPropsExample'
 import WithMouseDownPropsExample from './WithMouseDownPropsExample'
 import WithTouchPropsExample from './WithTouchPropsExample'
 
-const Example = ({ children }) => (
+const Example = ({ children }) =>
   <div
     style={{
       backgroundColor: 'white',
@@ -20,11 +20,10 @@ const Example = ({ children }) => (
   >
     {children}
   </div>
-)
 
 const Page = componentQueries(
   ({ width }) => (width < 800 ? { mobile: true } : { mobile: false })
-)(({ mobile }) => (
+)(({ mobile }) =>
   <main style={{ padding: 20 }}>
     <h1
       style={{
@@ -59,6 +58,11 @@ const Page = componentQueries(
         <WithHoverPropsExample />
       </Example>
       <Example>
+        <article>
+          <h1><a href="example/WithSwipeExample.html">withSwipe</a></h1>
+        </article>
+      </Example>
+      <Example>
         <WithMouseDownPropsExample />
       </Example>
       <Example>
@@ -66,6 +70,6 @@ const Page = componentQueries(
       </Example>
     </section>
   </main>
-))
+)
 
 render(<Page />, document.getElementById('root'))

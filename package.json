@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/klarna/higher-order-components#readme",
   "devDependencies": {
+    "prettier": "^1.4.4",
     "prop-types": "^15.5.10",
     "react": "^15.5.0",
     "react-component-queries": "^2.1.1",
