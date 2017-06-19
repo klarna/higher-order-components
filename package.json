@@ -6,6 +6,7 @@
   "scripts": {
     "build": "sagui build",
     "dist": "sagui dist",
+    "format": "sagui format",
     "prepublish": "sagui build",
     "start": "sagui develop --port 3000",
     "test": "sagui test",
@@ -28,19 +29,23 @@
   },
   "homepage": "https://github.com/klarna/higher-order-components#readme",
   "devDependencies": {
+    "prettier": "^1.4.4",
     "prop-types": "^15.5.10",
     "react": "^15.5.0",
-    "react-context-props": "^2.0.0",
+    "react-component-queries": "^2.1.1",
+    "react-context-props": "^2.1.0",
     "react-dom": "^15.5.0",
-    "sagui": "8.0.7"
+    "react-sizeme": "^2.3.2",
+    "sagui": "9.0.0-rc.16"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",
     "react": "^15.5.0",
-    "react-context-props": "^2.0.0"
+    "react-context-props": "^2.1.0"
   },
   "dependencies": {
     "collect-fps": "2.0.0",
+    "recompose": "^0.23.4",
     "seed-random": "^2.2.0"
   }
 }

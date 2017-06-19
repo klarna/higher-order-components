@@ -1,29 +1,38 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import wrapDisplayName from 'recompose/wrapDisplayName'
 
-export default touchProps => Target => class WithTouchProps extends Component {
-  constructor () {
-    super()
+export default touchProps => Target => {
+  class WithTouchProps extends Component {
+    constructor() {
+      super()
 
-    this.state = {
-      touched: false
+      this.state = {
+        touched: false,
+      }
+    }
+
+    render() {
+      const { onTouchStart, onTouchEnd, ...props } = this.props
+      const { touched } = this.state
+
+      return (
+        <Target
+          onTouchStart={(...args) => {
+            this.setState({ touched: true })
+            onTouchStart && onTouchStart(...args)
+          }}
+          onTouchEnd={(...args) => {
+            this.setState({ touched: false })
+            onTouchEnd && onTouchEnd(...args)
+          }}
+          {...props}
+          {...(touched ? touchProps : {})}
+        />
+      )
     }
   }
 
-  render () {
-    const {onTouchStart, onTouchEnd, ...props} = this.props
-    const {touched} = this.state
+  WithTouchProps.displayName = wrapDisplayName(Target, 'withTouchProps')
 
-    return <Target
-      onTouchStart={(...args) => {
-        this.setState({touched: true})
-        onTouchStart && onTouchStart(...args)
-      }}
-      onTouchEnd={(...args) => {
-        this.setState({touched: false})
-        onTouchEnd && onTouchEnd(...args)
-      }}
-      {...props}
-      {...touched ? touchProps : {}}
-    />
-  }
+  return WithTouchProps
 }

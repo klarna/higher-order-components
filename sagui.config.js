@@ -5,15 +5,17 @@
 module.exports = {
   libraries: [
     'index',
-    'deprecated',
-    'notifyOnLowFPS',
     'overridable',
-    'themeable',
-    'uncontrolled',
+    'withDeprecationWarning',
     'withDisplayName',
     'withFocusProps',
+    'withNotifyOnLowFPS',
     'withHoverProps',
     'withMouseDownProps',
-    'withTouchProps'
-  ]
+    'withTheme',
+    'withTouchProps',
+    'withUncontrolledProp',
+    'withUniqueFormIdentifier',
+  ],
+  pages: ['example/index'],
 }

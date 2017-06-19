@@ -1,26 +1,36 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
+import React, { Component } from 'react'
+import { render } from 'react-dom'
 import withMouseDownProps from './withMouseDownProps'
-import {equal} from 'assert'
+import { equal } from 'assert'
 
 describe('withMouseDownProps', () => {
+  it('wraps the name of the original component', () => {
+    function Input(props) {
+      return <input {...props} />
+    }
+
+    const EnhancedInput = withMouseDownProps({ hover: true })(Input)
+
+    equal(EnhancedInput.displayName, 'withMouseDownProps(Input)')
+  })
+
   it('has the touch down prop when mouseDown gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {
-      constructor () {
+      constructor() {
         super()
 
         this.updated = false
       }
 
-      componentDidMount () {
+      componentDidMount() {
         setTimeout(() => {
           this.updated = true
           this.props.onMouseDown()
         })
       }
 
-      componentDidUpdate () {
+      componentDidUpdate() {
         if (this.updated) {
           setTimeout(() => {
             expect(root.querySelector('span').textContent).toBe('Mouse down!')
@@ -29,17 +39,19 @@ describe('withMouseDownProps', () => {
         }
       }
 
-      render () {
-        const {label} = this.props
+      render() {
+        const { label } = this.props
 
-        return <div style={{backgroundColor: 'red', width: 40, height: 20}}>
-          <span>{label}</span>
-        </div>
+        return (
+          <div style={{ backgroundColor: 'red', width: 40, height: 20 }}>
+            <span>{label}</span>
+          </div>
+        )
       }
     }
     Target.defaultProps = { label: '' }
     const DecoratedTarget = withMouseDownProps({
-      label: 'Mouse down!'
+      label: 'Mouse down!',
     })(Target)
 
     render(<DecoratedTarget />, root)
@@ -48,11 +60,11 @@ describe('withMouseDownProps', () => {
   it('loses the touch down prop when mouseUp gets triggered', done => {
     const root = document.createElement('div')
     class Target extends Component {
-      componentDidMount () {
+      componentDidMount() {
         this.props.onMouseDown()
       }
 
-      componentDidUpdate () {
+      componentDidUpdate() {
         setTimeout(() => {
           this.props.onMouseUp()
           setTimeout(() => {
@@ -62,15 +74,15 @@ describe('withMouseDownProps', () => {
         })
       }
 
-      render () {
-        const {label} = this.props
+      render() {
+        const { label } = this.props
         return <span>{label}</span>
       }
     }
 
     Target.defaultProps = { label: '' }
     const DecoratedTarget = withMouseDownProps({
-      label: 'Mouse down!'
+      label: 'Mouse down!',
     })(Target)
 
     render(<DecoratedTarget />, root)
