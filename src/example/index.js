@@ -7,6 +7,7 @@ import WithDisplayNameExample from './WithDisplayNameExample'
 import WithFocusPropsExample from './WithFocusPropsExample'
 import WithHoverPropsExample from './WithHoverPropsExample'
 import WithMouseDownPropsExample from './WithMouseDownPropsExample'
+import WithNotifyOnLowFPSExample from './WithNotifyOnLowFPSExample'
 import WithTouchPropsExample from './WithTouchPropsExample'
 import WithUncontrolledPropExample from './WithUncontrolledPropExample'
 import WithUniqueFormIdentifierExample from './WithUniqueFormIdentifierExample'
@@ -47,6 +48,9 @@ const Page = componentQueries(
             }),
       }}
     >
+      <Example>
+        <WithNotifyOnLowFPSExample />
+      </Example>
       <Example>
         <WithDeprecationWarningExample />
       </Example>

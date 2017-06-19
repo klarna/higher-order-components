@@ -17,5 +17,5 @@ module.exports = {
     'withUncontrolledProp',
     'withUniqueFormIdentifier',
   ],
-  pages: ['example/index', 'example/WithSwipeExample'],
+  pages: ['example/index'],
 }
