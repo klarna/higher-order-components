@@ -8,6 +8,8 @@ import WithFocusPropsExample from './WithFocusPropsExample'
 import WithHoverPropsExample from './WithHoverPropsExample'
 import WithMouseDownPropsExample from './WithMouseDownPropsExample'
 import WithTouchPropsExample from './WithTouchPropsExample'
+import WithUncontrolledPropExample from './WithUncontrolledPropExample'
+import WithUniqueFormIdentifierExample from './WithUniqueFormIdentifierExample'
 
 const Example = ({ children }) =>
   <div
@@ -62,6 +64,12 @@ const Page = componentQueries(
       </Example>
       <Example>
         <WithTouchPropsExample />
+      </Example>
+      <Example>
+        <WithUncontrolledPropExample />
+      </Example>
+      <Example>
+        <WithUniqueFormIdentifierExample />
       </Example>
     </section>
   </main>

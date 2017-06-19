@@ -5,7 +5,7 @@ export default withUncontrolledProp({
   prop: 'counter',
   defaultProp: 'defaultCounter',
   handlers: {
-    onClick: ({ counter }) => () => counter + 1,
+    onClick: ({ counter }) => () => (counter || 0) + 1,
   },
 })(function StatelessCounter({ counter, onClick }) {
   return (
