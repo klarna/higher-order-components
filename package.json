@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/klarna/higher-order-components#readme",
   "devDependencies": {
+    "jwt-decode": "^2.2.0",
+    "jwt-simple": "^0.5.1",
     "prettier": "^1.4.4",
     "prop-types": "^15.5.10",
     "react": "^15.5.0",
@@ -39,6 +41,7 @@
     "sagui": "9.0.0-rc.16"
   },
   "peerDependencies": {
+    "jwt-decode": "^2.2.0",
     "prop-types": "^15.5.10",
     "react": "^15.5.0",
     "react-context-props": "^2.1.0"
