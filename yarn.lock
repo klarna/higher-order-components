@@ -4758,9 +4758,9 @@ react-component-queries@^2.1.1:
   dependencies:
     invariant "^2.2.0"
 
-react-context-props@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/react-context-props/-/react-context-props-2.1.0.tgz#66eafca274219969cd50898741ebc6b0b782db18"
+react-context-props@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-context-props/-/react-context-props-2.2.0.tgz#1f0bd558b337482c7e437a13699acf7938bca18c"
 
 react-dom@^15.5.0:
   version "15.5.4"
