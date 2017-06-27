@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react'
-import { withPropsFromContext } from 'react-context-props'
+import React, {PureComponent} from 'react'
+import {withPropsFromContext} from 'react-context-props'
 
 export default (styles = {}, designName) => Target => {
   class OverridableComponent extends PureComponent {
@@ -12,18 +12,18 @@ export default (styles = {}, designName) => Target => {
 
     getOverride() {
       if (!this.props.design.getOverrideFor) {
-        return { ...styles, ...this.props.styles }
+        return {...styles, ...this.props.styles}
       }
       const override = this.props.design.getOverrideFor(
-        Object.assign(Target, { designName: this.designName })
+        Object.assign(Target, {designName: this.designName})
       )
       this.Component = override.Component
-      return { ...styles, ...this.props.styles, ...override.css }
+      return {...styles, ...this.props.styles, ...override.css}
     }
 
     render() {
-      const { design, ...otherProps } = this.props // eslint-disable-line
-      const props = { ...otherProps, styles: this.getOverride() }
+      const {design, ...otherProps} = this.props // eslint-disable-line
+      const props = {...otherProps, styles: this.getOverride()}
       return <this.Component {...props} />
     }
   }
@@ -35,5 +35,5 @@ export default (styles = {}, designName) => Target => {
     styles: {},
   }
 
-  return withPropsFromContext(OverridableComponent, ['design'])
+  return withPropsFromContext(['design'])(OverridableComponent)
 }
