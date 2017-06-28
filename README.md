@@ -462,7 +462,7 @@ export default withUncontrolledProp({
 
 ## withJWTProps (inputPropName, outputPropsMapping) (Component)
 
-**withJWTProps** decodes [JWT](https://jwt.io/) encoded token (passed in with props as `inputPropName`) and provides its fields to Target component spreaded as props (use `outputPropsMapping` argument to "remap" their names):
+**withJWTProps** decodes [JWT](https://jwt.io/) encoded token (passed in with props as `inputPropName`) and provides its fields to Target component spread as props (use `outputPropsMapping` argument to "remap" their names):
 
 ```js
 import React from 'react'
