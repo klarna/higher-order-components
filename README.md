@@ -5,8 +5,6 @@
 
 This library is a collection of useful React higher-order Components.
 
-**Note**: Documentation is a work in progress. It will probably be expanded with examples later on.
-
 ## withDisplayName (string) ... (Component)
 
 **withDisplayName** let's you easily set the `displayName` of components.
@@ -262,42 +260,50 @@ export default Radio
 
 The UUID for this would look something like: `Radio-c821f424-053a-4175-8112-1e0a6370b4cc`
 
-## Overridable
+## withOverrideFromContext
 
-**Overridable** provides a way of replacing the styles or the full implementation of a component.
+**Overridable** provides a way of injecting props or replacing the implementation of the component anywhere in the React tree (using `React.context`). This is useful for extreme customizations.
 
-Say that you have a single component for a list of articles:
+The override is done by setting a prop in the `React.context` named after the `displayName` of the target component. This prop can be:
 
-```javascript
-function Blog ({name, articles}) {
-  return <main>
-    <h1>{name}</h1>
+- An object structure. If an object structure is set, then the behavior will be that the props actually passed to the component will be deep merged with the object structure found in the context (local props take precedence).
+- A component implementation. If a component is passed, then that function will be called and rendered instead of the original implementation.
 
-    {articles.map(({title, content}) => <Article key={title}>
-      <Title>{title}</Title>
-      <section>
-        {content}
-      </section>
-    </Article>)}
-  </main>
-}
-```
-
-…and you want to reuse the **Blog** component but would like the **Title** to look different in your context. There are many ways of solving this issue, but in the particular use case of having exactly the same app rendering with many variations for some components, a solution is to have components that can be overridden from the outside — with a property in the React.context — so that the app is not concerned at all with the fact that the internal components might change.
-
-**TODO**: Complete explanation with the `<Design>` component as well.
+This example illustrates both use cases:
 
 ```javascript
-// This is the object that you get when you
-// import styles from './styles.css'
-type CSSModule = {
-  [key: string]: string
-}
+import React from 'react'
+import PropTypes from 'prop-types'
+import {render} from 'react-dom'
+import {getContextualizer} from 'react-context-props'
+import {withOverrideFromContext} from '@klarna/higher-order-components'
 
-type Overridable = (
-  cssModule: CSSModule,
-  ?designName: string // The designName is by default the `name` or `displayName` of the Component
-) => (target: ReactComponent) => Component
+// For Button we will just partially override the style prop
+const Button = ({style}) => <button style={style}>Plain button</button>
+// For Input we will just replace the implementation
+const Input = () => <input type='radio' />
+
+const OverridableButton = withOverrideFromContext(Button)
+const OverridableInput = withOverrideFromContext(Input)
+
+const Overrides = getContextualizer({
+  Button: PropTypes.oneOf([
+    PropTypes.object,
+    PropTypes.func
+  ]),
+  Input: PropTypes.oneOf([
+    PropTypes.object,
+    PropTypes.func
+  ])
+}, 'overrides')
+
+render(
+  <Overrides Button={{color: 'blue'}} Input={() => <input type='tel' />}>
+    <OverridableButton style={{background: 'yellow'}} />
+    <OverridableInput />
+  </Overrides>,
+  document.getElementById('root')
+)
 ```
 
 ## withTheme (themeToProps) (Component)
