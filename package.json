@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "collect-fps": "2.0.0",
+    "deepmerge": "^1.4.4",
     "recompose": "^0.23.4",
     "seed-random": "^2.2.0"
   }
