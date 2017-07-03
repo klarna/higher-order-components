@@ -5,7 +5,7 @@
 module.exports = {
   libraries: [
     'index',
-    'overridable',
+    'withOverrideFromContext',
     'withDeprecationWarning',
     'withDisplayName',
     'withFocusProps',
