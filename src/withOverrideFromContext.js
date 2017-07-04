@@ -10,13 +10,15 @@ export default Target => {
   const WithOverrideFromContext = withPropsFromContext([name])(props => {
     const Override = props[name]
 
-    const propsWithNoOverride = { ...props }
-    delete propsWithNoOverride[name]
+    const propsWithoutOverride = { ...props }
+    delete propsWithoutOverride[name]
 
     if (typeof Override === 'function') {
-      return <Override {...propsWithNoOverride} />
+      return <Override {...propsWithoutOverride} />
+    } else if (Override != null) {
+      return <Target {...deepMerge(Override, propsWithoutOverride)} />
     } else {
-      return <Target {...deepMerge(Override, propsWithNoOverride)} />
+      return <Target {...propsWithoutOverride} />
     }
   })
 

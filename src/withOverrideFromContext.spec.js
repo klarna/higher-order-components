@@ -34,7 +34,7 @@ describe('withOverrideFromContext', () => {
       }
 
       const Overrides = getContextualizer({
-        Target: PropTypes.oneOf([PropTypes.object, PropTypes.func]),
+        Target: PropTypes.object,
       })
 
       const OverridableTarget = withOverrideFromContext(Target)
@@ -88,7 +88,7 @@ describe('withOverrideFromContext', () => {
       }
 
       const Overrides = getContextualizer({
-        Target: PropTypes.oneOf([PropTypes.object, PropTypes.func]),
+        Target: PropTypes.func,
       })
 
       const OverridableTarget = withOverrideFromContext(Target)
@@ -104,6 +104,34 @@ describe('withOverrideFromContext', () => {
       equal(root.querySelector('#replacementTextAlign').innerHTML, 'left')
       equal(root.querySelector('#replacementColor').innerHTML, 'default')
       equal(root.querySelector('#replacementPrimary').innerHTML, 'true')
+    })
+  })
+
+  describe('when there is no override', () => {
+    it('renders as usual', () => {
+      const root = document.createElement('div')
+      document.body.innerHTML = ''
+      document.body.appendChild(root)
+
+      function Target({ style, color, primary }) {
+        return (
+          <div>
+            <span id="background">{style.background}</span>
+            <span id="textAlign">{style.textAlign}</span>
+            <span id="color">{color}</span>
+            <span id="primary">{primary.toString()}</span>
+          </div>
+        )
+      }
+
+      const OverridableTarget = withOverrideFromContext(Target)
+
+      render(<OverridableTarget style={{ textAlign: 'left' }} primary />, root)
+
+      equal(root.querySelector('#background').innerHTML, '')
+      equal(root.querySelector('#textAlign').innerHTML, 'left')
+      equal(root.querySelector('#color').innerHTML, '')
+      equal(root.querySelector('#primary').innerHTML, 'true')
     })
   })
 })
