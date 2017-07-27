@@ -5,6 +5,48 @@
 
 This library is a collection of useful React higher-order Components.
 
+## withStyleSheetOverride (propsToPick, getDefaultStyleSheet) (Component)
+
+**withStyleSheetOverride** provides a flexible way of setting style sheets in the components from a functions that take a subset of the `props` and return a style structure. It also provides the ability for consumers of the component to pass their own `getStyleSheet` prop that takes the same subset of the props and returns another style sheet that `withStyleSheetOverride` will deep merge on top of the default ones. For example:
+
+```javascript
+function Header({hovered, styleSheet, title, tagline}) {
+  return <header>
+    <h1 style={styleSheet.title}>{title}</h1>
+    <p style={styleSheet.tagline}>{tagline}</p>
+  </header>
+}
+
+const EnhancedTitle = withStyleSheetOverride(
+  ['hovered'],
+  ({hovered}) => ({
+    title: {
+      color: hovered ? 'blue' : 'black'
+    },
+    tagline: {
+      color: hovered ? 'lightblue' : 'gray'
+    }
+  })
+)(Header)
+
+render(
+  <EnhancedTitle
+    hovered
+    getStyleSheet={({hovered}) => ({
+      title: {
+        background: hovered ? 'white' : 'pink'
+      },
+      tagline: {
+        background: hovered ? 'white' : 'pink'
+      }
+    })}
+  />,
+  document.getElementById('root')
+)
+```
+
+…will render the `h1` with `{ color: 'blue', background: 'white' }` and the `p` with `{ color: 'lightblue', background: 'white' }`.
+
 ## withDisplayName (string) ... (Component)
 
 **withDisplayName** let's you easily set the `displayName` of components.
