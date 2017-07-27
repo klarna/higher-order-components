@@ -12,6 +12,7 @@ module.exports = {
     'withNotifyOnLowFPS',
     'withHoverProps',
     'withMouseDownProps',
+    'withStyleSheetOverride',
     'withTheme',
     'withTouchProps',
     'withUncontrolledProp',
