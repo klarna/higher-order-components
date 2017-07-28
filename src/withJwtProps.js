@@ -44,7 +44,7 @@ export default (propName, propsMapping) => Target => {
   }
 
   WithJwtProps.defaultProps = {
-    onJWTError: () => {},
+    onJwtError: () => {},
   }
 
   WithJwtProps.propTypes = {
