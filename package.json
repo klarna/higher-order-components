@@ -38,7 +38,7 @@
     "react-context-props": "^2.2.0",
     "react-dom": "^15.5.0",
     "react-sizeme": "^2.3.2",
-    "sagui": "11.0.0-rc.2"
+    "sagui": "11.0.0-rc.3"
   },
   "peerDependencies": {
     "jwt-decode": "^2.2.0",
