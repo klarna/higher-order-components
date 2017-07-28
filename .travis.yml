@@ -6,6 +6,7 @@ before_script:
 script:
 - npm test
 deploy:
+  skip_cleanup: true
   provider: npm
   email: ui-admin.e@klarna.com
   api_key:
