@@ -508,14 +508,14 @@ export default withUncontrolledProp({
 
 > The behavior of this higher-order component is very close to combining `withState` and `withHandlers` from [`recompose`](https://github.com/acdlite/recompose/blob/master/docs/API.md#withstate). The reason why it was created anyway is that it also provides the `defaultProp`.
 
-## withJWTProps (inputPropName, outputPropsMapping) (Component)
+## withJwtProps (inputPropName, outputPropsMapping) (Component)
 
-**withJWTProps** decodes [JWT](https://jwt.io/) encoded token (passed in with props as `inputPropName`) and provides its fields to Target component spread as props (use optional `outputPropsMapping` argument to "remap" their names):
+**withJwtProps** decodes [JWT](https://jwt.io/) encoded token (passed in with props as `inputPropName`) and provides its fields to Target component spread as props (use optional `outputPropsMapping` argument to "remap" their names):
 
 ```js
 import React from 'react'
 import {render} from 'react-dom'
-import {withJWTProps} from '@klarna/higher-order-components'
+import {withJwtProps} from '@klarna/higher-order-components'
 import jwt from 'jwt-simple'
 
 const clientToken = jwt.encode({
@@ -526,7 +526,7 @@ const clientToken = jwt.encode({
 const Target = ({ propA, propB }) => (
   <h1>{propA} {propB}</h1>
 )
-const EnhancedTarget = withJWTProps(
+const EnhancedTarget = withJwtProps(
   'clientToken',
   {
     foo: 'propA',

@@ -4,7 +4,7 @@ import wrapDisplayName from 'recompose/wrapDisplayName'
 import jwtDecode from 'jwt-decode'
 
 export default (propName, propsMapping) => Target => {
-  class WithJWTProps extends Component {
+  class WithJwtProps extends Component {
     constructor(props, context) {
       super(props, context)
 
@@ -32,7 +32,7 @@ export default (propName, propsMapping) => Target => {
           return result
         }, {})
       } catch (e) {
-        this.props.onJWTError(e)
+        this.props.onJwtError(e)
 
         return {}
       }
@@ -43,15 +43,15 @@ export default (propName, propsMapping) => Target => {
     }
   }
 
-  WithJWTProps.defaultProps = {
+  WithJwtProps.defaultProps = {
     onJWTError: () => {},
   }
 
-  WithJWTProps.propTypes = {
-    onJWTError: PropTypes.func,
+  WithJwtProps.propTypes = {
+    onJwtError: PropTypes.func,
   }
 
-  WithJWTProps.displayName = wrapDisplayName(Target, 'withJWTProps')
+  WithJwtProps.displayName = wrapDisplayName(Target, 'withJwtProps')
 
-  return WithJWTProps
+  return WithJwtProps
 }

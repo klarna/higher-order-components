@@ -3,9 +3,9 @@ import { render } from 'react-dom'
 import { equal } from 'assert'
 import jwt from 'jwt-simple'
 
-import withJWTProps from './withJWTProps'
+import withJwtProps from './withJwtProps'
 
-describe('withJWTProps', () => {
+describe('withJwtProps', () => {
   const clientToken = jwt.encode(
     {
       propA: 'prop A',
@@ -24,9 +24,9 @@ describe('withJWTProps', () => {
 
   it('wraps the name of the original component', () => {
     const Target = () => null
-    const DecoratedTarget = withJWTProps('clientToken')(Target)
+    const DecoratedTarget = withJwtProps('clientToken')(Target)
 
-    equal(DecoratedTarget.displayName, 'withJWTProps(Target)')
+    equal(DecoratedTarget.displayName, 'withJwtProps(Target)')
   })
 
   it('should pass decoded JWT token props', done => {
@@ -44,7 +44,7 @@ describe('withJWTProps', () => {
       }
     }
 
-    const DecoratedTarget = withJWTProps('clientToken')(Target)
+    const DecoratedTarget = withJwtProps('clientToken')(Target)
 
     render(<DecoratedTarget clientToken={clientToken} />, root)
   })
@@ -64,7 +64,7 @@ describe('withJWTProps', () => {
       }
     }
 
-    const DecoratedTarget = withJWTProps('clientToken', {
+    const DecoratedTarget = withJwtProps('clientToken', {
       propA: 'prop-A',
       propB: 'prop-B',
     })(Target)
@@ -85,20 +85,20 @@ describe('withJWTProps', () => {
       }
     }
 
-    const DecoratedTarget = withJWTProps('clientToken')(Target)
+    const DecoratedTarget = withJwtProps('clientToken')(Target)
 
     render(<DecoratedTarget clientToken={clientToken} />, root)
     render(<DecoratedTarget clientToken={updatedClientToken} />, root)
   })
 
-  it('should invoke `onError` callback when something went wrong', done => {
+  it('should invoke `onJwtError` callback when something went wrong', done => {
     const Target = () => null
-    const DecoratedTarget = withJWTProps('clientToken')(Target)
+    const DecoratedTarget = withJwtProps('clientToken')(Target)
 
     render(
       <DecoratedTarget
         clientToken="hej"
-        onJWTError={e => {
+        onJwtError={e => {
           equal(e instanceof Error, true)
           done()
         }}
