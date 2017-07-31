@@ -7,7 +7,7 @@
     "build": "sagui build",
     "dist": "sagui dist",
     "format": "sagui format",
-    "prepublish": "sagui build",
+    "prepublishOnly": "babel src/ -d dist/ --ignore spec.js,example/",
     "start": "sagui develop --port 3000",
     "test": "sagui test",
     "test:lint": "sagui test:lint",
@@ -44,11 +44,15 @@
   "peerDependencies": {
     "jwt-decode": "^2.2.0",
     "prop-types": "^15.5.10",
+    "ramda": "^0.24.1",
     "react": "^15.5.0",
-    "react-context-props": "^2.2.0",
-    "ramda": "^0.24.1"
+    "react-context-props": "^2.2.0"
   },
   "dependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
     "collect-fps": "2.0.0",
     "deepmerge": "^1.4.4",
     "recompose": "^0.23.4",
