@@ -7,7 +7,7 @@ const styleElementId = 'autofill-style'
 
 const isWebkit = () => navigator.userAgent.indexOf('WebKit') !== -1
 
-const emptyAnimation = animationName => {
+function emptyAnimation(animationName) {
   return `
     @keyframes ${animationName} {
       from {/**/}
@@ -16,7 +16,7 @@ const emptyAnimation = animationName => {
   `
 }
 
-const injectStyle = style => {
+function injectStyle(style) {
   let styleElement = document.getElementById(styleElementId)
 
   if (!styleElement) {
@@ -61,7 +61,7 @@ function injectAutofillHook() {
   injectStyle(notAutofillHook)
 }
 
-const registerAutofill = () => {
+function registerAutofill() {
   const autofillInjected =
     window.__klarna_ui_components && window.__klarna_ui_components.isAutofillInjected
 
