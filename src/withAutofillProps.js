@@ -3,6 +3,7 @@ import wrapDisplayName from 'recompose/wrapDisplayName'
 
 const startAnimationName = 'onAutofillStart'
 const endAnimationName = 'onAutofillCancel'
+const styleElementId = 'autofill-style'
 
 const isWebkit = () => navigator.userAgent.indexOf('WebKit') !== -1
 
@@ -16,9 +17,13 @@ const emptyAnimation = animationName => {
 }
 
 const injectStyle = style => {
-  const styleElement = document.createElement('style')
+  let styleElement = document.getElementById(styleElementId)
 
-  document.head.appendChild(styleElement)
+  if (!styleElement) {
+    styleElement = document.createElement('style')
+    styleElement.id = styleElementId
+    document.head.appendChild(styleElement)
+  }
 
   let styleSheet = styleElement.sheet
 
