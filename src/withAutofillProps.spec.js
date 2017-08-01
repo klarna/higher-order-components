@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import { render } from 'react-dom'
+import React from 'react'
 import withAutofillProps from './withAutofillProps'
 import { equal } from 'assert'
 
