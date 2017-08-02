@@ -29,7 +29,9 @@ describe('withUncontrolledProp', () => {
       return (
         <div>
           <button onClick={onClick}>press</button>
-          <span>{pressed ? 'pressed' : 'not pressed'}</span>
+          <span>
+            {pressed ? 'pressed' : 'not pressed'}
+          </span>
         </div>
       )
     }
@@ -61,7 +63,9 @@ describe('withUncontrolledProp', () => {
       return (
         <div>
           <button onClick={onClick}>press</button>
-          <span>{pressed ? 'pressed' : 'not pressed'}</span>
+          <span>
+            {pressed ? 'pressed' : 'not pressed'}
+          </span>
         </div>
       )
     }
@@ -90,7 +94,9 @@ describe('withUncontrolledProp', () => {
       return (
         <div>
           <button onClick={onClick}>press</button>
-          <span>{pressed ? 'pressed' : 'not pressed'}</span>
+          <span>
+            {pressed ? 'pressed' : 'not pressed'}
+          </span>
         </div>
       )
     }
@@ -119,7 +125,9 @@ describe('withUncontrolledProp', () => {
       return (
         <div>
           <button onClick={onClick}>press</button>
-          <span>{pressed ? 'pressed' : 'not pressed'}</span>
+          <span>
+            {pressed ? 'pressed' : 'not pressed'}
+          </span>
         </div>
       )
     }
@@ -147,7 +155,9 @@ describe('withUncontrolledProp', () => {
         return (
           <div>
             <button onClick={onClick}>toggle</button>
-            <span>{pressed ? 'pressed' : 'not pressed'}</span>
+            <span>
+              {pressed ? 'pressed' : 'not pressed'}
+            </span>
           </div>
         )
       }
@@ -181,9 +191,15 @@ describe('withUncontrolledProp', () => {
       function ButtonSwitch({ pressed, onClick }) {
         return (
           <div>
-            <button id="press" onClick={() => onClick(true)}>press</button>
-            <button id="unpress" onClick={() => onClick(false)}>unpress</button>
-            <span>{pressed ? 'pressed' : 'not pressed'}</span>
+            <button id="press" onClick={() => onClick(true)}>
+              press
+            </button>
+            <button id="unpress" onClick={() => onClick(false)}>
+              unpress
+            </button>
+            <span>
+              {pressed ? 'pressed' : 'not pressed'}
+            </span>
           </div>
         )
       }

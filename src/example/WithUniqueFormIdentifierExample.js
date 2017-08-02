@@ -27,7 +27,11 @@ export default withUniqueFormIdentifier(function FormElement({ name }) {
 })`}</pre>
       </code>
       <p>The generated unique identifier is:</p>
-      <p><code>{name}</code></p>
+      <p>
+        <code>
+          {name}
+        </code>
+      </p>
     </article>
   )
 })

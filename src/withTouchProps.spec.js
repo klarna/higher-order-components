@@ -44,7 +44,9 @@ describe('withTouchProps', () => {
 
         return (
           <div style={{ backgroundColor: 'red', width: 40, height: 20 }}>
-            <span>{label}</span>
+            <span>
+              {label}
+            </span>
           </div>
         )
       }
@@ -76,7 +78,11 @@ describe('withTouchProps', () => {
 
       render() {
         const { label } = this.props
-        return <span>{label}</span>
+        return (
+          <span>
+            {label}
+          </span>
+        )
       }
     }
 
