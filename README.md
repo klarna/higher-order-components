@@ -5,7 +5,7 @@
 
 This library is a collection of useful React higher-order Components.
 
-## withStyleSheetOverride (propsToPick, getDefaultStyleSheet) (Component)
+## withStyleSheetOverride (propsSelector, getDefaultStyleSheet) (Component)
 
 **withStyleSheetOverride** provides a flexible way of setting style sheets in the components. The first argument to it is a selector from all the `props` to an object of values that are relevant for styles. The second argument is a function from those values to a stylesheet structure. It also provides the ability for consumers of the component to pass their own `getStyleSheet` prop that takes the same subset of the props and returns another style sheet that `withStyleSheetOverride` will deep merge on top of the default ones. For example:
 
