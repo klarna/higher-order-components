@@ -10,7 +10,7 @@ This library is a collection of useful React higher-order Components.
 **withStyleSheetOverride** provides a flexible way of setting style sheets in the components. The first argument to it is a selector from all the `props` to an object of values that are relevant for styles. The second argument is a function from those values to a stylesheet structure. It also provides the ability for consumers of the component to pass their own `getStyleSheet` prop that takes the same subset of the props and returns another style sheet that `withStyleSheetOverride` will deep merge on top of the default ones. For example:
 
 ```javascript
-function Header({hovered, styleSheet, title, tagline}) {
+function Header({styleSheet, title, tagline}) {
   return <header>
     <h1 style={styleSheet.title}>{title}</h1>
     <p style={styleSheet.tagline}>{tagline}</p>
@@ -18,29 +18,30 @@ function Header({hovered, styleSheet, title, tagline}) {
 }
 
 const EnhancedTitle = withStyleSheetOverride(
-  ({hovered, pressed}) => ({
-    hoveredAndPressed: hovered && pressed
+  ({tagline, pressed}) => ({
+    hasTagline: tagline && tagline.length > 0,
+    pressed
   }),
-  ({hoveredAndPressed}) => ({
+  ({hasTagline, pressed}) => ({
     title: {
-      color: hoveredAndPressed ? 'blue' : 'black'
+      color: hasTagline ? 'blue' : 'black'
     },
     tagline: {
-      color: hoveredAndPressed ? 'lightblue' : 'gray'
+      color: pressed ? 'lightblue' : 'gray'
     }
   })
 )(Header)
 
 render(
   <EnhancedTitle
-    hovered
+    tagline='Hello!'
     pressed
-    getStyleSheet={({hoveredAndPressed}) => ({
+    getStyleSheet={({hasTagline, pressed}) => ({
       title: {
-        background: hoveredAndPressed ? 'white' : 'pink'
+        background: hasTagline ? 'white' : 'pink'
       },
       tagline: {
-        background: hoveredAndPressed ? 'white' : 'pink'
+        background: pressed ? 'white' : 'pink'
       }
     })}
   />,
