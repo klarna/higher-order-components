@@ -17,7 +17,11 @@ describe('withStyleSheetOverride', () => {
   it('passes the default styleSheet as prop to the component', () => {
     const root = document.createElement('div')
     function Target({ styleSheet }) {
-      return <div>{styleSheet.base.color}</div>
+      return (
+        <div>
+          {styleSheet.base.color}
+        </div>
+      )
     }
 
     const Enhanced = withStyleSheetOverride(
@@ -38,7 +42,11 @@ describe('withStyleSheetOverride', () => {
     it('has a styleSheet built using the props passed in', () => {
       const root = document.createElement('div')
       function Target({ styleSheet }) {
-        return <div>{styleSheet.base.color}</div>
+        return (
+          <div>
+            {styleSheet.base.color}
+          </div>
+        )
       }
 
       const Enhanced = withStyleSheetOverride(
@@ -65,8 +73,12 @@ describe('withStyleSheetOverride', () => {
       function Target({ styleSheet }) {
         return (
           <div>
-            <h1>{styleSheet.base.color}</h1>
-            <p>{styleSheet.base.background}</p>
+            <h1>
+              {styleSheet.base.color}
+            </h1>
+            <p>
+              {styleSheet.base.background}
+            </p>
           </div>
         )
       }

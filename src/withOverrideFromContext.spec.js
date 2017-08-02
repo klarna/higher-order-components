@@ -25,10 +25,18 @@ describe('withOverrideFromContext', () => {
       function Target({ style, color, primary }) {
         return (
           <div>
-            <span id="background">{style.background}</span>
-            <span id="textAlign">{style.textAlign}</span>
-            <span id="color">{color}</span>
-            <span id="primary">{primary.toString()}</span>
+            <span id="background">
+              {style.background}
+            </span>
+            <span id="textAlign">
+              {style.textAlign}
+            </span>
+            <span id="color">
+              {color}
+            </span>
+            <span id="primary">
+              {primary.toString()}
+            </span>
           </div>
         )
       }
@@ -68,10 +76,18 @@ describe('withOverrideFromContext', () => {
       function Target({ style, color, primary }) {
         return (
           <div>
-            <span id="background">{style.background}</span>
-            <span id="textAlign">{style.textAlign}</span>
-            <span id="color">{color}</span>
-            <span id="primary">{primary}</span>
+            <span id="background">
+              {style.background}
+            </span>
+            <span id="textAlign">
+              {style.textAlign}
+            </span>
+            <span id="color">
+              {color}
+            </span>
+            <span id="primary">
+              {primary}
+            </span>
           </div>
         )
       }
@@ -79,10 +95,18 @@ describe('withOverrideFromContext', () => {
       function Replacement({ style, primary, color }) {
         return (
           <div>
-            <span id="replacementBackground">{style.background || 'default'}</span>
-            <span id="replacementTextAlign">{style.textAlign || 'default'}</span>
-            <span id="replacementColor">{color || 'default'}</span>
-            <span id="replacementPrimary">{primary.toString() || 'default'}</span>
+            <span id="replacementBackground">
+              {style.background || 'default'}
+            </span>
+            <span id="replacementTextAlign">
+              {style.textAlign || 'default'}
+            </span>
+            <span id="replacementColor">
+              {color || 'default'}
+            </span>
+            <span id="replacementPrimary">
+              {primary.toString() || 'default'}
+            </span>
           </div>
         )
       }
@@ -116,10 +140,18 @@ describe('withOverrideFromContext', () => {
       function Target({ style, color, primary }) {
         return (
           <div>
-            <span id="background">{style.background}</span>
-            <span id="textAlign">{style.textAlign}</span>
-            <span id="color">{color}</span>
-            <span id="primary">{primary.toString()}</span>
+            <span id="background">
+              {style.background}
+            </span>
+            <span id="textAlign">
+              {style.textAlign}
+            </span>
+            <span id="color">
+              {color}
+            </span>
+            <span id="primary">
+              {primary.toString()}
+            </span>
           </div>
         )
       }
