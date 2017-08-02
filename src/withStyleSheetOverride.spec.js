@@ -20,11 +20,14 @@ describe('withStyleSheetOverride', () => {
       return <div>{styleSheet.base.color}</div>
     }
 
-    const Enhanced = withStyleSheetOverride([], () => ({
-      base: {
-        color: 'red',
-      },
-    }))(Target)
+    const Enhanced = withStyleSheetOverride(
+      x => x,
+      () => ({
+        base: {
+          color: 'red',
+        },
+      })
+    )(Target)
 
     render(<Enhanced />, root)
 
@@ -38,13 +41,18 @@ describe('withStyleSheetOverride', () => {
         return <div>{styleSheet.base.color}</div>
       }
 
-      const Enhanced = withStyleSheetOverride(['hovered'], ({ hovered }) => ({
-        base: {
-          color: hovered ? 'green' : 'red',
-        },
-      }))(Target)
+      const Enhanced = withStyleSheetOverride(
+        ({ hovered, pressed }) => ({
+          hoveredAndPressed: hovered && pressed,
+        }),
+        ({ hoveredAndPressed }) => ({
+          base: {
+            color: hoveredAndPressed ? 'green' : 'red',
+          },
+        })
+      )(Target)
 
-      render(<Enhanced hovered />, root)
+      render(<Enhanced hovered pressed />, root)
 
       equal(root.querySelector('div').innerText, 'green')
     })
@@ -63,19 +71,25 @@ describe('withStyleSheetOverride', () => {
         )
       }
 
-      const Enhanced = withStyleSheetOverride(['hovered'], ({ hovered }) => ({
-        base: {
-          color: hovered ? 'green' : 'red',
-          background: 'blue',
-        },
-      }))(Target)
+      const Enhanced = withStyleSheetOverride(
+        ({ hovered, pressed }) => ({
+          hoveredAndPressed: hovered && pressed,
+        }),
+        ({ hoveredAndPressed }) => ({
+          base: {
+            color: hoveredAndPressed ? 'green' : 'red',
+            background: 'blue',
+          },
+        })
+      )(Target)
 
       render(
         <Enhanced
           hovered
-          getStyleSheet={({ hovered }) => ({
+          pressed
+          getStyleSheet={({ hoveredAndPressed }) => ({
             base: {
-              background: hovered ? 'rebeccapurple' : 'bisque',
+              background: hoveredAndPressed ? 'rebeccapurple' : 'bisque',
             },
           })}
         />,
