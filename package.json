@@ -7,7 +7,7 @@
     "build": "sagui build",
     "dist": "sagui dist",
     "format": "sagui format",
-    "prepublishOnly": "babel src/ -d dist/ --ignore spec.js,example/",
+    "prepare": "babel src/ -d dist/ --ignore spec.js,example/",
     "start": "sagui develop --port 3000",
     "test": "sagui test",
     "test:lint": "sagui test:lint",
