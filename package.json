@@ -15,6 +15,9 @@
     "test:unit": "sagui test:unit --coverage",
     "test:unit:watch": "sagui test:unit --watch"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/klarna/higher-order-components.git"
