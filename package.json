@@ -40,7 +40,6 @@
     "jwt-simple": "^0.5.1",
     "prettier": "^1.4.4",
     "prop-types": "^15.5.10",
-    "ramda": "^0.24.1",
     "react": "^15.5.0",
     "react-component-queries": "^2.1.1",
     "react-context-props": "^2.2.0",
@@ -51,7 +50,6 @@
   "peerDependencies": {
     "jwt-decode": "^2.2.0",
     "prop-types": "^15.5.10",
-    "ramda": "^0.24.1",
     "react": "^15.5.0",
     "react-context-props": "^2.2.0"
   },

@@ -18,13 +18,15 @@ function Header({hovered, styleSheet, title, tagline}) {
 }
 
 const EnhancedTitle = withStyleSheetOverride(
-  ['hovered'],
-  ({hovered}) => ({
+  ({hovered, pressed}) => ({
+    hoveredAndPressed: hovered && pressed
+  }),
+  ({hoveredAndPressed}) => ({
     title: {
-      color: hovered ? 'blue' : 'black'
+      color: hoveredAndPressed ? 'blue' : 'black'
     },
     tagline: {
-      color: hovered ? 'lightblue' : 'gray'
+      color: hoveredAndPressed ? 'lightblue' : 'gray'
     }
   })
 )(Header)
@@ -32,12 +34,13 @@ const EnhancedTitle = withStyleSheetOverride(
 render(
   <EnhancedTitle
     hovered
-    getStyleSheet={({hovered}) => ({
+    pressed
+    getStyleSheet={({hoveredAndPressed}) => ({
       title: {
-        background: hovered ? 'white' : 'pink'
+        background: hoveredAndPressed ? 'white' : 'pink'
       },
       tagline: {
-        background: hovered ? 'white' : 'pink'
+        background: hoveredAndPressed ? 'white' : 'pink'
       }
     })}
   />,
