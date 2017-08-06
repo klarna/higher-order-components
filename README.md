@@ -540,22 +540,22 @@ render(
 )
 ```
 
-## WithAutofillProps (props) (Component)
+## withAutofillProps (props) (Component)
 
 Adds the props to the component if the element is autofilled.
 
 ```javascript
 // InputBlock.js
-import {WithAutofillProps} from '@klarna/higher-order-components'
+import {withAutofillProps} from '@klarna/higher-order-components'
 
 function InputBlock ({autofill, onAnimationStart}) {
   return <div>
-    <input onAnimationStart={onAnimationStart}  />
+    <input name='email' onAnimationStart={onAnimationStart}  />
     {autofill ? 'It’s autofilled!' : 'It’s not autofilled'}
   </div>
 }
 
-export WithAutofillProps({
+export withAutofillProps({
   autofill: true
 })(InputBlock)
 ```

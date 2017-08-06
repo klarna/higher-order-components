@@ -20,12 +20,12 @@ export default withAutofillProps({ autofill: true })(function Autofill({ autofil
   return (
     <article>
       <h1>withAutofillProps</h1>
-      <input placeholder={autofill ? 'autofilled!' : 'not autofilled'} {...props} />
+      <input name="email" style={autofill && { borderColor: 'aqua' }} {...props} />
     </article>
   )
 })`}</pre>
       </code>
-      <input placeholder={autofill ? 'autofilled!' : 'not autofilled'} {...props} />
+      <input name="email" style={autofill && { borderColor: 'aqua' }} {...props} />
     </article>
   )
 })
