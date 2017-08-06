@@ -4,6 +4,7 @@ import wrapDisplayName from 'recompose/wrapDisplayName'
 const startAnimationName = 'onAutofillStart'
 const endAnimationName = 'onAutofillCancel'
 const styleElementId = 'autofill-style'
+const counterAttribute = 'data-counter'
 
 const isWebkit = () => navigator.userAgent.indexOf('WebKit') !== -1
 
@@ -17,15 +18,7 @@ function emptyAnimation(animationName) {
 }
 
 function injectStyle(style) {
-  let styleElement = document.getElementById(styleElementId)
-
-  if (!styleElement) {
-    styleElement = document.createElement('style')
-    styleElement.id = styleElementId
-    document.head.appendChild(styleElement)
-  }
-
-  let styleSheet = styleElement.sheet
+  let styleSheet = document.getElementById(styleElementId).sheet
 
   styleSheet.insertRule(style, styleSheet.cssRules.length)
 }
@@ -62,18 +55,31 @@ function injectAutofillHook() {
 }
 
 function registerAutofill() {
-  const autofillInjected =
-    window.__klarna_ui_components && window.__klarna_ui_components.isAutofillInjected
+  let autofillStyle = document.getElementById(styleElementId)
 
-  if (!autofillInjected && isWebkit()) {
+  if (!autofillStyle && isWebkit()) {
+    autofillStyle = document.createElement('style')
+    autofillStyle.id = styleElementId
+    autofillStyle.setAttribute(counterAttribute, 0)
+    document.head.appendChild(autofillStyle)
+
     injectKeyFrames()
     injectAutofillHook()
+  }
 
-    if (window.__klarna_ui_components) {
-      window.__klarna_ui_components.isAutofillInjected = true
-    } else {
-      window.__klarna_ui_components = { isAutofillInjected: true }
-    }
+  let usageCounter = autofillStyle.getAttribute(counterAttribute)
+  usageCounter++
+  autofillStyle.setAttribute(counterAttribute, usageCounter)
+}
+
+function unregisterAutofill() {
+  let autofillStyle = document.getElementById(styleElementId)
+  let usageCounter = autofillStyle.getAttribute(counterAttribute)
+  usageCounter--
+  autofillStyle.setAttribute(counterAttribute, usageCounter)
+
+  if (usageCounter === 0) {
+    autofillStyle.outerHTML = ''
   }
 }
 
@@ -82,9 +88,15 @@ export default autofillProps => Target => {
     constructor() {
       super()
 
-      registerAutofill()
-
       this.state = { autofill: false }
+    }
+
+    onComponentDidMount() {
+      registerAutofill()
+    }
+
+    onComponentWillUnmount() {
+      unregisterAutofill()
     }
 
     handleAnimation(animationName) {
