@@ -5,13 +5,14 @@
 module.exports = {
   libraries: [
     'index',
-    'withOverrideFromContext',
+    'withAutofillProps',
     'withDeprecationWarning',
     'withDisplayName',
     'withFocusProps',
-    'withNotifyOnLowFPS',
     'withHoverProps',
     'withMouseDownProps',
+    'withNotifyOnLowFPS',
+    'withOverrideFromContext',
     'withStyleSheetOverride',
     'withTheme',
     'withTouchProps',
