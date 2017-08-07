@@ -17,18 +17,18 @@ function emptyAnimation(animationName) {
   `
 }
 
-function injectStyle(style) {
-  let styleSheet = document.getElementById(styleElementId).sheet
-
-  styleSheet.insertRule(style, styleSheet.cssRules.length)
-}
-
 function injectKeyFrames() {
   const autofillStartEmptyKeyframesStyle = emptyAnimation(startAnimationName)
   const autofillEndEmptyKeyframesStyle = emptyAnimation(endAnimationName)
 
   injectStyle(autofillStartEmptyKeyframesStyle)
   injectStyle(autofillEndEmptyKeyframesStyle)
+}
+
+function injectStyle(style) {
+  let styleSheet = document.getElementById(styleElementId).sheet
+
+  styleSheet.insertRule(style, styleSheet.cssRules.length)
 }
 
 function injectAutofillHook() {
@@ -38,7 +38,7 @@ function injectAutofillHook() {
       // JavaScript can capture 'animationstart' events
       animation-name: ${startAnimationName};
 
-      // Make the backgound color become yellow _really slowly_
+      // Change the backgound color _really slowly_
       transition: background-color 50000s ease-in-out 0s;
     }
   `
@@ -55,9 +55,11 @@ function injectAutofillHook() {
 }
 
 function registerAutofill() {
+  if (!isWebkit()) return
+
   let autofillStyle = document.getElementById(styleElementId)
 
-  if (!autofillStyle && isWebkit()) {
+  if (!autofillStyle) {
     autofillStyle = document.createElement('style')
     autofillStyle.id = styleElementId
     autofillStyle.setAttribute(counterAttribute, 0)
@@ -73,12 +75,15 @@ function registerAutofill() {
 }
 
 function unregisterAutofill() {
+  if (!isWebkit()) return
+
   let autofillStyle = document.getElementById(styleElementId)
   let usageCounter = autofillStyle.getAttribute(counterAttribute)
   usageCounter--
   autofillStyle.setAttribute(counterAttribute, usageCounter)
 
   if (usageCounter === 0) {
+    // remove element
     autofillStyle.outerHTML = ''
   }
 }
