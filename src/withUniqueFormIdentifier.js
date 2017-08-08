@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import wrapDisplayName from 'recompose/wrapDisplayName'
 import seededRandom from 'seed-random'
 
@@ -16,7 +16,7 @@ const uuid = seed => {
 
 let counter = 0
 export default Target => {
-  class WithUniqueFormIdentifier extends PureComponent {
+  class WithUniqueFormIdentifier extends Component {
     constructor() {
       super()
 
