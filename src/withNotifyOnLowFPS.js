@@ -5,42 +5,47 @@ import wrapDisplayName from 'recompose/wrapDisplayName'
 const noop = () => {}
 
 export default ({ threshold = 30, fpsCollector = collectFps }) => Target => {
-  let endFPSCollection = noop
-
-  const handleStartFPSCollection = component => () => {
-    if (endFPSCollection !== noop || component.state.fps < threshold) {
-      return
-    }
-
-    try {
-      endFPSCollection = fpsCollector()
-    } catch (e) {
-      endFPSCollection = () => 0
-    }
-  }
-
   class WithNotifyOnLowFPS extends Component {
     constructor() {
       super()
 
-      this.state = { fps: threshold }
+      this.endFPSCollection = noop
+      this.state = {
+        fps: threshold,
+      }
+      this.onStartFPSCollection = this.onStartFPSCollection.bind(this)
+      this.onEndFPSCollection = this.onEndFPSCollection.bind(this)
+    }
+
+    onStartFPSCollection() {
+      if (this.endFPSCollection !== noop || this.state.fps < threshold) {
+        return
+      }
+
+      try {
+        this.endFPSCollection = fpsCollector()
+      } catch (e) {
+        this.endFPSCollection = () => 0
+      }
+    }
+
+    onEndFPSCollection() {
+      if (this.endFPSCollection !== noop) {
+        const fps = this.endFPSCollection()
+        this.setState({ fps })
+        this.endFPSCollection = noop
+        if (fps < threshold) {
+          this.props.onLowFPS && this.props.onLowFPS()
+        }
+      }
     }
 
     render() {
       return (
         <Target
           {...this.props}
-          onStartFPSCollection={handleStartFPSCollection(this)}
-          onEndFPSCollection={() => {
-            if (endFPSCollection !== noop) {
-              const fps = endFPSCollection()
-              this.setState({ fps })
-              endFPSCollection = noop
-              if (fps < threshold) {
-                this.props.onLowFPS && this.props.onLowFPS()
-              }
-            }
-          }}
+          onStartFPSCollection={this.onStartFPSCollection}
+          onEndFPSCollection={this.onEndFPSCollection}
           lowFPS={this.state.fps < threshold}
         />
       )

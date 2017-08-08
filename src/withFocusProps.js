@@ -9,24 +9,33 @@ export default focusProps => Target => {
       this.state = {
         focused: false,
       }
+      this.onFocus = this.onFocus.bind(this)
+      this.onBlur = this.onBlur.bind(this)
+    }
+
+    onFocus(...args) {
+      this.setState({ focused: true })
+
+      if (this.props.onFocus) {
+        this.props.onFocus(...args)
+      }
+    }
+
+    onBlur(...args) {
+      this.setState({ focused: false })
+
+      if (this.props.onBlur) {
+        this.props.onBlur(...args)
+      }
     }
 
     render() {
-      const { onFocus, onBlur, ...props } = this.props
-      const { focused } = this.state
-
       return (
         <Target
-          onFocus={(...args) => {
-            this.setState({ focused: true })
-            onFocus && onFocus(...args)
-          }}
-          onBlur={(...args) => {
-            this.setState({ focused: false })
-            onBlur && onBlur(...args)
-          }}
-          {...props}
-          {...(focused ? focusProps : {})}
+          {...this.props}
+          onFocus={this.onFocus}
+          onBlur={this.onBlur}
+          {...this.state.focused && focusProps}
         />
       )
     }
