@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import wrapDisplayName from 'recompose/wrapDisplayName'
 
 const makeWithUncontrolledPropHandler = ({
@@ -23,7 +23,7 @@ const makeWithUncontrolledPropHandler = ({
 }
 
 export default ({ defaultProp, handlers, prop, resetHandlerName }) => Target => {
-  class WithUncontrolledProp extends PureComponent {
+  class WithUncontrolledProp extends Component {
     componentDidMount() {
       this.setState({
         [prop]: this.props[prop] != null ? this.props[prop] : this.props[defaultProp],
