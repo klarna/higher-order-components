@@ -7,26 +7,35 @@ export default hoverProps => Target => {
       super()
 
       this.state = {
-        hover: false,
+        hovered: false,
+      }
+      this.onMouseOver = this.onMouseOver.bind(this)
+      this.onMouseOut = this.onMouseOut.bind(this)
+    }
+
+    onMouseOver(...args) {
+      this.setState({ hovered: true })
+
+      if (this.props.onMouseOver) {
+        this.props.onMouseOver(...args)
+      }
+    }
+
+    onMouseOut(...args) {
+      this.setState({ hovered: false })
+
+      if (this.props.onMouseOut) {
+        this.props.onMouseOut(...args)
       }
     }
 
     render() {
-      const { onMouseOver, onMouseOut, ...props } = this.props
-      const { hover } = this.state
-
       return (
         <Target
-          onMouseOver={(...args) => {
-            this.setState({ hover: true })
-            onMouseOver && onMouseOver(...args)
-          }}
-          onMouseOut={(...args) => {
-            this.setState({ hover: false })
-            onMouseOut && onMouseOut(...args)
-          }}
-          {...props}
-          {...(hover ? hoverProps : {})}
+          {...this.props}
+          onMouseOver={this.onMouseOver}
+          onMouseOut={this.onMouseOut}
+          {...this.state.hovered && hoverProps}
         />
       )
     }

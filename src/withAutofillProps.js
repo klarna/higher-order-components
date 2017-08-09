@@ -94,6 +94,7 @@ export default autofillProps => Target => {
       super()
 
       this.state = { autofill: false }
+      this.handleAnimation = this.handleAnimation.bind(this)
     }
 
     onComponentDidMount() {
@@ -119,7 +120,7 @@ export default autofillProps => Target => {
 
       return (
         <Target
-          onAnimationStart={this.handleAnimation.bind(this)}
+          onAnimationStart={this.handleAnimation}
           {...this.props}
           {...autofill && autofillProps}
         />
