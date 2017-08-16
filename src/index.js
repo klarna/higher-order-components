@@ -1,3 +1,4 @@
+export { default as normalizeStyle } from './normalizeStyle'
 export { default as withAutofillProps } from './withAutofillProps'
 export { default as withDeprecationWarning } from './withDeprecationWarning'
 export { default as withDisplayName } from './withDisplayName'
