@@ -5,6 +5,26 @@
 
 This library is a collection of useful React higher-order Components.
 
+## normalizeStyle (Component)
+
+**normalizeStyle** is a work-in-progress higher-order component that will take care of cleaning up and normalizing the `style` prop so that all properties work both in web and native, even adding vendor prefixes if necessary.
+
+Currently only `lineHeight` normalization is implemented.
+
+Using it is simple enough:
+
+```js
+import { normalizeStyle } from '@klarna/higher-order-components'
+
+function MyDiv ({style}) {
+  return <div style={style}>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </div>
+}
+
+export default normalizeStyle(MyDiv)
+```
+
 ## withStyleSheetOverride (propsSelector, getDefaultStyleSheet) (Component)
 
 **withStyleSheetOverride** provides a flexible way of setting style sheets in the components. The first argument to it is a selector from all the `props` to an object of values that are relevant for styles. The second argument is a function from those values to a stylesheet structure. It also provides the ability for consumers of the component to pass their own `getStyleSheet` prop that takes the same subset of the props and returns another style sheet that `withStyleSheetOverride` will deep merge on top of the default ones. For example:
