@@ -9,23 +9,23 @@ export default hoverProps => Target => {
       this.state = {
         hovered: false,
       }
-      this.onMouseOver = this.onMouseOver.bind(this)
-      this.onMouseOut = this.onMouseOut.bind(this)
+      this.onMouseEnter = this.onMouseEnter.bind(this)
+      this.onMouseLeave = this.onMouseLeave.bind(this)
     }
 
-    onMouseOver(...args) {
+    onMouseEnter(...args) {
       this.setState({ hovered: true })
 
-      if (this.props.onMouseOver) {
-        this.props.onMouseOver(...args)
+      if (this.props.onMouseEnter) {
+        this.props.onMouseEnter(...args)
       }
     }
 
-    onMouseOut(...args) {
+    onMouseLeave(...args) {
       this.setState({ hovered: false })
 
-      if (this.props.onMouseOut) {
-        this.props.onMouseOut(...args)
+      if (this.props.onMouseLeave) {
+        this.props.onMouseLeave(...args)
       }
     }
 
@@ -33,8 +33,8 @@ export default hoverProps => Target => {
       return (
         <Target
           {...this.props}
-          onMouseOver={this.onMouseOver}
-          onMouseOut={this.onMouseOut}
+          onMouseEnter={this.onMouseEnter}
+          onMouseLeave={this.onMouseLeave}
           {...this.state.hovered && hoverProps}
         />
       )
