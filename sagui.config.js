@@ -10,7 +10,7 @@ module.exports = {
     'withDisplayName',
     'withFocusProps',
     'withHoverProps',
-    'withMouseDownProps',
+    'withPressedProps',
     'withNotifyOnLowFPS',
     'withOverrideFromContext',
     'withStyleSheetOverride',

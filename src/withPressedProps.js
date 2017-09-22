@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import wrapDisplayName from 'recompose/wrapDisplayName'
 
-export default mouseDownProps => Target => {
-  class WithMouseDownProps extends Component {
+export default pressedProps => Target => {
+  class WithPressedProps extends Component {
     constructor() {
       super()
 
       this.state = {
-        mouseDown: false,
+        pressed: false,
       }
       this.onMouseDown = this.onMouseDown.bind(this)
       this.onMouseUp = this.onMouseUp.bind(this)
     }
 
     onMouseDown(...args) {
-      this.setState({ mouseDown: true })
+      this.setState({ pressed: true })
 
       if (this.props.onMouseDown) {
         this.props.onMouseDown(...args)
@@ -22,7 +22,7 @@ export default mouseDownProps => Target => {
     }
 
     onMouseUp(...args) {
-      this.setState({ mouseDown: false })
+      this.setState({ pressed: false })
 
       if (this.props.onMouseUp) {
         this.props.onMouseUp(...args)
@@ -35,13 +35,13 @@ export default mouseDownProps => Target => {
           {...this.props}
           onMouseDown={this.onMouseDown}
           onMouseUp={this.onMouseUp}
-          {...this.state.mouseDown && mouseDownProps}
+          {...this.state.pressed && pressedProps}
         />
       )
     }
   }
 
-  WithMouseDownProps.displayName = wrapDisplayName(Target, 'withMouseDownProps')
+  WithPressedProps.displayName = wrapDisplayName(Target, 'withPressedProps')
 
-  return WithMouseDownProps
+  return WithPressedProps
 }

@@ -1,10 +1,10 @@
 import React from 'react'
-import { withMouseDownProps } from '../'
+import { withPressedProps } from '../'
 
-export default withMouseDownProps({ pressed: true })(function Pressable({ pressed, ...props }) {
+export default withPressedProps({ pressed: true })(function Pressable({ pressed, ...props }) {
   return (
     <article {...props}>
-      <h1>withMouseDownProps</h1>
+      <h1>withPressedProps</h1>
       <code>
         <pre
           style={{
@@ -14,12 +14,12 @@ export default withMouseDownProps({ pressed: true })(function Pressable({ presse
             overflowX: 'scroll',
           }}
         >{`import React from 'react'
-import { withMouseDownProps } from '@klarna/higher-order-components'
+import { withPressedProps } from '@klarna/higher-order-components'
 
-export default withMouseDownProps({ pressed: true })(function Pressable({ pressed, ...props }) {
+export default withPressedProps({ pressed: true })(function Pressable({ pressed, ...props }) {
   return (
     <article {...props}>
-      <h1>withMouseDownProps</h1>
+      <h1>withPressedProps</h1>
       {pressed ? 'pressed!' : 'press anywhere to see it change'}
     </article>
   )

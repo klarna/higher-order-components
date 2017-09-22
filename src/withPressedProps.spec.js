@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import withMouseDownProps from './withMouseDownProps'
+import withPressedProps from './withPressedProps'
 import { equal } from 'assert'
 
-describe('withMouseDownProps', () => {
+describe('withPressedProps', () => {
   it('wraps the name of the original component', () => {
     function Input(props) {
       return <input {...props} />
     }
 
-    const EnhancedInput = withMouseDownProps({ hover: true })(Input)
+    const EnhancedInput = withPressedProps({ hover: true })(Input)
 
-    equal(EnhancedInput.displayName, 'withMouseDownProps(Input)')
+    equal(EnhancedInput.displayName, 'withPressedProps(Input)')
   })
 
   it('has the touch down prop when mouseDown gets triggered', done => {
@@ -52,7 +52,7 @@ describe('withMouseDownProps', () => {
       }
     }
     Target.defaultProps = { label: '' }
-    const DecoratedTarget = withMouseDownProps({
+    const DecoratedTarget = withPressedProps({
       label: 'Mouse down!',
     })(Target)
 
@@ -87,7 +87,7 @@ describe('withMouseDownProps', () => {
     }
 
     Target.defaultProps = { label: '' }
-    const DecoratedTarget = withMouseDownProps({
+    const DecoratedTarget = withPressedProps({
       label: 'Mouse down!',
     })(Target)
 
