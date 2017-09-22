@@ -142,13 +142,13 @@ export withHoverProps({
 })(Hovereable)
 ```
 
-## withMouseDownProps (props) (Component)
+## withPressedProps (props) (Component)
 
 Adds the props to the component if the element is being pressed with the mouse.
 
 ```javascript
 // Pressable.js
-import {withMouseDownProps} from '@klarna/higher-order-components'
+import {withPressedProps} from '@klarna/higher-order-components'
 
 function Pressable ({pressed, onMouseDown, onMouseUp}) {
   return <div onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
@@ -156,7 +156,7 @@ function Pressable ({pressed, onMouseDown, onMouseUp}) {
   </div>
 }
 
-export withMouseDownProps({
+export withPressedProps({
   pressed: true
 })(Pressable)
 ```
