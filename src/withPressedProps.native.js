@@ -9,23 +9,23 @@ export default pressedProps => Target => {
       this.state = {
         pressed: false,
       }
-      this.onMouseDown = this.onMouseDown.bind(this)
-      this.onMouseUp = this.onMouseUp.bind(this)
+      this.onPressIn = this.onPressIn.bind(this)
+      this.onPressOut = this.onPressOut.bind(this)
     }
 
-    onMouseDown(...args) {
+    onPressIn(...args) {
       this.setState({ pressed: true })
 
-      if (this.props.onMouseDown) {
-        this.props.onMouseDown(...args)
+      if (this.props.onPressIn) {
+        this.props.onPressIn(...args)
       }
     }
 
-    onMouseUp(...args) {
+    onPressOut(...args) {
       this.setState({ pressed: false })
 
-      if (this.props.onMouseUp) {
-        this.props.onMouseUp(...args)
+      if (this.props.onPressOut) {
+        this.props.onPressOut(...args)
       }
     }
 
@@ -33,8 +33,8 @@ export default pressedProps => Target => {
       return (
         <Target
           {...this.props}
-          onMouseDown={this.onMouseDown}
-          onMouseUp={this.onMouseUp}
+          onPressIn={this.onPressIn}
+          onPressOut={this.onPressOut}
           {...this.state.pressed && pressedProps}
         />
       )
