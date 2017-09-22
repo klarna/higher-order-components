@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import wrapDisplayName from 'recompose/wrapDisplayName'
 
-export default pressedProps => Target => {
+export default (pressedProps = {}) => Target => {
   class WithPressedProps extends Component {
     constructor() {
       super()
@@ -35,7 +35,7 @@ export default pressedProps => Target => {
           {...this.props}
           onPressIn={this.onPressIn}
           onPressOut={this.onPressOut}
-          {...this.state.pressed && pressedProps}
+          {...this.state.pressed ? pressedProps : {}}
         />
       )
     }
