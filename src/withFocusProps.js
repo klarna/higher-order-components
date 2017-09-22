@@ -32,10 +32,10 @@ export default (focusProps = {}) => Target => {
     render() {
       return (
         <Target
-          {...(this.props || {})}
+          {...this.props || {}}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
-          {...this.state.focused ? focusProps : {}}
+          {...(this.state.focused ? focusProps : {})}
         />
       )
     }
