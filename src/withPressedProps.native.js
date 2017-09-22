@@ -35,7 +35,7 @@ export default (pressedProps = {}) => Target => {
           {...this.props}
           onPressIn={this.onPressIn}
           onPressOut={this.onPressOut}
-          {...this.state.pressed ? pressedProps : {}}
+          {...(this.state.pressed ? pressedProps : {})}
         />
       )
     }
