@@ -1,6 +1,6 @@
 {
   "name": "@klarna/higher-order-components",
-  "version": "4.0.3",
+  "version": "5.0.0-0",
   "description": "A collection of useful React higher-order components",
   "main": "dist/index.js",
   "scripts": {
@@ -44,18 +44,19 @@
     "react-context-props": "^2.2.0",
     "react-dom": "^15.5.0",
     "react-sizeme": "^2.3.2",
-    "sagui": "^11.1.0"
+    "sagui": "^11.1.0",
+    "recompose": "^0.23.4"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",
     "react": "^15.5.0",
-    "react-context-props": "^2.2.0"
+    "react-context-props": "^2.2.0",
+    "recompose": "^0.23.4"
   },
   "dependencies": {
     "collect-fps": "2.0.0",
     "deepmerge": "^1.4.4",
     "jwt-decode": "^2.2.0",
-    "recompose": "^0.23.4",
     "seed-random": "^2.2.0"
   }
 }
