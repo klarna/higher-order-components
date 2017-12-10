@@ -104,8 +104,8 @@ export default autofillProps => Target => {
       unregisterAutofill()
     }
 
-    handleAnimation(animationName) {
-      switch (animationName) {
+    handleAnimation(e) {
+      switch (e.animationName) {
         case startAnimationName:
           return this.setState({ autofill: true })
 
