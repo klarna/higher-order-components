@@ -97,11 +97,11 @@ export default autofillProps => Target => {
       this.handleAnimation = this.handleAnimation.bind(this)
     }
 
-    onComponentDidMount() {
+    componentDidMount() {
       registerAutofill()
     }
 
-    onComponentWillUnmount() {
+    componentWillUnmount() {
       unregisterAutofill()
     }
 
