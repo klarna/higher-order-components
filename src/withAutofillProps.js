@@ -32,21 +32,20 @@ function injectStyle(style) {
 }
 
 function injectAutofillHook() {
+  // Expose a hook for JavaScript when autofill is shown.
+  // JavaScript can capture 'animationstart' events
+  // Change the backgound color _really slowly_
   const autofillHook = `
     input:-webkit-autofill {
-      // Expose a hook for JavaScript when autofill is shown.
-      // JavaScript can capture 'animationstart' events
       animation-name: ${startAnimationName};
-
-      // Change the backgound color _really slowly_
       transition: background-color 50000s ease-in-out 0s;
     }
   `
 
+  // Expose a hook for JavaScript when autofill is no longer shown.
+  // JavaScript can capture 'animationstart' events
   const notAutofillHook = `
     input:not(:-webkit-autofill) {
-      // Expose a hook for JavaScript when autofill is no longer shown.
-      // JavaScript can capture 'animationstart' events
       animation-name: ${endAnimationName};
     }`
 
