@@ -21,11 +21,7 @@ describe('withAutofillProps', () => {
     function Target({ autofilled, onAnimationStart }) {
       animationStartCallback = onAnimationStart
 
-      return (
-        <div>
-          {autofilled ? 'autofilled' : 'not autofilled'}
-        </div>
-      )
+      return <div>{autofilled ? 'autofilled' : 'not autofilled'}</div>
     }
 
     const DecoratedTarget = withAutofillProps({
@@ -36,7 +32,7 @@ describe('withAutofillProps', () => {
 
     equal(root.innerText, 'not autofilled')
 
-    animationStartCallback('onAutofillStart')
+    animationStartCallback({ animationName: 'onAutofillStart' })
 
     equal(root.innerText, 'autofilled')
   })
@@ -48,11 +44,7 @@ describe('withAutofillProps', () => {
     function Target({ autofilled, onAnimationStart }) {
       animationStartCallback = onAnimationStart
 
-      return (
-        <div>
-          {autofilled ? 'autofilled' : 'not autofilled'}
-        </div>
-      )
+      return <div>{autofilled ? 'autofilled' : 'not autofilled'}</div>
     }
 
     const DecoratedTarget = withAutofillProps({
@@ -61,10 +53,10 @@ describe('withAutofillProps', () => {
 
     render(<DecoratedTarget />, root)
 
-    animationStartCallback('onAutofillStart')
+    animationStartCallback({ animationName: 'onAutofillStart' })
     equal(root.innerText, 'autofilled')
 
-    animationStartCallback('onAutofillCancel')
+    animationStartCallback({ animationName: 'onAutofillCancel' })
 
     equal(root.innerText, 'not autofilled')
   })
