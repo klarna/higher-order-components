@@ -36,7 +36,7 @@ describe('withAutofillProps', () => {
 
     equal(root.innerText, 'not autofilled')
 
-    animationStartCallback('onAutofillStart')
+    animationStartCallback({ animationName: 'onAutofillStart' })
 
     equal(root.innerText, 'autofilled')
   })
@@ -61,10 +61,10 @@ describe('withAutofillProps', () => {
 
     render(<DecoratedTarget />, root)
 
-    animationStartCallback('onAutofillStart')
+    animationStartCallback({ animationName: 'onAutofillStart' })
     equal(root.innerText, 'autofilled')
 
-    animationStartCallback('onAutofillCancel')
+    animationStartCallback({ animationName: 'onAutofillCancel' })
 
     equal(root.innerText, 'not autofilled')
   })
