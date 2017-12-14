@@ -28,7 +28,11 @@ function injectKeyFrames() {
 function injectStyle(style) {
   let styleSheet = document.getElementById(styleElementId).sheet
 
-  styleSheet.insertRule(style, styleSheet.cssRules.length)
+  try {
+    styleSheet.insertRule(style, styleSheet.cssRules.length)
+  } catch (err) {
+    console.warn(err)
+  }
 }
 
 function injectAutofillHook() {
