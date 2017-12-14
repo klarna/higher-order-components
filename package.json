@@ -44,8 +44,8 @@
     "react-context-props": "^2.2.0",
     "react-dom": "^15.5.0",
     "react-sizeme": "^2.3.2",
-    "sagui": "^11.1.0",
-    "recompose": "^0.23.4"
+    "recompose": "^0.23.4",
+    "sagui": "^11.4.2"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",
