@@ -24,14 +24,11 @@ describe('withStyleSheetOverride', () => {
       )
     }
 
-    const Enhanced = withStyleSheetOverride(
-      x => x,
-      () => ({
-        base: {
-          color: 'red',
-        },
-      })
-    )(Target)
+    const Enhanced = withStyleSheetOverride(() => ({
+      base: {
+        color: 'red',
+      },
+    }))(Target)
 
     render(<Enhanced />, root)
 
@@ -49,16 +46,11 @@ describe('withStyleSheetOverride', () => {
         )
       }
 
-      const Enhanced = withStyleSheetOverride(
-        ({ hovered, pressed }) => ({
-          hoveredAndPressed: hovered && pressed,
-        }),
-        ({ hoveredAndPressed }) => ({
-          base: {
-            color: hoveredAndPressed ? 'green' : 'red',
-          },
-        })
-      )(Target)
+      const Enhanced = withStyleSheetOverride(({ hovered, pressed }) => ({
+        base: {
+          color: hovered && pressed ? 'green' : 'red',
+        },
+      }))(Target)
 
       render(<Enhanced hovered pressed />, root)
 
@@ -83,25 +75,20 @@ describe('withStyleSheetOverride', () => {
         )
       }
 
-      const Enhanced = withStyleSheetOverride(
-        ({ hovered, pressed }) => ({
-          hoveredAndPressed: hovered && pressed,
-        }),
-        ({ hoveredAndPressed }) => ({
-          base: {
-            color: hoveredAndPressed ? 'green' : 'red',
-            background: 'blue',
-          },
-        })
-      )(Target)
+      const Enhanced = withStyleSheetOverride(({ hovered, pressed }) => ({
+        base: {
+          color: hovered && pressed ? 'green' : 'red',
+          background: 'blue',
+        },
+      }))(Target)
 
       render(
         <Enhanced
           hovered
           pressed
-          getStyleSheet={({ hoveredAndPressed }) => ({
+          getStyleSheet={({ hovered, pressed }) => ({
             base: {
-              background: hoveredAndPressed ? 'rebeccapurple' : 'bisque',
+              background: hovered && pressed ? 'rebeccapurple' : 'bisque',
             },
           })}
         />,
