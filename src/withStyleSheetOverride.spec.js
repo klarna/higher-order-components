@@ -24,14 +24,11 @@ describe('withStyleSheetOverride', () => {
       )
     }
 
-    const Enhanced = withStyleSheetOverride(
-      x => x,
-      () => ({
-        base: {
-          color: 'red',
-        },
-      })
-    )(Target)
+    const Enhanced = withStyleSheetOverride(() => ({
+      base: {
+        color: 'red',
+      },
+    }))(Target)
 
     render(<Enhanced />, root)
 
@@ -49,16 +46,11 @@ describe('withStyleSheetOverride', () => {
         )
       }
 
-      const Enhanced = withStyleSheetOverride(
-        ({ hovered, pressed }) => ({
-          hoveredAndPressed: hovered && pressed,
-        }),
-        ({ hoveredAndPressed }) => ({
-          base: {
-            color: hoveredAndPressed ? 'green' : 'red',
-          },
-        })
-      )(Target)
+      const Enhanced = withStyleSheetOverride(({ hovered, pressed }) => ({
+        base: {
+          color: hovered && pressed ? 'green' : 'red',
+        },
+      }))(Target)
 
       render(<Enhanced hovered pressed />, root)
 
@@ -83,25 +75,20 @@ describe('withStyleSheetOverride', () => {
         )
       }
 
-      const Enhanced = withStyleSheetOverride(
-        ({ hovered, pressed }) => ({
-          hoveredAndPressed: hovered && pressed,
-        }),
-        ({ hoveredAndPressed }) => ({
-          base: {
-            color: hoveredAndPressed ? 'green' : 'red',
-            background: 'blue',
-          },
-        })
-      )(Target)
+      const Enhanced = withStyleSheetOverride(({ hovered, pressed }) => ({
+        base: {
+          color: hovered && pressed ? 'green' : 'red',
+          background: 'blue',
+        },
+      }))(Target)
 
       render(
         <Enhanced
           hovered
           pressed
-          getStyleSheet={({ hoveredAndPressed }) => ({
+          getStyleSheet={({ hovered, pressed }) => ({
             base: {
-              background: hoveredAndPressed ? 'rebeccapurple' : 'bisque',
+              background: hovered && pressed ? 'rebeccapurple' : 'bisque',
             },
           })}
         />,
@@ -110,6 +97,48 @@ describe('withStyleSheetOverride', () => {
 
       equal(root.querySelector('h1').innerText, 'green')
       equal(root.querySelector('p').innerText, 'rebeccapurple')
+    })
+
+    describe('when the default styles include a function', () => {
+      it('the styleSheet is a deepmerge of both results', () => {
+        const root = document.createElement('div')
+
+        function Target({ styleSheet }) {
+          return (
+            <div>
+              <h1>
+                {styleSheet.base().color}
+              </h1>
+              <p>
+                {styleSheet.base().background}
+              </p>
+            </div>
+          )
+        }
+
+        const Enhanced = withStyleSheetOverride(({ hovered, pressed }) => ({
+          base: () => ({
+            color: hovered && pressed ? 'green' : 'red',
+            background: 'blue',
+          }),
+        }))(Target)
+
+        render(
+          <Enhanced
+            hovered
+            pressed
+            getStyleSheet={({ hovered, pressed }) => ({
+              base: {
+                background: hovered && pressed ? 'rebeccapurple' : 'bisque',
+              },
+            })}
+          />,
+          root
+        )
+
+        equal(root.querySelector('h1').innerText, 'green')
+        equal(root.querySelector('p').innerText, 'rebeccapurple')
+      })
     })
   })
 })

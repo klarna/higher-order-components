@@ -25,9 +25,9 @@ function MyDiv ({style}) {
 export default normalizeStyle(MyDiv)
 ```
 
-## withStyleSheetOverride (propsSelector, getDefaultStyleSheet) (Component)
+## withStyleSheetOverride (getDefaultStyleSheet) (Component)
 
-**withStyleSheetOverride** provides a flexible way of setting style sheets in the components. The first argument to it is a selector from all the `props` to an object of values that are relevant for styles. The second argument is a function from those values to a stylesheet structure. It also provides the ability for consumers of the component to pass their own `getStyleSheet` prop that takes the same subset of the props and returns another style sheet that `withStyleSheetOverride` will deep merge on top of the default ones. For example:
+**withStyleSheetOverride** provides a flexible way of setting style sheets in the components. It takes a function from `props` to a stylesheet structure. It also provides the ability for consumers of the component to pass their own `getStyleSheet` prop that takes the props and returns another style sheet: `withStyleSheetOverride` will deep merge this override style sheet on top of the default styles. For example:
 
 ```javascript
 function Header({styleSheet, title, tagline}) {
@@ -39,12 +39,8 @@ function Header({styleSheet, title, tagline}) {
 
 const EnhancedTitle = withStyleSheetOverride(
   ({tagline, pressed}) => ({
-    hasTagline: tagline && tagline.length > 0,
-    pressed
-  }),
-  ({hasTagline, pressed}) => ({
     title: {
-      color: hasTagline ? 'blue' : 'black'
+      color: tagline && tagline.length > 0 ? 'blue' : 'black'
     },
     tagline: {
       color: pressed ? 'lightblue' : 'gray'
@@ -56,9 +52,9 @@ render(
   <EnhancedTitle
     tagline='Hello!'
     pressed
-    getStyleSheet={({hasTagline, pressed}) => ({
+    getStyleSheet={({tagline, pressed}) => ({
       title: {
-        background: hasTagline ? 'white' : 'pink'
+        background: tagline && tagline.length > 0 ? 'white' : 'pink'
       },
       tagline: {
         background: pressed ? 'white' : 'pink'
@@ -70,6 +66,44 @@ render(
 ```
 
 …will render the `h1` with `{ color: 'blue', background: 'white' }` and the `p` with `{ color: 'lightblue', background: 'white' }`.
+
+Functions as styles instead of objects are also supported. This would work as well:
+
+```javascript
+function Header({styleSheet, title, tagline}) {
+  return <header>
+    <h1 style={styleSheet.title(title)}>{title}</h1>
+    <p style={styleSheet.tagline}>{tagline}</p>
+  </header>
+}
+
+const EnhancedTitle = withStyleSheetOverride(
+  ({pressed}) => ({
+    title: text => ({
+      color: text.length > 30 ? 'red' : 'black'
+    }),
+    tagline: {
+      color: pressed ? 'lightblue' : 'gray'
+    }
+  })
+)(Header)
+
+render(
+  <EnhancedTitle
+    tagline='Hello!'
+    pressed
+    getStyleSheet={({pressed}) => ({
+      title: text => ({
+        background: text.length < 10 ? 'white' : 'pink'
+      }),
+      tagline: {
+        background: pressed ? 'white' : 'pink'
+      }
+    })}
+  />,
+  document.getElementById('root')
+)
+```
 
 ## withDisplayName (string) ... (Component)
 
