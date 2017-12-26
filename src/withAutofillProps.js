@@ -31,7 +31,7 @@ function injectStyle(style) {
   try {
     styleSheet.insertRule(style, styleSheet.cssRules.length)
   } catch (err) {
-    console.warn(err)
+    console.warn('style injection failed')
   }
 }
 
