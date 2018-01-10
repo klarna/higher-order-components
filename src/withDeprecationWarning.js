@@ -2,6 +2,9 @@ import React from 'react'
 import wrapDisplayName from 'recompose/wrapDisplayName'
 
 const deprecate = ({ name, useInstead, readMore }) =>
+  process &&
+  process.env &&
+  process.env.NODE_ENV !== 'production' &&
   console &&
   console.error &&
   console.error(
