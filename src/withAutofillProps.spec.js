@@ -68,4 +68,37 @@ describe('withAutofillProps', () => {
 
     equal(root.innerText, 'not autofilled')
   })
+
+  it('calls the onAutofill callback when autofill happens', () => {
+    const root = document.createElement('div')
+    let onAutofillCalled = false
+    let animationStartCallback
+
+    function Target({ autofilled, onAnimationStart }) {
+      animationStartCallback = onAnimationStart
+
+      return (
+        <div>
+          {autofilled ? 'autofilled' : 'not autofilled'}
+        </div>
+      )
+    }
+
+    const DecoratedTarget = withAutofillProps({
+      autofilled: true,
+    })(Target)
+
+    render(
+      <DecoratedTarget
+        onAutofill={() => {
+          onAutofillCalled = true
+        }}
+      />,
+      root
+    )
+
+    animationStartCallback({ animationName: 'onAutofillStart' })
+
+    equal(onAutofillCalled, true)
+  })
 })
