@@ -111,6 +111,10 @@ export default autofillProps => Target => {
     handleAnimation(e) {
       switch (e.animationName) {
         case startAnimationName:
+          if (this.props.onAutofill) {
+            this.props.onAutofill()
+          }
+
           return this.setState({ autofill: true })
 
         case endAnimationName:
