@@ -61,9 +61,9 @@ describe('withOverrideFromContext', () => {
       )
 
       equal(root.querySelector('#background').innerHTML, 'red')
-      equal(root.querySelector('#textAlign').innerHTML, 'left')
+      equal(root.querySelector('#textAlign').innerHTML, 'justify')
       equal(root.querySelector('#color').innerHTML, 'blue')
-      equal(root.querySelector('#primary').innerHTML, 'true')
+      equal(root.querySelector('#primary').innerHTML, 'false')
     })
   })
 

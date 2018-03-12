@@ -16,7 +16,7 @@ export default Target => {
     if (typeof Override === 'function') {
       return <Override {...propsWithoutOverride} />
     } else if (Override != null) {
-      return <Target {...deepMerge(Override, propsWithoutOverride)} />
+      return <Target {...deepMerge(propsWithoutOverride, Override)} />
     } else {
       return <Target {...propsWithoutOverride} />
     }
