@@ -118,6 +118,9 @@ export default autofillProps => Target => {
           return this.setState({ autofill: true })
 
         case endAnimationName:
+          if (this.props.onEndAutofill) {
+            this.props.onEndAutofill()
+          }
           return this.setState({ autofill: false })
       }
     }
