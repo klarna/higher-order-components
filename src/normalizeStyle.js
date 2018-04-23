@@ -8,7 +8,9 @@ const fixLineHeight = (lineHeight, displayName) => {
     )
   }
 
-  return global.navigator.product === 'ReactNative' ? lineHeight : `${lineHeight}px`
+  return global.navigator && global.navigator.product === 'ReactNative'
+    ? lineHeight
+    : `${lineHeight}px`
 }
 
 const fixStyle = (style, displayName) => ({
