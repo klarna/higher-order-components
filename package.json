@@ -38,25 +38,22 @@
     "babel-preset-stage-3": "^6.24.1",
     "jwt-simple": "^0.5.1",
     "prettier": "^1.5.3",
-    "prop-types": "^15.5.10",
     "react": "^15.5.0",
     "react-component-queries": "^2.1.1",
-    "react-context-props": "^2.2.0",
     "react-dom": "^15.5.0",
     "react-sizeme": "^2.3.2",
-    "recompose": "^0.23.4",
     "sagui": "^11.4.2"
   },
   "peerDependencies": {
-    "prop-types": "^15.5.10",
-    "react": "^15.5.4 || ^16.0.0",
-    "react-context-props": "^2.2.0",
-    "recompose": "^0.23.4"
+    "react": "^15.5.4 || ^16.0.0"
   },
   "dependencies": {
     "collect-fps": "2.0.0",
     "deepmerge": "^1.4.4",
     "jwt-decode": "^2.2.0",
+    "prop-types": "^15.5.10 || ^16.0.0",
+    "recompose": "^0.26.0",
+    "react-context-props": "^2.2.0",
     "seed-random": "^2.2.0"
   }
 }
