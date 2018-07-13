@@ -6,6 +6,7 @@ import WithDeprecationWarningExample from './WithDeprecationWarningExample'
 import WithDisplayNameExample from './WithDisplayNameExample'
 import WithFocusPropsExample from './WithFocusPropsExample'
 import WithHoverPropsExample from './WithHoverPropsExample'
+import WithKeyboardFocusPropsExample from './WithKeyboardFocusPropsExample'
 import WithPressedPropsExample from './WithPressedPropsExample'
 import WithNotifyOnLowFPSExample from './WithNotifyOnLowFPSExample'
 import WithTouchPropsExample from './WithTouchPropsExample'
@@ -59,6 +60,9 @@ const Page = componentQueries(
       </Example>
       <Example>
         <WithFocusPropsExample />
+      </Example>
+      <Example>
+        <WithKeyboardFocusPropsExample />
       </Example>
       <Example>
         <WithHoverPropsExample />

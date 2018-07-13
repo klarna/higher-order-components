@@ -5,3 +5,4 @@ dist
 .sagui
 .DS_Store
 .npmrc
+yarn-error.log
