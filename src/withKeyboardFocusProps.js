@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import wrapDisplayName from 'recompose/wrapDisplayName'
 
 export default (focusProps = {}) => Target => {
-  class WithFocusProps extends Component {
+  let isMousePressed = false
+
+  class WithKeyboardFocusProps extends Component {
     constructor() {
       super()
 
@@ -11,10 +13,14 @@ export default (focusProps = {}) => Target => {
       }
       this.onFocus = this.onFocus.bind(this)
       this.onBlur = this.onBlur.bind(this)
+      this.onMouseDown = this.onMouseDown.bind(this)
+      this.onMouseUp = this.onMouseUp.bind(this)
     }
 
     onFocus(...args) {
-      this.setState({ focused: true })
+      if (!isMousePressed) {
+        this.setState({ focused: true })
+      }
 
       if (this.props.onFocus) {
         this.props.onFocus(...args)
@@ -29,19 +35,37 @@ export default (focusProps = {}) => Target => {
       }
     }
 
+    onMouseDown(...args) {
+      isMousePressed = true
+
+      if (this.props.onMouseDown) {
+        this.props.onMouseDown(...args)
+      }
+    }
+
+    onMouseUp(...args) {
+      isMousePressed = false
+
+      if (this.props.onMouseUp) {
+        this.props.onMouseUp(...args)
+      }
+    }
+
     render() {
       return (
         <Target
           {...this.props || {}}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
+          onMouseDown={this.onMouseDown}
+          onMouseUp={this.onMouseUp}
           {...(this.state.focused ? focusProps : {})}
         />
       )
     }
   }
 
-  WithFocusProps.displayName = wrapDisplayName(Target, 'withFocusProps')
+  WithKeyboardFocusProps.displayName = wrapDisplayName(Target, 'withKeyboardFocusProps')
 
-  return WithFocusProps
+  return WithKeyboardFocusProps
 }

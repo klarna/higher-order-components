@@ -157,6 +157,31 @@ export withFocusProps({
 })(InputBlock)
 ```
 
+## withKeyboardFocusProps (props) (Component)
+
+Adds the props to the component if the element is focused by keyboard actions.
+
+```javascript
+// InputBlock.js
+import {withKeyboardFocusProps} from '@klarna/higher-order-components'
+
+function InputBlock ({keyboardFocused, onFocus, onBlur, onMouseDown, onMouseUp}) {
+  return <div>
+    <input
+      onFocus={onFocus}
+      onBlur={onBlur}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
+    />
+    {keyboardFocused ? 'It’s focused via keyboard!' : 'It’s not focused'}
+  </div>
+}
+
+export withKeyboardFocusProps({
+  keyboardFocused: true
+})(InputBlock)
+```
+
 ## withHoverProps (props) (Component)
 
 Adds the props to the component if the element is hovered.
