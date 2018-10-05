@@ -2,6 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import componentQueries from 'react-component-queries'
 
+import WithDeprecatedPropExample from './WithDeprecatedPropExample'
 import WithDeprecationWarningExample from './WithDeprecationWarningExample'
 import WithDisplayNameExample from './WithDisplayNameExample'
 import WithFocusPropsExample from './WithFocusPropsExample'
@@ -51,6 +52,9 @@ const Page = componentQueries(
     >
       <Example>
         <WithNotifyOnLowFPSExample />
+      </Example>
+      <Example>
+        <WithDeprecatedPropExample active />
       </Example>
       <Example>
         <WithDeprecationWarningExample />

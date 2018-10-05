@@ -6,6 +6,7 @@ module.exports = {
   libraries: [
     'index',
     'withAutofillProps',
+    'withDeprecatedProp',
     'withDeprecationWarning',
     'withDisplayName',
     'withFocusProps',

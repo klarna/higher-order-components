@@ -1,5 +1,6 @@
 export { default as normalizeStyle } from './normalizeStyle'
 export { default as withAutofillProps } from './withAutofillProps'
+export { default as withDeprecatedProp } from './withDeprecatedProp'
 export { default as withDeprecationWarning } from './withDeprecationWarning'
 export { default as withDisplayName } from './withDisplayName'
 export { default as withFocusProps } from './withFocusProps'
