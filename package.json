@@ -1,6 +1,6 @@
 {
   "name": "@klarna/higher-order-components",
-  "version": "6.3.1",
+  "version": "6.4.0",
   "description": "A collection of useful React higher-order components",
   "main": "dist/index.js",
   "scripts": {
