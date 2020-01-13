@@ -1,5 +1,7 @@
 # @klarna/higher-order-components
 
+**Note**: This project is [now deprecated](https://github.com/klarna/higher-order-components/issues/85)
+
 [![Build Status](https://travis-ci.org/klarna/higher-order-components.svg)](https://travis-ci.org/klarna/higher-order-components)
 [![npm version](https://img.shields.io/npm/v/@klarna/higher-order-components.svg?maxAge=10000)](https://www.npmjs.com/package/@klarna/higher-order-components)
 
